@@ -13,7 +13,6 @@ namespace TccUsjt2018.Database.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CodigoCategoria { get; set; }
         public string NomeCategoria { get; set; }
-        public string DescricaoCategoria { get; set; }    
-        public int ProdutoId { get; set; }
+        public string DescricaoCategoria { get; set; }
     }
 }

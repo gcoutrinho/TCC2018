@@ -13,11 +13,10 @@ namespace TccUsjt2018.Database.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CodigoProduto { get; set; }
         public string NomeProduto { get; set; }
-        public DateTime DataCadastro { get; set; }       
+        public DateTime DataCadastro { get; set; }
         public virtual CategoriaProduto CategoriaProduto { get; set; }
-        [ForeignKey("CategoriaId")]
-        public int CategoriaId { get; set; }
-        public decimal ValorProduto { get; set; }
-        public string Marca { get; set; }
+        [ForeignKey("CategoriaProduto")]
+        public int Categoria_CodigoCategoria { get; set; }
+        public string MarcaProduto { get; set; }
     }
 }

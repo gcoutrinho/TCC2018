@@ -13,12 +13,16 @@ namespace TccUsjt2018.Database.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CodigoLote { get; set; }
         public string DescricaoLote { get; set; }
-        public DateTime DataCadastro { get; set; }
         public DateTime ValidadeLote { get; set; }
-        public int QuantidadeProduto { get; set; } 
+        public int QuantidadeProduto { get; set; }    
         public virtual Produto Produto { get; set; }
-        [ForeignKey("ProdutoId")]
-        public int ProdutoId { get; set; }
-        
+        [ForeignKey("Produto")]
+        public int Produto_CodigoProduto { get; set; }
+        public virtual Estoque Estoque { get; set; }
+        [ForeignKey("Estoque")]
+        public int Estoque_CodigoEstoque { get; set; }
+
+
+
     }
 }

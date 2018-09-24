@@ -32,6 +32,12 @@ namespace TccUsjt2018.Database.DAO
             return contexto.Lotes.ToList();
         }
 
+        public void Update(Lote lote)
+        {
+            contexto.Lotes.Update(lote);
+            contexto.SaveChanges();
+        }
+
 
     }
 }
