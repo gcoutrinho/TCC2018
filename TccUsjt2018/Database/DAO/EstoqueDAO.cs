@@ -33,6 +33,11 @@ namespace TccUsjt2018.Database.DAO
             contexto.SaveChanges();
         }
 
+        public List<Estoque> GetAll()
+        {
+            return contexto.Estoques.ToList();
+        }
+
 
 
 

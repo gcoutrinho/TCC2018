@@ -218,8 +218,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>banco23092018DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LoteController.cs" />
+    <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Database\EntidadesContext\EntidadesContext.cs" />
     <Compile Include="Database\DAO\CategoriaDAO.cs" />
     <Compile Include="Database\DAO\EstoqueDAO.cs" />
@@ -252,7 +255,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TccDataBaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Lote\LoteViewModel.cs" />
+    <Compile Include="ViewModels\ProdutoCategoria\CategoriaProdutoViewModel.cs" />
     <Compile Include="ViewModels\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Produtos\ProdutoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\animate.css" />
@@ -1530,6 +1536,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Categoria\" />
+    <Folder Include="Views\Lote\" />
+    <Folder Include="Views\Produtos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

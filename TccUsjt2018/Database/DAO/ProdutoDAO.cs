@@ -17,9 +17,7 @@ namespace TccUsjt2018.Database.DAO
         }
 
         public void Salva(Produto produto)
-        {
-            //var categoriaProduto = produto.CategoriaProduto.CodigoCategoria;
-            //produto.CategoriaId = categoriaProduto;
+        {           
             contexto.Produtos.Add(produto);
             contexto.SaveChanges();
         }
@@ -38,7 +36,6 @@ namespace TccUsjt2018.Database.DAO
         public List<Produto> GetAll()
         {
             return contexto.Produtos.ToList();
-        }
-      
+        }      
     }
 }
