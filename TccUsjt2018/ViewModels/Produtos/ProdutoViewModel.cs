@@ -18,5 +18,6 @@ namespace TccUsjt2018.ViewModels
         public int Categoria_CodigoCategoria { get; set; }
         public string MarcaProduto { get; set; }
         public DateTime ValidadeLote { get; set; }
+
     }
 }

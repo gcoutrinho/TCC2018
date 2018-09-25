@@ -8,10 +8,17 @@ namespace TccUsjt2018.ViewModels.Login
 {
     public class LoginViewModel
     {
+
         [Required]
-        public string Email;
+        [Display(Name = "E-mail")]
+        [EmailAddress]
+        public string Email { get; set; }
+
         [Required]
-        public string Senha;
+        [DataType(DataType.Password)]
+        [Display(Name = "Senha")]
+        public string Senha { get; set; }
+        
 
     }
 }
