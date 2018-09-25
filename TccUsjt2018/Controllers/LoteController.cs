@@ -29,9 +29,12 @@ namespace TccUsjt2018.Controllers
             EstoqueDAO estoqueDAO = new EstoqueDAO();
             var listaEstoque = estoqueDAO.GetAll();
 
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            var listaProduto = produtoDAO.GetAll();
+
             ViewBag.Lotes = listaLote;
             ViewBag.Estoques = listaEstoque;
-            
+            ViewBag.Produtos = listaProduto;
             return View();
         }
 
