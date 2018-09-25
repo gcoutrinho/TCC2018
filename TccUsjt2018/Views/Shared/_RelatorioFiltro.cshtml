@@ -1,0 +1,141 @@
+﻿
+<div class="modal fade" id="endereco-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title pull-left">Novo Endereço</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div id="formgroupcep" class="form-group form-group--float">
+                            @if (Model.Endereco != null)
+                            {
+                                <input type="text" id="inputcep" value="@Model.Endereco.Cep" class="form-control form-control-lg input-mask" data-mask="00000-000" maxlength="9">
+                            }
+                            else
+                            {
+                                <input type="text" id="inputcep" class="form-control form-control-lg input-mask" data-mask="00000-000" maxlength="9">
+                            }
+                            <label class="form-control-label">CEP</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div style="display: none;  margin-bottom: 2rem" id="errorcep">
+                            <small style="color: red;">CEP inválido!</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-1" style="display:none" id="loading">
+                        <div class="preloader pl-lg">
+                            <svg class="pl-circular" style="height: 30px" viewBox="25 25 50 50">
+                                <circle class="plc-path" cx="50" cy="50" r="20" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div id="formgrouplogradouro" class="form-group form-group--float">
+                    @if (Model.Endereco != null)
+                    {
+                        <input type="text" id="inputlogradouro" class="form-control form-control-lg" value="@Model.Endereco.Logradouro">
+                    }
+                    else
+                    {
+                        <input type="text" id="inputlogradouro" class="form-control form-control-lg">
+                    }
+                    <label class="form-control-label">Logradouro</label>
+                    <i class="form-group__bar"></i>
+                </div>
+                <div style="display: none;  margin-bottom: 2rem" id="errorlogradouro">
+                    <small style="color: red;">Preencha o campo corretamente!</small>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div id="formgroupnum" class="form-group form-group--float">
+                            @if (Model.Endereco != null)
+                            {
+                                <input type="number" id="inputnum" class="form-control form-control-lg" value="@Model.Endereco.Numero">
+                            }
+                            else
+                            {
+                                <input type="number" id="inputnum" class="form-control form-control-lg">
+                            }
+                            <label class="form-control-label">Nº</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div style="display: none;  margin-bottom: 2rem" id="errornum">
+                            <small style="color: red;">Preencha o campo corretamente!</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group form-group--float">
+                            @if (Model.Endereco != null)
+                            {
+                                <input type="text" id="inputcomplemento" class="form-control form-control-lg" value="@Model.Endereco.Complemento">
+                            }
+                            else
+                            {
+                                <input type="text" id="inputcomplemento" class="form-control form-control-lg">
+                            }
+                            <label>Complemento</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                    </div>
+                </div>
+                <div id="formgroupbairro" class="form-group form-group--float">
+                    @if (Model.Endereco != null)
+                    {
+                        <input type="text" id="inputbairro" class="form-control form-control-lg" value="@Model.Endereco.Bairro">
+                    }
+                    else
+                    {
+                        <input type="text" id="inputbairro" class="form-control form-control-lg">
+                    }
+                    <label class="form-control-label">Bairro</label>
+                    <i class="form-group__bar"></i>
+                </div>
+                <div style="display: none;  margin-bottom: 2rem" id="errorbairro">
+                    <small style="color: red;">Preencha o campo corretamente!</small>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5">
+                        <div id="formgroupcidade" class="form-group form-group--float">
+                            @if (Model.Endereco != null)
+                            {
+                                <input type="text" id="inputcidade" class="form-control form-control-lg" value="@Model.Endereco.Municipio">
+                            }
+                            else
+                            {
+                                <input type="text" id="inputcidade" class="form-control form-control-lg">
+                            }
+                            <label class="form-control-label">Cidade</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div style="display: none;  margin-bottom: 2rem" id="errorcidade">
+                            <small style="color: red;">Preencha o campo corretamente!</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div id="formgroupestado" class="form-group form-group--float">
+                            @if (Model.Endereco != null)
+                            {
+                                <input type="text" id="inputuf" class="form-control form-control-lg" maxlength="2" value="@Model.Endereco.Estado">
+                            }
+                            else
+                            {
+                                <input type="text" id="inputuf" class="form-control form-control-lg" maxlength="2">
+                            }
+                            <label class="form-control-label">UF</label>
+                            <i class="form-group__bar"></i>
+                        </div>
+                        <div style="display: none;  margin-bottom: 2rem" id="errorestado">
+                            <small style="color: red;">Preencha o campo corretamente!</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cadastrar_endereco" class="btn btn-success">Salvar</button>
+                <button type="button" class="btn btn-link" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
