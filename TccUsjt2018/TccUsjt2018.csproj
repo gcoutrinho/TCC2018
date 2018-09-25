@@ -223,6 +223,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
+    <Compile Include="Controllers\RelatorioController.cs" />
     <Compile Include="Database\EntidadesContext\EntidadesContext.cs" />
     <Compile Include="Database\DAO\CategoriaDAO.cs" />
     <Compile Include="Database\DAO\EstoqueDAO.cs" />
@@ -1539,6 +1540,7 @@
     <Folder Include="Views\Categoria\" />
     <Folder Include="Views\Lote\" />
     <Folder Include="Views\Produtos\" />
+    <Folder Include="Views\Relatorio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

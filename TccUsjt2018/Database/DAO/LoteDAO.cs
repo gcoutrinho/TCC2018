@@ -37,7 +37,5 @@ namespace TccUsjt2018.Database.DAO
             contexto.Lotes.Update(lote);
             contexto.SaveChanges();
         }
-
-
     }
 }
