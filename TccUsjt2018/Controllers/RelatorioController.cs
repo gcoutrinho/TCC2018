@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using TccUsjt2018.Database.DAO;
 using TccUsjt2018.Database.Entities;
+using TccUsjt2018.ViewModels;
+using TccUsjt2018.ViewModels.Relatório;
 
 namespace TccUsjt2018.Controllers
 {
@@ -18,38 +20,46 @@ namespace TccUsjt2018.Controllers
 
         public ActionResult RelatorioProduto(string nomeProduto, string nomeCategoria, DateTime dataValidade)
         {
+            RelatorioViewModel model = new RelatorioViewModel();
+            model.ListaProdutoViewModel = new List<ProdutoViewModel>();
+
             ProdutoDAO produtoDAO = new ProdutoDAO();
-            var listaProduto = produtoDAO.GetAll();
+
+            var listaProduto = produtoDAO.GetAll().Where(x => x.NomeProduto == nomeProduto 
+                                                   && x.CategoriaProduto.NomeCategoria == nomeCategoria);
 
             LoteDAO loteDAO = new LoteDAO();
-            var listaLote = loteDAO.GetAll();
 
-            CategoriaDAO categoriaDAO = new CategoriaDAO();
-            var listaCategoria = categoriaDAO.GetAll();
+            var listaLote = loteDAO.GetAll().Where(x => x.ValidadeLote == dataValidade);           
 
-            //if ()
-            //{
+            if (nomeProduto != null && nomeCategoria != null && dataValidade != null)
+            {
+                var resultQuery = from p in listaProduto
+                                  join l in listaLote
+                                  on p.CodigoProduto equals l.Produto.CodigoProduto
+                                  select new
+                                  {
+                                      p.NomeProduto,
+                                      p.CategoriaProduto.NomeCategoria,
+                                      l.ValidadeLote,
+                                  };
 
-            //}
+                foreach (var item in resultQuery)
+                {
+                    ProdutoViewModel modelproduto = new ProdutoViewModel();
+                    modelproduto.NomeProduto = item.NomeProduto;
+                    modelproduto.CategoriaProduto.NomeCategoria = item.NomeCategoria;
+                    modelproduto.ValidadeLote = item.ValidadeLote;
 
-            //var Resultado = from p in listaProduto
-            //                join l in listaLote on p.CodigoProduto equals l.Produto_CodigoProduto
-                            
+                    model.ListaProdutoViewModel.Add(modelproduto);
 
-            //                join c in listaCategoria on p.CategoriaProduto.CodigoCategoria equals c.CodigoCategoria
-                            
-            //                c.NomeCategoria = nomeCategoria
+                }
 
-                            
-            //                select new
-            //                {
-            //                    Nome = p.NomeProduto,
-            //                    Animal = l.nome,
-            //                    Tipo = _T.nome
-            //                };
+                return View(model);
+                                 
+            }
 
-
-
+            return null;
 
 
 

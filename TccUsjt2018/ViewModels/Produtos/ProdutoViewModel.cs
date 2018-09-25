@@ -17,5 +17,6 @@ namespace TccUsjt2018.ViewModels
         public virtual CategoriaProduto CategoriaProduto { get; set; }     
         public int Categoria_CodigoCategoria { get; set; }
         public string MarcaProduto { get; set; }
+        public DateTime ValidadeLote { get; set; }
     }
 }
