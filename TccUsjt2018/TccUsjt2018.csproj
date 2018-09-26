@@ -256,6 +256,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TccDataBaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Filtros\FiltrosViewModel.cs" />
     <Compile Include="ViewModels\Lote\LoteViewModel.cs" />
     <Compile Include="ViewModels\ProdutoCategoria\CategoriaProdutoViewModel.cs" />
     <Compile Include="ViewModels\Login\LoginViewModel.cs" />

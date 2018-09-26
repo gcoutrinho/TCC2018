@@ -52,7 +52,6 @@ namespace TccUsjt2018.Controllers
                     modelproduto.ValidadeLote = item.ValidadeLote;
 
                     model.ListaProdutoViewModel.Add(modelproduto);
-
                 }
 
                 return View(model);
@@ -60,11 +59,6 @@ namespace TccUsjt2018.Controllers
             }
 
             return null;
-
-
-
-
-
         }
     }
 }
