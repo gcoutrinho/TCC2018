@@ -16,11 +16,11 @@ namespace TccUsjt2018.Controllers
         public ActionResult Index()
         {
             var model = new RelatorioViewModel();
-            model.ListaProdutoViewModel = new List();
+            model.ListaProdutoViewModel = new List<ProdutoViewModel>();
             return View(model);
         }
 
-        public ActionResult RelatorioProduto(string nomeProduto, string nomeCategoria, DateTime dataValidade)
+        public ActionResult RelatorioProduto(string nomeCategoria, DateTime dataValidade)
         {
 
             RelatorioViewModel model = new RelatorioViewModel
@@ -41,14 +41,14 @@ namespace TccUsjt2018.Controllers
 
             ProdutoDAO produtoDAO = new ProdutoDAO();
             var listaProduto = produtoDAO.GetAll();
-            var filtroProduto = new List<Produto>();
-            foreach (var item in listaProduto)
-            {
-                if (item.NomeProduto.Equals(nomeProduto))
-                {
-                    filtroProduto.Add(item);
-                }
-            }
+            //var filtroProduto = new List<Produto>();
+            //foreach (var item in listaProduto)
+            //{
+            //    if (item.NomeProduto.Equals(nomeProduto))
+            //    {
+            //        filtroProduto.Add(item);
+            //    }
+            //}
 
             LoteDAO loteDAO = new LoteDAO();
             var listaLote = loteDAO.GetAll();
@@ -60,9 +60,9 @@ namespace TccUsjt2018.Controllers
                     filtroLote.Add(item);
                 }
             }
-            if (nomeProduto != null && nomeCategoria != null && dataValidade != null)
+            if (nomeCategoria != null && dataValidade != null)
             {
-                var resultQuery = from p in filtroProduto
+                var resultQuery = from p in listaProduto
                                   join l in filtroLote
                                   on p.CodigoProduto equals l.Produto_CodigoProduto
                                   join c in filtroCategoria
@@ -75,9 +75,9 @@ namespace TccUsjt2018.Controllers
                                   };
                 return View();
             }
-            else if (nomeProduto != null && nomeCategoria == null && dataValidade != null)
+            else if (nomeCategoria == null && dataValidade != null)
             {
-                var resultQuery = from p in filtroProduto
+                var resultQuery = from p in listaProduto
                                   join l in filtroLote
                                   on p.CodigoProduto equals l.Produto_CodigoProduto
                                   select new
@@ -88,7 +88,7 @@ namespace TccUsjt2018.Controllers
                                   };
                 return View();
             }
-            else if (nomeProduto == null && nomeCategoria == null)
+            else if (nomeCategoria == null && dataValidade == null)
             {
                 var todosLote = loteDAO.GetAll();
                 var todosProdutos = produtoDAO.GetAll();
