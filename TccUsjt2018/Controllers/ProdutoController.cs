@@ -18,6 +18,7 @@ namespace TccUsjt2018.Controllers
             ProdutoDAO dao = new ProdutoDAO();
             var produtos = dao.GetAll();
             ViewBag.Produtos = produtos;
+
             return View();
         }
 
@@ -25,12 +26,12 @@ namespace TccUsjt2018.Controllers
         {
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             var listaCategoria = categoriaDAO.GetAll();
-
             ViewBag.Categorias = listaCategoria;
             
             return View();
         }
         
+        [HttpPost]
         public ActionResult Adiciona(ProdutoViewModel model)
         {
             ProdutoDAO dao = new ProdutoDAO();
