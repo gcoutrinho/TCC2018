@@ -17,9 +17,8 @@ namespace TccUsjt2018.Controllers
         {
             ProdutoDAO dao = new ProdutoDAO();
             var produtos = dao.GetAll();
-            ViewBag.Produtos = produtos;
 
-            return View();
+            return View(produtos);
         }
 
         public ActionResult FormularioProduto()

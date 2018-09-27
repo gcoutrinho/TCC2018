@@ -16,7 +16,7 @@ namespace TccUsjt2018.Controllers
         public ActionResult Index()
         {
             var model = new RelatorioViewModel();
-            model.ListaProdutoViewModel = new List();
+            model.ListaProdutoViewModel = new List<ProdutoViewModel>();
             return View(model);
         }
 

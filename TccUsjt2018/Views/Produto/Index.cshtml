@@ -1,6 +1,6 @@
-﻿@model TccUsjt2018.ViewModels.Relatório.RelatorioViewModel
-@{ 
-    ViewBag.Title = "Relatório Produto";
+﻿@model List<TccUsjt2018.Database.Entities.Produto>
+@{
+    ViewBag.Title = "Produtos";
 }
 
 <div class="content mt-3">
@@ -19,29 +19,25 @@
                                     <th>Produto</th>
                                     <th>Categoria</th>
                                     <th>Validade</th>
+                                    <th>Situacao</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach(var produto in Model.ListaProdutoViewModel)
-                                {
-                                <tr>
-                                    <td>@Html.DisplayFor(model => produto.NomeProduto)</td>
-                                    <td>@Html.DisplayFor(model => produto.CategoriaProduto.NomeCategoria)</td>
-                                    <td>@Html.DisplayFor(model => produto.ValidadeLote.ToString("MM/yyyy"))</td>
-                                </tr>
-                                }
+                                @*@foreach(var produto in Model.ListaProdutoViewModel)
+                                    {
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    }*@
 
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div><!-- .animated -->
 </div><!-- .content -->
-
-<script>
-
-</script>
