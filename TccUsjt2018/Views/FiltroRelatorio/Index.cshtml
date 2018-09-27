@@ -1,0 +1,51 @@
+﻿@model TccUsjt2018.ViewModels.Filtros.FiltrosViewModel
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Inline</strong> Form
+                    </div>
+                    <div class="card-body card-block">
+                        <form action="" method="post" class="form-inline">
+                            <div class="form-group">
+                                <select name="select" id="select" class="form-control">
+                                    <option value="0">Please select</option>
+                                    <option value="1">Option #1</option>
+                                    <option value="2">Option #2</option>
+                                    <option value="3">Option #3</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail2" class="px-1  form-control-label">Email</label>
+                                <input type="email" id="exampleInputEmail2" placeholder="jane.doe@example.com" required="" class="form-control">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fa fa-dot-circle-o"></i> Submit
+                        </button>
+                        <button type="reset" class="btn btn-danger btn-sm">
+                            <i class="fa fa-ban"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+
+
+<script>
+    jQuery(document).ready(function () {
+        jQuery(".standardSelect").chosen({
+            disable_search_threshold: 10,
+            no_results_text: "Oops, nothing found!",
+            width: "100%"
+        });
+    });
+</script>
