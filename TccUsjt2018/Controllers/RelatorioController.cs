@@ -15,7 +15,9 @@ namespace TccUsjt2018.Controllers
         // GET: Relatorio
         public ActionResult Index()
         {
-            return View();
+            var model = new RelatorioViewModel();
+            model.ListaProdutoViewModel = new List();
+            return View(model);
         }
 
         public ActionResult RelatorioProduto(string nomeProduto, string nomeCategoria, DateTime dataValidade)
