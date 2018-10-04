@@ -12,20 +12,13 @@ namespace TccUsjt2018.Controllers
 {
     public class RelatorioController : Controller
     {
-        // GET: Relatorio
-        public ActionResult Index()
-        {
-            var model = new RelatorioViewModel();
-            model.ListaProdutoViewModel = new List<ProdutoViewModel>();
-            return View(model);
-        }
 
         public ActionResult RelatorioProduto(string nomeCategoria, DateTime dataValidade)
         {
 
-            RelatorioViewModel model = new RelatorioViewModel
+            RelatorioProdutoViewModel model = new RelatorioProdutoViewModel
             {
-                ListaProdutoViewModel = new List<ProdutoViewModel>()
+                Produtos = new List<ProdutoViewModel>()
             };
 
             CategoriaDAO categoriaDAO = new CategoriaDAO();

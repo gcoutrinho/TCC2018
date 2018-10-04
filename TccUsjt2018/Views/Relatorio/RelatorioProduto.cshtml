@@ -1,6 +1,6 @@
-﻿@model TccUsjt2018.ViewModels.Relatório.RelatorioViewModel
-@{ 
-    ViewBag.Title = "Relatório Produto";
+﻿@model TccUsjt2018.ViewModels.Relatório.RelatorioProdutoViewModel
+@{
+    ViewBag.Title = "Relatório de Produto";
 }
 
 <div class="content mt-3">
@@ -22,13 +22,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach(var produto in Model.ListaProdutoViewModel)
+                                @foreach (var produto in Model.Produtos)
                                 {
-                                <tr>
-                                    <td>@Html.DisplayFor(model => produto.NomeProduto)</td>
-                                    <td>@Html.DisplayFor(model => produto.CategoriaProduto.NomeCategoria)</td>
-                                    <td>@Html.DisplayFor(model => produto.ValidadeLote.ToString("MM/yyyy"))</td>
-                                </tr>
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => produto.NomeProduto)</td>
+                                        <td>@Html.DisplayFor(model => produto.CategoriaProduto.NomeCategoria)</td>
+                                        <td>@Html.DisplayFor(model => produto.ValidadeLote.ToString("MM/yyyy"))</td>
+                                    </tr>
                                 }
 
                             </tbody>
