@@ -1,38 +1,42 @@
-﻿@model List<TccUsjt2018.Database.Entities.Produto>
+﻿@model IEnumerable<TccUsjt2018.ViewModels.ProdutoViewModel>
 @{
     ViewBag.Title = "Produtos";
 }
-
 <div class="content mt-3">
     <div class="animated fadeIn">
         <div class="row">
-
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Relatório de Produtos</strong>
+                        <strong class="card-title">@ViewBag.Title</strong>
                     </div>
                     <div class="card-body">
+                        @Html.ActionLink("Cadastrar", "Create", null,  new { @class = "btn btn-primary" })
+                        <br />
+                        <br />
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Produto</th>
+                                    <th>Id</th>
+                                    <th>Nome</th>
                                     <th>Categoria</th>
-                                    <th>Validade</th>
-                                    <th>Situacao</th>
+                                    <th>Marca</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @*@foreach(var produto in Model.ListaProdutoViewModel)
-                                    {
+                                @foreach (var produto in Model)
+                                {
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>@Html.DisplayFor(model => produto.CodigoProduto)</td>
+                                        <td>@Html.DisplayFor(model => produto.NomeProduto)</td>
+                                        <td>@Html.DisplayFor(model => produto.CategoriaProduto.NomeCategoria)</td>
+                                        <td>@Html.DisplayFor(model => produto.MarcaProduto)</td>
+                                        <td align="center"><button onclick="detalhes('@produto');" type="button" class="btn btn-success">Detalhes</button>
+                                        @Html.ActionLink("Editar", "Edit", new { codigo = produto.CodigoProduto }, new { @class = "btn btn-warning" })
+                                        <button onclick="remover('@produto');" type="button" class="btn btn-danger">Excluir</button></td>
                                     </tr>
-                                    }*@
-
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -41,3 +45,14 @@
         </div>
     </div><!-- .animated -->
 </div><!-- .content -->
+
+<script>
+
+    function detalhes(produto) {
+
+    }
+
+    function remover(produto) {
+
+    }
+</script>

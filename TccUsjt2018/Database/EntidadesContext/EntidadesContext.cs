@@ -18,7 +18,7 @@ namespace TccUsjt2018.Database.EntitiesContext
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //Seta o valor da minha connection strings que esta no Web.config
-            string connectionString = ConfigurationManager.ConnectionStrings["banco23092018"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["banco23092018ConnectionString"].ConnectionString;
             //Seta o tipo de BD que sera usado para armazenar as informações
             optionsBuilder.UseSqlServer(connectionString);
             base.OnConfiguring(optionsBuilder);
