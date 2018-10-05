@@ -1,84 +1,28 @@
-﻿
+﻿@model TccUsjt2018.Database.Entities.CategoriaProduto
+
 <div class="modal fade" id="endereco-modal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title pull-left">Novo Endereço</h5>
+                <h5 class="modal-title pull-left">Escolha o filtro</h5>
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-sm-3">
-                        <div id="formgroupcep" class="form-group form-group--float">
-                            @if (Model.Endereco != null)
-                            {
-                                <input type="text" id="inputcep" value="@Model.Endereco.Cep" class="form-control form-control-lg input-mask" data-mask="00000-000" maxlength="9">
-                            }
-                            else
-                            {
-                                <input type="text" id="inputcep" class="form-control form-control-lg input-mask" data-mask="00000-000" maxlength="9">
-                            }
-                            <label class="form-control-label">CEP</label>
-                            <i class="form-group__bar"></i>
-                        </div>
-                        <div style="display: none;  margin-bottom: 2rem" id="errorcep">
-                            <small style="color: red;">CEP inválido!</small>
-                        </div>
+                    <div class="form-group form-group--float">
+                        <input type="text" class="form-control" placeholder="Nome">
                     </div>
-                    <div class="col-sm-1" style="display:none" id="loading">
-                        <div class="preloader pl-lg">
-                            <svg class="pl-circular" style="height: 30px" viewBox="25 25 50 50">
-                                <circle class="plc-path" cx="50" cy="50" r="20" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div id="formgrouplogradouro" class="form-group form-group--float">
-                    @if (Model.Endereco != null)
-                    {
-                        <input type="text" id="inputlogradouro" class="form-control form-control-lg" value="@Model.Endereco.Logradouro">
-                    }
-                    else
-                    {
-                        <input type="text" id="inputlogradouro" class="form-control form-control-lg">
-                    }
-                    <label class="form-control-label">Logradouro</label>
-                    <i class="form-group__bar"></i>
                 </div>
                 <div style="display: none;  margin-bottom: 2rem" id="errorlogradouro">
                     <small style="color: red;">Preencha o campo corretamente!</small>
                 </div>
                 <div class="row">
-                    <div class="col-sm-3">
-                        <div id="formgroupnum" class="form-group form-group--float">
-                            @if (Model.Endereco != null)
-                            {
-                                <input type="number" id="inputnum" class="form-control form-control-lg" value="@Model.Endereco.Numero">
-                            }
-                            else
-                            {
-                                <input type="number" id="inputnum" class="form-control form-control-lg">
-                            }
-                            <label class="form-control-label">Nº</label>
-                            <i class="form-group__bar"></i>
-                        </div>
-                        <div style="display: none;  margin-bottom: 2rem" id="errornum">
-                            <small style="color: red;">Preencha o campo corretamente!</small>
-                        </div>
+                    <div class="form-group form-group--float">
+                        <input type="text" class="form-control" placeholder="Categoria">
+                        @Html.EnumDropDownListFor(model => model.Tipo, "Categoria", new { @class = "form-control select2" })
                     </div>
-                    <div class="col-sm-3">
-                        <div class="form-group form-group--float">
-                            @if (Model.Endereco != null)
-                            {
-                                <input type="text" id="inputcomplemento" class="form-control form-control-lg" value="@Model.Endereco.Complemento">
-                            }
-                            else
-                            {
-                                <input type="text" id="inputcomplemento" class="form-control form-control-lg">
-                            }
-                            <label>Complemento</label>
-                            <i class="form-group__bar"></i>
-                        </div>
-                    </div>
+                </div>
+                <div style="display: none;  margin-bottom: 2rem" id="errornum">
+                    <small style="color: red;">Preencha o campo corretamente!</small>
                 </div>
                 <div id="formgroupbairro" class="form-group form-group--float">
                     @if (Model.Endereco != null)

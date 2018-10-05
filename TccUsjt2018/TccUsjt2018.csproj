@@ -213,6 +213,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="banco23092018.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>banco23092018.xsd</DependentUpon>
+    </Compile>
     <Compile Include="banco23092018DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -221,6 +226,7 @@
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\FiltroRelatorioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\CadastrosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
@@ -262,9 +268,13 @@
     <Compile Include="ViewModels\ProdutoCategoria\CategoriaProdutoViewModel.cs" />
     <Compile Include="ViewModels\Login\LoginViewModel.cs" />
     <Compile Include="ViewModels\Produtos\ProdutoViewModel.cs" />
-    <Compile Include="ViewModels\Relatório\RelatorioViewModel.cs" />
+    <Compile Include="ViewModels\Relatório\RelatorioProdutoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\banco23092018.mdf" />
+    <Content Include="App_Data\banco23092018_log.ldf">
+      <DependentUpon>banco23092018.mdf</DependentUpon>
+    </Content>
     <Content Include="Assets\css\animate.css" />
     <Content Include="Assets\css\bootstrap-select.css" />
     <Content Include="Assets\css\bootstrap.css" />
@@ -1453,6 +1463,17 @@
     <Content Include="banco23092018DataSet.xsc">
       <DependentUpon>banco23092018DataSet.xsd</DependentUpon>
     </Content>
+    <Content Include="banco23092018.xsc">
+      <DependentUpon>banco23092018.xsd</DependentUpon>
+    </Content>
+    <None Include="banco23092018.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>banco23092018.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="banco23092018.xss">
+      <DependentUpon>banco23092018.xsd</DependentUpon>
+    </Content>
     <None Include="banco23092018DataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>banco23092018DataSet.Designer.cs</LastGenOutput>
@@ -1537,16 +1558,15 @@
     <Content Include="Tcc2018DataSet.xss">
       <DependentUpon>Tcc2018DataSet.xsd</DependentUpon>
     </Content>
-    <Content Include="Views\Relatorio\Index.cshtml" />
     <Content Include="Views\Shared\_MenuLateral.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_RelatorioFiltro.cshtml" />
-    <Content Include="Views\Produtos\Index.cshtml" />
     <Content Include="Views\Produto\Index.cshtml" />
     <Content Include="Views\FiltroRelatorio\Index.cshtml" />
+    <Content Include="Views\Relatorio\RelatorioProduto.cshtml" />
+    <Content Include="Views\Produto\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Categoria\" />
     <Folder Include="Views\Lote\" />

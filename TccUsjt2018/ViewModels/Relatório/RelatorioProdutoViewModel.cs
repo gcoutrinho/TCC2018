@@ -5,8 +5,8 @@ using System.Web;
 
 namespace TccUsjt2018.ViewModels.Relatório
 {
-    public class RelatorioViewModel
+    public class RelatorioProdutoViewModel
     {
-        public List<ProdutoViewModel> ListaProdutoViewModel { get; set; }
+        public List<ProdutoViewModel> Produtos { get; set; }
     }
 }

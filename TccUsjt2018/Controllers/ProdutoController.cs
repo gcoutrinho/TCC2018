@@ -18,20 +18,52 @@ namespace TccUsjt2018.Controllers
             ProdutoDAO dao = new ProdutoDAO();
             var produtos = dao.GetAll();
 
-            return View(produtos);
+            var model = produtos.Select(x => new ProdutoViewModel()
+            {
+                CodigoProduto = x.CodigoProduto,
+                NomeProduto = x.NomeProduto,
+                DataCadastro = x.DataCadastro,
+                CategoriaProduto = x.CategoriaProduto,
+                MarcaProduto = x.MarcaProduto
+            }).ToList();
+
+            return View(model);
         }
 
-        public ActionResult FormularioProduto()
+        public ActionResult Create()
         {
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             var listaCategoria = categoriaDAO.GetAll();
             ViewBag.Categorias = listaCategoria;
-            
+
+            ProdutoViewModel model = new ProdutoViewModel();
+            return View(model);
+        }
+
+        public ActionResult Edit(int codigo)
+        {
+            ProdutoDAO dao = new ProdutoDAO();
+            var produto = dao.GetById(codigo);
+
+            var model = new ProdutoViewModel() {
+                CodigoProduto = produto.CodigoProduto,
+                NomeProduto = produto.NomeProduto,
+                DataCadastro = produto.DataCadastro,
+                CategoriaProduto = produto.CategoriaProduto,
+                MarcaProduto = produto.MarcaProduto
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ProdutoViewModel model)
+        {
             return View();
         }
         
         [HttpPost]
-        public ActionResult Adiciona(ProdutoViewModel model)
+        public ActionResult Create(ProdutoViewModel model)
         {
             ProdutoDAO dao = new ProdutoDAO();
 
