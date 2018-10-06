@@ -1,0 +1,45 @@
+﻿@model TccUsjt2018.ViewModels.Filtros.FiltrosViewModel
+@{
+    ViewBag.Title = "Relatório de Produtos";
+}
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">@ViewBag.Title</strong>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm())
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(x => x.NomeProduto)
+                                @Html.EditorFor(x => x.NomeProduto, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(X => X.DataVencimento, new { @class = "control-label mb-1" })
+                                @Html.EditorFor(x => x.NomeCategoria, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.Categorias, new SelectList(new List<dynamic> { Model.Categorias}))
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+<script>
+
+    function detalhes(produto) {
+
+    }
+
+    function remover(produto) {
+
+    }
+</script>

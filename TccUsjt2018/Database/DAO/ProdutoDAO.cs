@@ -35,7 +35,15 @@ namespace TccUsjt2018.Database.DAO
 
         public List<Produto> GetAll()
         {
-            return contexto.Produtos.ToList();
+            CategoriaDAO categoriaDAO = new CategoriaDAO();
+            var produtos =  contexto.Produtos.ToList();
+
+            foreach (var item in produtos)
+            {
+                item.CategoriaProduto = categoriaDAO.GetById(item.Categoria_CodigoCategoria);
+            }
+
+            return produtos;
         }      
     }
 }

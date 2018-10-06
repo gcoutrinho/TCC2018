@@ -1,6 +1,6 @@
-﻿@model IEnumerable<TccUsjt2018.ViewModels.ProdutoViewModel>
+﻿@model IEnumerable<TccUsjt2018.ViewModels.ProdutoCategoria.CategoriaProdutoViewModel>
 @{
-    ViewBag.Title = "Produto";
+    ViewBag.Title = "Categoria";
 }
 <div class="content mt-3">
     <div class="animated fadeIn">
@@ -11,7 +11,7 @@
                         <strong class="card-title">@ViewBag.Title</strong>
                     </div>
                     <div class="card-body">
-                        @Html.ActionLink("Cadastrar", "Create", null,  new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Cadastrar", "Create", null, new { @class = "btn btn-primary" })
                         <br />
                         <br />
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -19,22 +19,22 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Nome</th>
-                                    <th>Categoria</th>
-                                    <th>Marca</th>
+                                    <th>Descrição</th>                              
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var produto in Model)
+                                @foreach (var categoria in Model)
                                 {
                                     <tr>
-                                        <td>@Html.DisplayFor(model => produto.CodigoProduto)</td>
-                                        <td>@Html.DisplayFor(model => produto.NomeProduto)</td>
-                                        <td>@Html.DisplayFor(model => produto.CategoriaProduto.NomeCategoria)</td>
-                                        <td>@Html.DisplayFor(model => produto.MarcaProduto)</td>
-                                        <td align="center"><button onclick="detalhes('@produto');" type="button" class="btn btn-success">Detalhes</button>
-                                        @Html.ActionLink("Editar", "Edit", new { codigo = produto.CodigoProduto }, new { @class = "btn btn-warning" })
-                                        <button onclick="remover('@produto');" type="button" class="btn btn-danger">Excluir</button></td>
+                                        <td>@Html.DisplayFor(model => categoria.CodigoCategoria)</td>
+                                        <td>@Html.DisplayFor(model => categoria.NomeCategoria)</td>
+                                        <td>@Html.DisplayFor(model => categoria.DescricaoCategoria)</td>                
+                                        <td align="center">
+                                            <button onclick="detalhes('@categoria');" type="button" class="btn btn-success">Detalhes</button>
+                                            @Html.ActionLink("Editar", "Edit", new { codigo = categoria.CodigoCategoria }, new { @class = "btn btn-warning" })
+                                            <button onclick="remover('@categoria');" type="button" class="btn btn-danger">Excluir</button>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>

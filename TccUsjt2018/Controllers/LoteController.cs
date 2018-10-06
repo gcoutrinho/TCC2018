@@ -15,10 +15,18 @@ namespace TccUsjt2018.Controllers
         public ActionResult Index()
         {
             LoteDAO loteDAO = new LoteDAO();
-            var listaLote = loteDAO.GetAll();
+            var lotes = loteDAO.GetAll();          
 
-            ViewBag.Lotes = listaLote;
-            return View();
+            var model = lotes.Select(x => new LoteViewModel()
+            {
+                CodigoLote = x.CodigoLote,
+                DescricaoLote = x.DescricaoLote,
+                Produto = x.Produto,
+                ValidadeLote = x .ValidadeLote,
+                QuantidadeProduto = x.QuantidadeProduto,
+            });
+
+            return View(model);
         }
 
         public ActionResult FormularioLote()

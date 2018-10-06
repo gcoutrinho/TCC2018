@@ -13,13 +13,18 @@ namespace TccUsjt2018.Controllers
     {
         // GET: Categoria
         public ActionResult Index()
-        {
+        {            
             CategoriaDAO categoriaDAO = new CategoriaDAO();
-            var listaCategoria = categoriaDAO.GetAll();
+            var categorias = categoriaDAO.GetAll();
 
-            ViewBag.Categorias = listaCategoria;
+            var model = categorias.Select(x => new CategoriaProdutoViewModel()
+            {
+                CodigoCategoria = x.CodigoCategoria,
+                NomeCategoria = x.NomeCategoria,
+                DescricaoCategoria = x.DescricaoCategoria,            
+            });
 
-            return View();
+            return View(model);
         }
 
         public ActionResult FormularioCategoria()

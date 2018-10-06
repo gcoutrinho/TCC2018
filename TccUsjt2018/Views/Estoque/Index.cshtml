@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TccUsjt2018.ViewModels.Estoques.EstoqueViewModel>
+@{
+    ViewBag.Title = "Estoque";
+}
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">@ViewBag.Title</strong>
+                    </div>
+                    <div class="card-body">
+                        @Html.ActionLink("Cadastrar", "Create", null, new { @class = "btn btn-primary" })
+                        <br />
+                        <br />
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nome</th>                               
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var estoque in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => estoque.CodigoEstoque)</td>
+                                        <td>@Html.DisplayFor(model => estoque.Descricao)</td>
+                                        <td align="center">
+                                            <button onclick="detalhes('@estoque');" type="button" class="btn btn-success">Detalhes</button>
+                                            @Html.ActionLink("Editar", "Edit", new { codigo = estoque.CodigoEstoque }, new { @class = "btn btn-warning" })
+                                            <button onclick="remover('@estoque');" type="button" class="btn btn-danger">Excluir</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+<script>
+
+    function detalhes(produto) {
+
+    }
+
+    function remover(produto) {
+
+    }
+</script>

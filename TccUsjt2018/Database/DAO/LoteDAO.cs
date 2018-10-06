@@ -29,7 +29,15 @@ namespace TccUsjt2018.Database.DAO
 
         public List<Lote> GetAll()
         {
-            return contexto.Lotes.ToList();
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            var retorno =  contexto.Lotes.ToList();
+
+            foreach (var produto in retorno)
+            {
+                produto.Produto = produtoDAO.GetById(produto.Produto_CodigoProduto);
+            }
+
+            return retorno;
         }
 
         public void Update(Lote lote)

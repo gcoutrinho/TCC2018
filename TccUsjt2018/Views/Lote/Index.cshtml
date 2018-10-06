@@ -1,6 +1,6 @@
-﻿@model IEnumerable<TccUsjt2018.ViewModels.ProdutoViewModel>
+﻿@model IEnumerable<TccUsjt2018.ViewModels.Lote.LoteViewModel>
 @{
-    ViewBag.Title = "Produto";
+    ViewBag.Title = "Lotes";
 }
 <div class="content mt-3">
     <div class="animated fadeIn">
@@ -11,7 +11,7 @@
                         <strong class="card-title">@ViewBag.Title</strong>
                     </div>
                     <div class="card-body">
-                        @Html.ActionLink("Cadastrar", "Create", null,  new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Cadastrar", "Create", null, new { @class = "btn btn-primary" })
                         <br />
                         <br />
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
@@ -19,22 +19,24 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Nome</th>
-                                    <th>Categoria</th>
-                                    <th>Marca</th>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var produto in Model)
+                                @foreach (var lote in Model)
                                 {
                                     <tr>
-                                        <td>@Html.DisplayFor(model => produto.CodigoProduto)</td>
-                                        <td>@Html.DisplayFor(model => produto.NomeProduto)</td>
-                                        <td>@Html.DisplayFor(model => produto.CategoriaProduto.NomeCategoria)</td>
-                                        <td>@Html.DisplayFor(model => produto.MarcaProduto)</td>
-                                        <td align="center"><button onclick="detalhes('@produto');" type="button" class="btn btn-success">Detalhes</button>
-                                        @Html.ActionLink("Editar", "Edit", new { codigo = produto.CodigoProduto }, new { @class = "btn btn-warning" })
-                                        <button onclick="remover('@produto');" type="button" class="btn btn-danger">Excluir</button></td>
+                                        <td>@Html.DisplayFor(model => lote.CodigoLote)</td>
+                                        <td>@Html.DisplayFor(model => lote.DescricaoLote)</td>
+                                        <td>@Html.DisplayFor(model => lote.Produto.NomeProduto)</td>
+                                        <td>@Html.DisplayFor(model => lote.QuantidadeProduto)</td>
+                                        <td align="center">
+                                            <button onclick="detalhes('@lote');" type="button" class="btn btn-success">Detalhes</button>
+                                            @Html.ActionLink("Editar", "Edit", new { codigo = lote.CodigoLote }, new { @class = "btn btn-warning" })
+                                            <button onclick="remover('@lote');" type="button" class="btn btn-danger">Excluir</button>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>

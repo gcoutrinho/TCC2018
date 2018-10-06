@@ -6,27 +6,31 @@ using System.Web.Mvc;
 using TccUsjt2018.Database.DAO;
 using TccUsjt2018.Database.Entities;
 using TccUsjt2018.ViewModels;
+using TccUsjt2018.ViewModels.Filtros;
 using TccUsjt2018.ViewModels.Relatório;
 
 namespace TccUsjt2018.Controllers
 {
     public class RelatorioController : Controller
     {
-
-        public ActionResult RelatorioProduto(string nomeCategoria, DateTime dataValidade)
+        public ActionResult Index()
         {
+            FiltrosViewModel model = new FiltrosViewModel();
+            CategoriaDAO categoria = new CategoriaDAO();
+            model.Categorias = categoria.GetAll();
 
-            RelatorioProdutoViewModel model = new RelatorioProdutoViewModel
-            {
-                Produtos = new List<ProdutoViewModel>()
-            };
+            return View(model);
+        }
 
+        public ActionResult RelatorioProduto(FiltrosViewModel filtro)
+        {
+           
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             var listaCategoria = categoriaDAO.GetAll();
             var filtroCategoria = new List<CategoriaProduto>();
             foreach (var item in listaCategoria)
             {
-                if (item.NomeCategoria.Equals(nomeCategoria))
+                if (item.NomeCategoria.Equals(filtro.NomeCategoria))
                 {
                     filtroCategoria.Add(item);
                 }
@@ -34,72 +38,77 @@ namespace TccUsjt2018.Controllers
 
             ProdutoDAO produtoDAO = new ProdutoDAO();
             var listaProduto = produtoDAO.GetAll();
-            //var filtroProduto = new List<Produto>();
-            //foreach (var item in listaProduto)
-            //{
-            //    if (item.NomeProduto.Equals(nomeProduto))
-            //    {
-            //        filtroProduto.Add(item);
-            //    }
-            //}
+            var filtroProduto = new List<Produto>();
+            foreach (var item in listaProduto)
+            {
+                if (item.NomeProduto.Equals(filtro.NomeCategoria))
+                {
+                    filtroProduto.Add(item);
+                }
+            }
 
             LoteDAO loteDAO = new LoteDAO();
             var listaLote = loteDAO.GetAll();
             var filtroLote = new List<Lote>();
             foreach (var item in listaLote)
             {
-                if (item.ValidadeLote.Equals(dataValidade))
+                if (item.ValidadeLote.Equals(filtro.DataVencimento))
                 {
                     filtroLote.Add(item);
                 }
             }
-            if (nomeCategoria != null && dataValidade != null)
+            if (filtro.NomeCategoria != null && filtro.DataVencimento != null)
             {
                 var resultQuery = from p in listaProduto
                                   join l in filtroLote
                                   on p.CodigoProduto equals l.Produto_CodigoProduto
                                   join c in filtroCategoria
                                   on p.Categoria_CodigoCategoria equals c.CodigoCategoria
-                                  select new
+                                  select new RelatorioProdutoViewModel()
                                   {
-                                      p.NomeProduto,
-                                      c.NomeCategoria,
-                                      l.ValidadeLote,
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      DataVencimento=  l.ValidadeLote,
+                                      Marca = p.MarcaProduto,
                                   };
                 return View();
             }
-            else if (nomeCategoria == null && dataValidade != null)
+            else if (filtro.NomeCategoria == null && filtro.DataVencimento != null)
             {
                 var resultQuery = from p in listaProduto
                                   join l in filtroLote
                                   on p.CodigoProduto equals l.Produto_CodigoProduto
-                                  select new
+                                  join c in filtroCategoria
+                                  on p.Categoria_CodigoCategoria equals c.CodigoCategoria
+                                  select new RelatorioProdutoViewModel
                                   {
-                                      p.NomeProduto,
-                                      p.MarcaProduto,
-                                      l.ValidadeLote,
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      DataVencimento = l.ValidadeLote,
+                                      Marca = p.MarcaProduto,
                                   };
                 return View();
             }
-            else if (nomeCategoria == null && dataValidade == null)
+            else if (filtro.NomeCategoria == null && filtro.DataVencimento == null)
             {
                 var todosLote = loteDAO.GetAll();
                 var todosProdutos = produtoDAO.GetAll();
                 var todasCategorias = categoriaDAO.GetAll();
 
-                var resultQuery = from p in todosProdutos
-                                  join l in todosLote
+                var resultQuery = from p in listaProduto
+                                  join l in filtroLote
                                   on p.CodigoProduto equals l.Produto_CodigoProduto
-                                  join c in todasCategorias
+                                  join c in filtroCategoria
                                   on p.Categoria_CodigoCategoria equals c.CodigoCategoria
-                                  select new
+                                  select new RelatorioProdutoViewModel
                                   {
-                                      p.NomeProduto,
-                                      c.NomeCategoria,
-                                      p.MarcaProduto,
-                                      l.ValidadeLote,
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      DataVencimento = l.ValidadeLote,
+                                      Marca = p.MarcaProduto,
                                   };
-                return View();
+
+                return View(resultQuery);
             }
 
             return null;
