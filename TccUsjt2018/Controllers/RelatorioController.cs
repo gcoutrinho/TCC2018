@@ -15,22 +15,36 @@ namespace TccUsjt2018.Controllers
     {
         public ActionResult Index()
         {
-            FiltrosViewModel model = new FiltrosViewModel();
-            CategoriaDAO categoria = new CategoriaDAO();
-            model.Categorias = categoria.GetAll();
+            var model = new FiltrosViewModel
+            {
+                Categorias = GetCategoria()
+            };
 
             return View(model);
         }
 
+        public IEnumerable<SelectListItem> GetCategoria()
+        {
+            var dao = new CategoriaDAO();
+            var categorias = dao.GetAll()
+                .Select(x => new SelectListItem
+                {
+                    Value = x.CodigoCategoria.ToString(),
+                    Text = x.NomeCategoria,
+                });
+
+            return new SelectList(categorias, "Value", "Text");
+        }
+
         public ActionResult RelatorioProduto(FiltrosViewModel filtro)
         {
-           
+
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             var listaCategoria = categoriaDAO.GetAll();
             var filtroCategoria = new List<CategoriaProduto>();
             foreach (var item in listaCategoria)
             {
-                if (item.NomeCategoria.Equals(filtro.NomeCategoria))
+                if (item.CodigoCategoria.Equals(filtro.SelectItemCategoriaId))
                 {
                     filtroCategoria.Add(item);
                 }
@@ -41,7 +55,7 @@ namespace TccUsjt2018.Controllers
             var filtroProduto = new List<Produto>();
             foreach (var item in listaProduto)
             {
-                if (item.NomeProduto.Equals(filtro.NomeCategoria))
+                if (item.NomeProduto.Equals(filtro.NomeProduto))
                 {
                     filtroProduto.Add(item);
                 }
@@ -57,9 +71,9 @@ namespace TccUsjt2018.Controllers
                     filtroLote.Add(item);
                 }
             }
-            if (filtro.NomeCategoria != null && filtro.DataVencimento != null)
+            if (filtro.SelectItemCategoriaId != null && filtro.DataVencimento != null && filtro.NomeProduto != null)
             {
-                var resultQuery = from p in listaProduto
+                var resultQuery = from p in filtroProduto
                                   join l in filtroLote
                                   on p.CodigoProduto equals l.Produto_CodigoProduto
                                   join c in filtroCategoria
@@ -68,37 +82,38 @@ namespace TccUsjt2018.Controllers
                                   {
                                       NomeProduto = p.NomeProduto,
                                       NomeCategoria = c.NomeCategoria,
-                                      DataVencimento=  l.ValidadeLote,
-                                      Marca = p.MarcaProduto,
-                                  };
-                return View();
-            }
-            else if (filtro.NomeCategoria == null && filtro.DataVencimento != null)
-            {
-                var resultQuery = from p in listaProduto
-                                  join l in filtroLote
-                                  on p.CodigoProduto equals l.Produto_CodigoProduto
-                                  join c in filtroCategoria
-                                  on p.Categoria_CodigoCategoria equals c.CodigoCategoria
-                                  select new RelatorioProdutoViewModel
-                                  {
-                                      NomeProduto = p.NomeProduto,
-                                      NomeCategoria = c.NomeCategoria,
                                       DataVencimento = l.ValidadeLote,
                                       Marca = p.MarcaProduto,
                                   };
-                return View();
+
+                return View(resultQuery);
             }
-            else if (filtro.NomeCategoria == null && filtro.DataVencimento == null)
+            //else if (filtro.SelectItemCategoriaId == null && filtro.DataVencimento == null && filtro.NomeProduto == null)
+            //{
+            //    var resultQuery = from p in listaProduto
+            //                      join l in filtroLote
+            //                      on p.CodigoProduto equals l.Produto_CodigoProduto
+            //                      join c in filtroCategoria
+            //                      on p.Categoria_CodigoCategoria equals c.CodigoCategoria
+            //                      select new RelatorioProdutoViewModel
+            //                      {
+            //                          NomeProduto = p.NomeProduto,
+            //                          NomeCategoria = c.NomeCategoria,
+            //                          DataVencimento = l.ValidadeLote,
+            //                          Marca = p.MarcaProduto,
+            //                      };
+            //    return View(resultQuery);
+            //}
+            else if (filtro.SelectItemCategoriaId == null && filtro.DataVencimento == null && filtro.NomeProduto == null)
             {
                 var todosLote = loteDAO.GetAll();
                 var todosProdutos = produtoDAO.GetAll();
                 var todasCategorias = categoriaDAO.GetAll();
 
-                var resultQuery = from p in listaProduto
-                                  join l in filtroLote
+                var resultQuery = from p in todosProdutos
+                                  join l in todosLote
                                   on p.CodigoProduto equals l.Produto_CodigoProduto
-                                  join c in filtroCategoria
+                                  join c in todasCategorias
                                   on p.Categoria_CodigoCategoria equals c.CodigoCategoria
                                   select new RelatorioProdutoViewModel
                                   {

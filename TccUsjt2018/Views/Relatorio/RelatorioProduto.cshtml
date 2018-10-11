@@ -1,4 +1,4 @@
-﻿@model TccUsjt2018.ViewModels.Relatório.RelatorioProdutoViewModel
+﻿@model IEnumerable<TccUsjt2018.ViewModels.Relatório.RelatorioProdutoViewModel>
 @{
     ViewBag.Title = "Relatório de Produto";
 }
@@ -19,16 +19,18 @@
                                     <th>Produto</th>
                                     <th>Categoria</th>
                                     <th>Validade</th>
+                                    <th>Marca</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var produto in Model.Produtos)
+                                @foreach (var produto in Model)
                                 {
-                                    <tr>
-                                        <td>@Html.DisplayFor(model => produto.NomeProduto)</td>
-                                        <td>@Html.DisplayFor(model => produto.CategoriaProduto.NomeCategoria)</td>
-                                        <td>@Html.DisplayFor(model => produto.ValidadeLote.ToString("MM/yyyy"))</td>
-                                    </tr>
+                                <tr>
+                                    <td>@Html.DisplayFor(model => produto.NomeProduto)</td>
+                                    <td>@Html.DisplayFor(model => produto.NomeCategoria)</td>
+                                    <td>@Html.DisplayFor(model => produto.DataVencimento)</td>
+                                    <td>@Html.DisplayFor(model => produto.Marca)</td>
+                                </tr>
                                 }
 
                             </tbody>

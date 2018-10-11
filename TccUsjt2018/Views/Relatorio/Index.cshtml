@@ -11,19 +11,24 @@
                         <strong class="card-title">@ViewBag.Title</strong>
                     </div>
                     <div class="card-body">
-                        @using (Html.BeginForm())
+                        @using (Html.BeginForm("RelatorioProduto", "Relatorio"))
                         {
-                            <div class="form-group">
+                            <div class="col-md-4 form-group form-group--float" style="display:inline-block ">
                                 @Html.LabelFor(x => x.NomeProduto)
                                 @Html.EditorFor(x => x.NomeProduto, new { @class = "form-control" })
                             </div>
-                            <div class="form-group">
+                            <div class="col-md-4 form-group form-group--float" style="display:inline-block">
                                 @Html.LabelFor(X => X.DataVencimento, new { @class = "control-label mb-1" })
-                                @Html.EditorFor(x => x.NomeCategoria, new { @class = "form-control" })
+                                @Html.EditorFor(x => x.DataVencimento, new { @class = "form-control" })
                             </div>
-                            <div class="form-group">
-                                @Html.DropDownListFor(model => model.Categorias, new SelectList(new List<dynamic> { Model.Categorias}))
+                            <div class="col-md-4 form-group form-group--float" style="display:inline-block">
+                                @Html.LabelFor(model => model.SelectItemCategoriaId)
+                                @Html.DropDownListFor(model => model.SelectItemCategoriaId, Model.Categorias)
                             </div>
+                            <div class="col-md-4 form-group form-group--float" style="display:inline-block">
+                                <button type="submit" class="btn btn-primary" id="idConsulta" value="">Consultar</button>
+                            </div>
+
                         }
 
                     </div>
@@ -32,9 +37,25 @@
         </div>
     </div><!-- .animated -->
 </div><!-- .content -->
-
 <script>
 
+    @*$(document).ready(function () {
+        $("#idConsulta").click(function (e) {
+            e.preventDefault();
+            var obj = { NomeProduto: $("#NomeProduto").val(), DataVencimento: $("#DataVencimento").val(), SelectItemCategoriaId: $("SelectItemCategoriaId").val() }
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("RelatorioProduto", "Relatorio")",
+                data: obj
+            });
+        });
+    });*@
+
+
+</script>
+
+<script>
     function detalhes(produto) {
 
     }

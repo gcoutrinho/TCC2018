@@ -218,11 +218,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>banco23092018.xsd</DependentUpon>
     </Compile>
-    <Compile Include="banco23092018conn.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>banco23092018conn.xsd</DependentUpon>
-    </Compile>
     <Compile Include="banco23092018DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1480,17 +1475,6 @@
     </None>
     <Content Include="banco23092018.xss">
       <DependentUpon>banco23092018.xsd</DependentUpon>
-    </Content>
-    <Content Include="banco23092018conn.xsc">
-      <DependentUpon>banco23092018conn.xsd</DependentUpon>
-    </Content>
-    <None Include="banco23092018conn.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>banco23092018conn.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="banco23092018conn.xss">
-      <DependentUpon>banco23092018conn.xsd</DependentUpon>
     </Content>
     <None Include="banco23092018DataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
