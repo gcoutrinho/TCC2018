@@ -38,6 +38,7 @@ namespace TccUsjt2018.Controllers
 
         public ActionResult RelatorioProduto(FiltrosViewModel filtro)
         {
+            filtro.SelectItemCategoriaId = null;
 
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             var listaCategoria = categoriaDAO.GetAll();

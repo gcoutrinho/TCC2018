@@ -305,10 +305,32 @@
     <Content Include="Assets\fonts\icomoon\index.html" />
     <Content Include="Assets\fonts\index.html" />
     <Content Include="Assets\fonts\themify.svg" />
+    <Content Include="Assets\jquery-maski\dist\jquery.mask.js" />
+    <Content Include="Assets\jquery-maski\dist\jquery.mask.min.js" />
+    <Content Include="Assets\jquery-maski\Gruntfile.js" />
+    <Content Include="Assets\jquery-maski\package.js" />
+    <Content Include="Assets\jquery-maski\src\jquery.mask.js" />
+    <Content Include="Assets\jquery-maski\test\jquery.mask.test.js" />
+    <Content Include="Assets\jquery-maski\test\qunit.css" />
+    <Content Include="Assets\jquery-maski\test\qunit.js" />
+    <Content Include="Assets\jquery-maski\test\sinon-1.10.3.js" />
+    <Content Include="Assets\jquery-maski\test\sinon-qunit-1.0.0.js" />
+    <Content Include="Assets\jquery-maski\test\sinon-qunit.js" />
+    <Content Include="Assets\jquery-maski\test\test-for-jquery-1.11.1.html" />
+    <Content Include="Assets\jquery-maski\test\test-for-jquery-1.7.2.html" />
+    <Content Include="Assets\jquery-maski\test\test-for-jquery-1.8.3.html" />
+    <Content Include="Assets\jquery-maski\test\test-for-jquery-1.9.1.html" />
+    <Content Include="Assets\jquery-maski\test\test-for-jquery-2.1.1.html" />
+    <Content Include="Assets\jquery-maski\test\test-for-jquery-3.0.0.html" />
+    <Content Include="Assets\jquery-maski\test\test-for-zepto.html" />
+    <Content Include="Assets\jquery-maski\test\zepto\data.js" />
+    <Content Include="Assets\jquery-maski\test\zepto\event.js" />
+    <Content Include="Assets\jquery-maski\test\zepto\zepto.min.js" />
     <Content Include="Assets\js\chartjs.min.js" />
     <Content Include="Assets\js\dashboard.js" />
     <Content Include="Assets\js\echarts.js" />
     <Content Include="Assets\js\index.html" />
+    <Content Include="Assets\js\jquery.mask.js" />
     <Content Include="Assets\js\less.min.js" />
     <Content Include="Assets\js\lib\chart-js\Chart.bundle.js" />
     <Content Include="Assets\js\lib\chart-js\chartjs-init.js" />
@@ -1172,6 +1194,30 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\inputmask\inputmask\bindings\inputmask.binding.js" />
+    <Content Include="Scripts\inputmask\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
+    <Content Include="Scripts\inputmask\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.js" />
+    <Content Include="Scripts\inputmask\inputmask\dependencyLibs\inputmask.dependencyLib.js" />
+    <Content Include="Scripts\inputmask\inputmask\global\document.js" />
+    <Content Include="Scripts\inputmask\inputmask\global\window.js" />
+    <Content Include="Scripts\inputmask\inputmask\inputmask.date.extensions.js" />
+    <Content Include="Scripts\inputmask\inputmask\inputmask.extensions.js" />
+    <Content Include="Scripts\inputmask\inputmask\inputmask.js" />
+    <Content Include="Scripts\inputmask\inputmask\inputmask.numeric.extensions.js" />
+    <Content Include="Scripts\inputmask\inputmask\jquery.inputmask.js" />
+    <Content Include="Scripts\inputmask\jquery.inputmask.bundle.js" />
+    <Content Include="Scripts\inputmask\min\inputmask\bindings\inputmask.binding.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask\dependencyLibs\inputmask.dependencyLib.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask\global\document.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask\global\window.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask\inputmask.date.extensions.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask\inputmask.extensions.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask\inputmask.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask\inputmask.numeric.extensions.min.js" />
+    <Content Include="Scripts\inputmask\min\inputmask\jquery.inputmask.min.js" />
+    <Content Include="Scripts\inputmask\min\jquery.inputmask.bundle.min.js" />
     <Content Include="TccDataBaseDataSet.xsc">
       <DependentUpon>TccDataBaseDataSet.xsd</DependentUpon>
     </Content>
@@ -1468,6 +1514,23 @@
     <Content Include="banco23092018.xsc">
       <DependentUpon>banco23092018.xsd</DependentUpon>
     </Content>
+    <Content Include="Assets\jquery-maski\.gitignore" />
+    <Content Include="Assets\jquery-maski\.jshintrc" />
+    <Content Include="Assets\jquery-maski\.ruby-version" />
+    <Content Include="Assets\jquery-maski\.travis.yml" />
+    <Content Include="Assets\jquery-maski\bower.json" />
+    <Content Include="Assets\jquery-maski\CHANGELOG.md" />
+    <Content Include="Assets\jquery-maski\component.json" />
+    <Content Include="Assets\jquery-maski\composer.json" />
+    <Content Include="Assets\jquery-maski\CONTRIBUTING.md" />
+    <Content Include="Assets\jquery-maski\deploy.rb" />
+    <Content Include="Assets\jquery-maski\docker-compose.yml" />
+    <Content Include="Assets\jquery-maski\Dockerfile" />
+    <Content Include="Assets\jquery-maski\ISSUE_TEMPLATE.md" />
+    <Content Include="Assets\jquery-maski\LICENSE" />
+    <Content Include="Assets\jquery-maski\package-lock.json" />
+    <Content Include="Assets\jquery-maski\package.json" />
+    <Content Include="Assets\jquery-maski\README.md" />
     <None Include="banco23092018.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>banco23092018.Designer.cs</LastGenOutput>
@@ -1568,12 +1631,12 @@
     <Content Include="Views\Produto\Index.cshtml" />
     <Content Include="Views\FiltroRelatorio\Index.cshtml" />
     <Content Include="Views\Relatorio\RelatorioProduto.cshtml" />
-    <Content Include="Views\Produto\Create.cshtml" />
     <Content Include="Views\Lote\Index.cshtml" />
     <Content Include="Views\Relatorio\Index.cshtml" />
     <Content Include="Views\Categoria\Index.cshtml" />
     <Content Include="Views\Estoque\Create.cshtml" />
     <Content Include="Views\Estoque\Index.cshtml" />
+    <Content Include="Views\Produto\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

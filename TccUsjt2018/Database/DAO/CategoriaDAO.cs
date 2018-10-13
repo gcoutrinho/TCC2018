@@ -22,7 +22,7 @@ namespace TccUsjt2018.Database.DAO
             contexto.SaveChanges();
         } 
 
-        public CategoriaProduto GetById(int id)
+        public CategoriaProduto GetById(int? id)
         {
             return contexto.Categorias.FirstOrDefault(x => x.CodigoCategoria == id);
         }

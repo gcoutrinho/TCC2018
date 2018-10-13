@@ -11,7 +11,7 @@ namespace TccUsjt2018.Database.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CodigoCategoria { get; set; }
+        public int? CodigoCategoria { get; set; }
         public string NomeCategoria { get; set; }
         public string DescricaoCategoria { get; set; }
     }

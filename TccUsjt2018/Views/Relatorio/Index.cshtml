@@ -13,22 +13,22 @@
                     <div class="card-body">
                         @using (Html.BeginForm("RelatorioProduto", "Relatorio"))
                         {
-                            <div class="col-md-4 form-group form-group--float" style="display:inline-block ">
+                            <div class="form-group">
                                 @Html.LabelFor(x => x.NomeProduto)
-                                @Html.EditorFor(x => x.NomeProduto, new { @class = "form-control" })
+                                @Html.TextBoxFor(x => x.NomeProduto, new { @class = "form-control" })
                             </div>
-                            <div class="col-md-4 form-group form-group--float" style="display:inline-block">
-                                @Html.LabelFor(X => X.DataVencimento, new { @class = "control-label mb-1" })
-                                @Html.EditorFor(x => x.DataVencimento, new { @class = "form-control" })
+                            <div class="form-group" style="display:inline-block">
+                                @Html.LabelFor(X => X.DataVencimento)
+                                @Html.TextBoxFor(x => x.DataVencimento, new { @class = "form-control" })
                             </div>
-                            <div class="col-md-4 form-group form-group--float" style="display:inline-block">
+                            <div class="cform-group">
                                 @Html.LabelFor(model => model.SelectItemCategoriaId)
-                                @Html.DropDownListFor(model => model.SelectItemCategoriaId, Model.Categorias)
+                                @Html.DropDownListFor(model => model.SelectItemCategoriaId, Model.Categorias, new { @class = "form-control" })
                             </div>
-                            <div class="col-md-4 form-group form-group--float" style="display:inline-block">
+                            <br />
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-primary" id="idConsulta" value="">Consultar</button>
                             </div>
-
                         }
 
                     </div>
@@ -37,6 +37,13 @@
         </div>
     </div><!-- .animated -->
 </div><!-- .content -->
+<script src="~/Assets/jquery-maski/src/jquery.mask.js"></script>
+<script src="~/Assets/jquery-maski/dist/jquery.mask.min.js"></script>>
+<script src="~/Assets/jquery-maski/dist/jquery.mask.js" type="text/javascript">
+    $('#DataVencimento').mask('99/99/9999');
+
+</script>
+
 <script>
 
     @*$(document).ready(function () {
@@ -51,11 +58,11 @@
             });
         });
     });*@
-
-
 </script>
 
+
 <script>
+
     function detalhes(produto) {
 
     }

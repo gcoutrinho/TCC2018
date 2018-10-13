@@ -8,7 +8,7 @@ namespace TccUsjt2018.ViewModels.ProdutoCategoria
 {
     public class CategoriaProdutoViewModel
     {
-        public int CodigoCategoria { get; set; }
+        public int? CodigoCategoria { get; set; }
         [Required]
         public string NomeCategoria { get; set; }
         [Required]

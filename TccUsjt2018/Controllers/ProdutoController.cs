@@ -32,11 +32,16 @@ namespace TccUsjt2018.Controllers
 
         public ActionResult Create()
         {
+            RelatorioController controller = new RelatorioController();
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             var listaCategoria = categoriaDAO.GetAll();
             ViewBag.Categorias = listaCategoria;
 
-            ProdutoViewModel model = new ProdutoViewModel();
+            var model = new ProdutoViewModel()
+            {
+                Categorias = controller.GetCategoria(),
+            };
+
             return View(model);
         }
 
@@ -66,6 +71,7 @@ namespace TccUsjt2018.Controllers
         public ActionResult Create(ProdutoViewModel model)
         {
             ProdutoDAO dao = new ProdutoDAO();
+            ModelState.Remove("Categorias");
 
             if (ModelState.IsValid)
             {
@@ -73,7 +79,7 @@ namespace TccUsjt2018.Controllers
                 {
                     NomeProduto = model.NomeProduto,
                     MarcaProduto = model.MarcaProduto,
-                    Categoria_CodigoCategoria = model.CategoriaProduto.CodigoCategoria,
+                    Categoria_CodigoCategoria = model.SelectItemCategoriaId,
                     DataCadastro = DateTime.Now,
                 };
 
@@ -86,6 +92,25 @@ namespace TccUsjt2018.Controllers
                 CategoriaDAO categoriaDao = new CategoriaDAO();
                 return View("FormularioProduto");
             }
+        }
+
+        [HttpPost]
+        public ActionResult Excluir(int codigo)
+        {
+            ProdutoDAO dao = new ProdutoDAO();
+            var model = dao.GetById(codigo);
+            var produto = new Produto()
+            {
+                NomeProduto = model.NomeProduto,
+                CodigoProduto = model.CodigoProduto,
+                Categoria_CodigoCategoria = model.CategoriaProduto.CodigoCategoria,
+                CategoriaProduto = model.CategoriaProduto,
+                DataCadastro = model.DataCadastro,
+                MarcaProduto = model.MarcaProduto,
+            };
+            dao.Remove(produto);
+
+            return RedirectToAction("Index");
         }
     }
 }

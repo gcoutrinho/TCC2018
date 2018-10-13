@@ -16,7 +16,7 @@ namespace TccUsjt2018.Database.Entities
         public DateTime DataCadastro { get; set; }
         public virtual CategoriaProduto CategoriaProduto { get; set; }
         [ForeignKey("CategoriaProduto")]
-        public int Categoria_CodigoCategoria { get; set; }
+        public int? Categoria_CodigoCategoria { get; set; }
         public string MarcaProduto { get; set; }
     }
 }
