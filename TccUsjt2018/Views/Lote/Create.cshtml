@@ -1,0 +1,57 @@
+﻿@model TccUsjt2018.ViewModels.Lote.LoteViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Novo Lote</strong>
+                    </div>
+                    <div class="card-body">
+                        <!-- Credit Card -->
+                        <div id="pay-invoice">
+                            <div class="card-body">
+                                @using (Html.BeginForm("Create", "Lote"))
+                                {
+                                    <div class="form-group">
+                                        @Html.LabelFor(X => X.DescricaoLote)
+                                        @Html.TextBoxFor(x => x.DescricaoLote, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(X => X.ValidadeLote)
+                                        @Html.TextBoxFor(x => x.ValidadeLote, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.SelectItemProdutoId)
+                                        @Html.DropDownListFor(model => model.SelectItemProdutoId, Model.Produtos, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.SelectItemEstoqueId)
+                                        @Html.DropDownListFor(model => model.SelectItemEstoqueId, Model.Estoques, new { @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(X => X.QuantidadeProduto)
+                                        @Html.TextBoxFor(x => x.QuantidadeProduto, new { @class = "form-control" })
+                                    </div>
+                                    <br />
+                                    <br />
+                                    <div class="form-group" style="display:inline-block">
+                                        <button type="submit" class="btn btn-primary" id="idCadastrar" value="">Cadastrar</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- .card -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

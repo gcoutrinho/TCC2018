@@ -10,8 +10,10 @@ namespace TccUsjt2018.ViewModels.ProdutoCategoria
     {
         public int? CodigoCategoria { get; set; }
         [Required]
+        [Display(Name = "Nome")]
         public string NomeCategoria { get; set; }
         [Required]
+        [Display(Name = "Descrição")]
         public string DescricaoCategoria { get; set; }
 
     }

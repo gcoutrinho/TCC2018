@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TccUsjt2018.Database.DAO;
 using TccUsjt2018.Database.Entities;
+using TccUsjt2018.ViewModels;
 using TccUsjt2018.ViewModels.Lote;
 
 namespace TccUsjt2018.Controllers
@@ -29,24 +30,45 @@ namespace TccUsjt2018.Controllers
             return View(model);
         }
 
-        public ActionResult FormularioLote()
+        public IEnumerable<SelectListItem> GetProdutos()
         {
-            LoteDAO loteDAO = new LoteDAO();
-            var listaLote = loteDAO.GetAll();
+            var dao = new ProdutoDAO();
+            var produtos = dao.GetAll()
+                .Select(x => new SelectListItem
+                {
+                    Value = x.CodigoProduto.ToString(),
+                    Text = x.NomeProduto,
+                });
 
-            EstoqueDAO estoqueDAO = new EstoqueDAO();
-            var listaEstoque = estoqueDAO.GetAll();
-
-            ProdutoDAO produtoDAO = new ProdutoDAO();
-            var listaProduto = produtoDAO.GetAll();
-
-            ViewBag.Lotes = listaLote;
-            ViewBag.Estoques = listaEstoque;
-            ViewBag.Produtos = listaProduto;
-            return View();
+            return new SelectList(produtos, "Value", "Text");
         }
 
-        public ActionResult Adiciona(LoteViewModel model)
+        public IEnumerable<SelectListItem> GetEstoque()
+        {
+            var dao = new EstoqueDAO();
+            var produtos = dao.GetAll()
+                .Select(x => new SelectListItem
+                {
+                    Value = x.CodigoEstoque.ToString(),
+                    Text = x.DescricaoEstoque,
+                });
+
+            return new SelectList(produtos, "Value", "Text");
+        }
+
+        public ActionResult Create()
+        {
+            var model = new LoteViewModel()
+            {
+                Produtos = GetProdutos(),
+                Estoques = GetEstoque(),
+
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Create(LoteViewModel model)
         {
             LoteDAO loteDAO = new LoteDAO();
 
@@ -55,8 +77,8 @@ namespace TccUsjt2018.Controllers
                 Lote lote = new Lote
                 {
                     DescricaoLote = model.DescricaoLote,
-                    Estoque_CodigoEstoque = model.Estoque.CodigoEstoque,
-                    Produto_CodigoProduto = model.Produto.CodigoProduto,
+                    Estoque_CodigoEstoque = (int)model.SelectItemEstoqueId,
+                    Produto_CodigoProduto = (int)model.SelectItemProdutoId,
                     QuantidadeProduto = model.QuantidadeProduto,
                     ValidadeLote = model.ValidadeLote,                    
                 };
@@ -67,7 +89,7 @@ namespace TccUsjt2018.Controllers
             }
             else
             {
-                return View("FormularioLote");
+                return View("Create");
             }
         }
     }

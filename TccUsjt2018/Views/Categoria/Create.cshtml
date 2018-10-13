@@ -1,6 +1,7 @@
-﻿@model TccUsjt2018.ViewModels.Estoques.EstoqueViewModel
+﻿@model TccUsjt2018.ViewModels.ProdutoCategoria.CategoriaProdutoViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Nova Categoria";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="content mt-3">
@@ -15,12 +16,16 @@
                         <!-- Credit Card -->
                         <div id="pay-invoice">
                             <div class="card-body">
-                                @using (Html.BeginForm("Create", "Estoque"))
+                                @using (Html.BeginForm("Create", "Categoria"))
                                 {
                                     <div class="form-group">
-                                        @Html.LabelFor(X => X.Descricao)
-                                        @Html.TextBoxFor(x => x.Descricao, new { @class = "form-control" })
+                                        @Html.LabelFor(X => X.NomeCategoria)
+                                        @Html.TextBoxFor(x => x.NomeCategoria, new { @class = "form-control" })
                                     </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(X => X.DescricaoCategoria)
+                                        @Html.TextBoxFor(x => x.DescricaoCategoria, new { @class = "form-control" })
+                                    </div>                                    
                                     <br />
                                     <br />
                                     <div class="form-group" style="display:inline-block">

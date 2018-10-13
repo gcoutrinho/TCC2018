@@ -34,8 +34,7 @@ namespace TccUsjt2018.Controllers
         {
             RelatorioController controller = new RelatorioController();
             CategoriaDAO categoriaDAO = new CategoriaDAO();
-            var listaCategoria = categoriaDAO.GetAll();
-            ViewBag.Categorias = listaCategoria;
+            var listaCategoria = categoriaDAO.GetAll();  
 
             var model = new ProdutoViewModel()
             {
@@ -44,29 +43,6 @@ namespace TccUsjt2018.Controllers
 
             return View(model);
         }
-
-        public ActionResult Edit(int codigo)
-        {
-            ProdutoDAO dao = new ProdutoDAO();
-            var produto = dao.GetById(codigo);
-
-            var model = new ProdutoViewModel() {
-                CodigoProduto = produto.CodigoProduto,
-                NomeProduto = produto.NomeProduto,
-                DataCadastro = produto.DataCadastro,
-                CategoriaProduto = produto.CategoriaProduto,
-                MarcaProduto = produto.MarcaProduto
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public ActionResult Edit(ProdutoViewModel model)
-        {
-            return View();
-        }
-        
         [HttpPost]
         public ActionResult Create(ProdutoViewModel model)
         {
@@ -94,6 +70,28 @@ namespace TccUsjt2018.Controllers
             }
         }
 
+        public ActionResult Edit(int codigo)
+        {
+            ProdutoDAO dao = new ProdutoDAO();
+            var produto = dao.GetById(codigo);
+
+            var model = new ProdutoViewModel() {
+                CodigoProduto = produto.CodigoProduto,
+                NomeProduto = produto.NomeProduto,
+                DataCadastro = produto.DataCadastro,
+                CategoriaProduto = produto.CategoriaProduto,
+                MarcaProduto = produto.MarcaProduto
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ProdutoViewModel model)
+        {
+            return View();
+        }        
+       
         [HttpPost]
         public ActionResult Excluir(int codigo)
         {

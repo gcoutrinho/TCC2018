@@ -32,6 +32,7 @@ namespace TccUsjt2018.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult Create(EstoqueViewModel model)
         {
             EstoqueDAO dao = new EstoqueDAO();
@@ -49,7 +50,7 @@ namespace TccUsjt2018.Controllers
             }
             else
             {
-                return View("Index");
+                return View("Create");
             }
         }
     }

@@ -27,12 +27,13 @@ namespace TccUsjt2018.Controllers
             return View(model);
         }
 
-        public ActionResult FormularioCategoria()
+        public ActionResult Create()
         {
             return View();
         }
 
-        public ActionResult Adiciona(CategoriaProdutoViewModel model)
+        [HttpPost]
+        public ActionResult Create(CategoriaProdutoViewModel model)
         {
             CategoriaDAO categoriaDAO = new CategoriaDAO();
 
@@ -50,7 +51,7 @@ namespace TccUsjt2018.Controllers
             }
             else
             {
-                return View("FormularioCategoria");
+                return View("Create");
             }
         }
     }

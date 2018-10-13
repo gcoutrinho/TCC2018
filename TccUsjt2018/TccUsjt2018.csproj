@@ -1637,6 +1637,8 @@
     <Content Include="Views\Estoque\Create.cshtml" />
     <Content Include="Views\Estoque\Index.cshtml" />
     <Content Include="Views\Produto\Create.cshtml" />
+    <Content Include="Views\Lote\Create.cshtml" />
+    <Content Include="Views\Categoria\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
