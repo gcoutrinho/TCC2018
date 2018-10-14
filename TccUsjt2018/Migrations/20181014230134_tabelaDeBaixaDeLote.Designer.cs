@@ -8,9 +8,10 @@ using TccUsjt2018.Database.EntitiesContext;
 namespace TccUsjt2018.Migrations
 {
     [DbContext(typeof(EntidadesContext))]
-    partial class EntidadesContextModelSnapshot : ModelSnapshot
+    [Migration("20181014230134_tabelaDeBaixaDeLote")]
+    partial class tabelaDeBaixaDeLote
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")

@@ -31,7 +31,11 @@ namespace TccUsjt2018.Controllers
 
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Home");
+                if (model.Email.Equals("gean.coutrinho@hotmail.com") && model.Senha.Equals("afesi123"))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
             }
 
             return View(model);

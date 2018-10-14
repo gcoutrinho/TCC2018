@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TccUsjt2018.Database.DAO;
-using TccUsjt2018.Database.Entities;
 
 namespace TccUsjt2018.Controllers
 {
@@ -29,6 +26,7 @@ namespace TccUsjt2018.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult RetornaRankingProdutos()
         {
             //Retorna Grafico de Colunas
@@ -51,5 +49,13 @@ namespace TccUsjt2018.Controllers
                               };
             return View(resultQuery);
         }
+
+        public ActionResult BaixaTresMeses()
+        {
+            
+
+        }
+
+
     }
 }

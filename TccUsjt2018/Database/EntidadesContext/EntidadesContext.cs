@@ -14,6 +14,7 @@ namespace TccUsjt2018.Database.EntitiesContext
         public DbSet<Estoque> Estoques { get; set; }
         public DbSet<Lote> Lotes { get; set; }
         public DbSet<CategoriaProduto> Categorias { get; set; }
+        public DbSet<Baixa> Baixas { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

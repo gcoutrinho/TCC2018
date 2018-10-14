@@ -1,8 +1,10 @@
 ﻿@model TccUsjt2018.ViewModels.Login.LoginViewModel
-
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
 
 <body class="bg-dark">
-
 
     <div class="sufee-login d-flex align-content-center flex-wrap">
         <div class="container">
@@ -34,8 +36,8 @@
                                 <input type="checkbox"> Lembrar-me
                             </label>
                             @*<label class="pull-right">
-                    <a href="#">Esqueceu a senha?</a>
-                </label>*@
+                                    <a href="#">Esqueceu a senha?</a>
+                                </label>*@
 
                         </div>
                         <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
@@ -49,3 +51,5 @@
 
 
 </body>
+
+
