@@ -17,5 +17,12 @@ namespace TccUsjt2018.ViewModels.Filtros
         [Display(Name = "Categoria")]
         public int? SelectItemCategoriaId { get; set; }
         public IEnumerable<SelectListItem> Categorias { get; set; }
+        [Display(Name = "Produto")]
+        public int? SelectItemProdutoId { get; set; }
+        public IEnumerable<SelectListItem> Produtos { get; set; }
+        [Display(Name = "Lote")]
+        public int? SelectItemLoteId { get; set; }
+        public IEnumerable<SelectListItem> Lotes { get; set; }
+
     }
 }

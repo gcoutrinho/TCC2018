@@ -37,10 +37,10 @@
         </div>
     </div><!-- .animated -->
 </div><!-- .content -->
-<script src="~/Assets/jquery-maski/src/jquery.mask.js"></script>
-<script src="~/Assets/jquery-maski/dist/jquery.mask.min.js"></script>>
-<script src="~/Assets/jquery-maski/dist/jquery.mask.js" type="text/javascript">
-    $('#DataVencimento').mask('99/99/9999');
+
+<script>
+    $(document).ready(function () {        
+        $("#DataVencimento").inputmask("mask", { "mask": "99/99/9999" });       
 
 </script>
 

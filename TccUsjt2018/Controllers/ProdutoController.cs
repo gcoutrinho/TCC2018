@@ -30,15 +30,28 @@ namespace TccUsjt2018.Controllers
             return View(model);
         }
 
+        public IEnumerable<SelectListItem> GetProdutos()
+        {
+            var dao = new ProdutoDAO();
+            var produtos = dao.GetAll()
+                .Select(x => new SelectListItem
+                {
+                    Value = x.CodigoProduto.ToString(),
+                    Text = x.NomeProduto,
+                });
+
+            return new SelectList(produtos, "Value", "Text");
+        }
+
         public ActionResult Create()
         {
-            RelatorioController controller = new RelatorioController();
+            CategoriaController categoriaController = new CategoriaController();
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             var listaCategoria = categoriaDAO.GetAll();  
 
             var model = new ProdutoViewModel()
             {
-                Categorias = controller.GetCategoria(),
+                Categorias = categoriaController.GetCategoria(),
             };
 
             return View(model);

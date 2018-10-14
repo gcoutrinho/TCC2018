@@ -15,31 +15,23 @@ namespace TccUsjt2018.Controllers
     {
         public ActionResult Index()
         {
+            CategoriaController categoriaController = new CategoriaController();
             var model = new FiltrosViewModel
             {
-                Categorias = GetCategoria()
+                Categorias = categoriaController.GetCategoria()
             };
 
             return View(model);
-        }
-
-        public IEnumerable<SelectListItem> GetCategoria()
-        {
-            var dao = new CategoriaDAO();
-            var categorias = dao.GetAll()
-                .Select(x => new SelectListItem
-                {
-                    Value = x.CodigoCategoria.ToString(),
-                    Text = x.NomeCategoria,
-                });
-
-            return new SelectList(categorias, "Value", "Text");
-        }
+        }      
 
         public ActionResult RelatorioProduto(FiltrosViewModel filtro)
         {
-            filtro.SelectItemCategoriaId = null;
+            if (filtro.SelectItemCategoriaId == 1)
+            {
+                filtro.SelectItemCategoriaId = null;
+            }           
 
+            // Retorna a lista de categoria de acordo com o filtro
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             var listaCategoria = categoriaDAO.GetAll();
             var filtroCategoria = new List<CategoriaProduto>();
@@ -51,6 +43,7 @@ namespace TccUsjt2018.Controllers
                 }
             }
 
+            // Retorna a lista de produtos de acordo com o filtro
             ProdutoDAO produtoDAO = new ProdutoDAO();
             var listaProduto = produtoDAO.GetAll();
             var filtroProduto = new List<Produto>();
@@ -62,6 +55,7 @@ namespace TccUsjt2018.Controllers
                 }
             }
 
+            // Retorna a lista de lotes de acordo com o filtro
             LoteDAO loteDAO = new LoteDAO();
             var listaLote = loteDAO.GetAll();
             var filtroLote = new List<Lote>();
@@ -78,7 +72,8 @@ namespace TccUsjt2018.Controllers
                                   join l in filtroLote
                                   on p.CodigoProduto equals l.Produto_CodigoProduto
                                   join c in filtroCategoria
-                                  on p.Categoria_CodigoCategoria equals c.CodigoCategoria
+                                  on p.Categoria_CodigoCategoria equals c.CodigoCategoria                      
+                                  
                                   select new RelatorioProdutoViewModel()
                                   {
                                       NomeProduto = p.NomeProduto,
@@ -89,22 +84,22 @@ namespace TccUsjt2018.Controllers
 
                 return View(resultQuery);
             }
-            //else if (filtro.SelectItemCategoriaId == null && filtro.DataVencimento == null && filtro.NomeProduto == null)
-            //{
-            //    var resultQuery = from p in listaProduto
-            //                      join l in filtroLote
-            //                      on p.CodigoProduto equals l.Produto_CodigoProduto
-            //                      join c in filtroCategoria
-            //                      on p.Categoria_CodigoCategoria equals c.CodigoCategoria
-            //                      select new RelatorioProdutoViewModel
-            //                      {
-            //                          NomeProduto = p.NomeProduto,
-            //                          NomeCategoria = c.NomeCategoria,
-            //                          DataVencimento = l.ValidadeLote,
-            //                          Marca = p.MarcaProduto,
-            //                      };
-            //    return View(resultQuery);
-            //}
+            else if (filtro.SelectItemCategoriaId != null && filtro.DataVencimento == null && filtro.NomeProduto == null)
+            {
+                var resultQuery = from p in listaProduto
+                                  join l in filtroLote
+                                  on p.CodigoProduto equals l.Produto_CodigoProduto
+                                  join c in filtroCategoria
+                                  on p.Categoria_CodigoCategoria equals c.CodigoCategoria
+                                  select new RelatorioProdutoViewModel
+                                  {
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      DataVencimento = l.ValidadeLote,
+                                      Marca = p.MarcaProduto,
+                                  };
+                return View(resultQuery);
+            }
             else if (filtro.SelectItemCategoriaId == null && filtro.DataVencimento == null && filtro.NomeProduto == null)
             {
                 var todosLote = loteDAO.GetAll();
@@ -130,14 +125,48 @@ namespace TccUsjt2018.Controllers
             return null;
         }
 
-        public ActionResult RelatorioLote(string nomeLote, string nomeCategoria, DateTime dataValidade)
+        public ActionResult IndexRelatorioLote()
         {
+            LoteController loteController = new LoteController();
+            ProdutoController produtoController = new ProdutoController();
+            CategoriaController categoriaController = new CategoriaController();
+
+            var model = new FiltrosViewModel()
+            {
+                Lotes = loteController.GetLotes(),
+                Categorias = categoriaController.GetCategoria(),
+                Produtos = produtoController.GetProdutos(),
+
+            };
+  
+            return View(model);
+        }
+
+        public ActionResult RelatorioLote(FiltrosViewModel filtro)
+        {
+            if (filtro.SelectItemCategoriaId == null)
+            {
+                filtro.SelectItemCategoriaId = null;
+            }
+            if (filtro.SelectItemProdutoId == null)
+            {
+                filtro.SelectItemProdutoId = null;
+            }
+            if (filtro.SelectItemLoteId == null)
+            {
+                filtro.SelectItemLoteId = null;
+            }
+            if (filtro.DataVencimento == null)
+            {
+                filtro.DataVencimento = null;
+            }
+
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             var listaCategoria = categoriaDAO.GetAll();
             var filtroCategoria = new List<CategoriaProduto>();
             foreach (var item in listaCategoria)
             {
-                if (item.NomeCategoria.Equals(nomeCategoria))
+                if (item.CodigoCategoria.Equals(filtro.SelectItemCategoriaId))
                 {
                     filtroCategoria.Add(item);
                 }
@@ -148,7 +177,7 @@ namespace TccUsjt2018.Controllers
             var filtroLote = new List<Lote>();
             foreach (var item in listaLote)
             {
-                if (item.ValidadeLote.Equals(dataValidade) && item.DescricaoLote.Equals(nomeLote))
+                if (item.ValidadeLote.Equals(filtro.DataVencimento) && item.CodigoLote.Equals(filtro.SelectItemLoteId))
                 {
                     filtroLote.Add(item);
                 }
@@ -159,7 +188,7 @@ namespace TccUsjt2018.Controllers
             var filtroProduto = new List<Produto>();
 
 
-            if (nomeLote != null && nomeCategoria != null && dataValidade != null)
+            if (filtro.SelectItemLoteId != null && filtro.SelectItemCategoriaId != null && filtro.DataVencimento != null)
             {
                 var resultQuery = from l in filtroLote
                                   join p in listaProduto
@@ -167,15 +196,15 @@ namespace TccUsjt2018.Controllers
                                   join c in filtroCategoria
                                   on p.Categoria_CodigoCategoria equals c.CodigoCategoria
                                   orderby l.ValidadeLote
-                                  select new
+                                  select new RelatorioLoteViewModel
                                   {
-                                      l.DescricaoLote,
-                                      p.NomeProduto,
-                                      c.NomeCategoria,
-                                      l.ValidadeLote,
-                                      l.QuantidadeProduto,
+                                      DescricaoLote = l.DescricaoLote,
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      ValidadeLote = l.ValidadeLote,
+                                      QuantidadeProduto = l.QuantidadeProduto,
                                   };
-                return View();
+                return View(resultQuery);
 
             }
             else
@@ -186,15 +215,15 @@ namespace TccUsjt2018.Controllers
                                   join c in listaCategoria
                                   on p.Categoria_CodigoCategoria equals c.CodigoCategoria
                                   orderby l.ValidadeLote
-                                  select new
+                                  select new RelatorioLoteViewModel
                                   {
-                                      l.DescricaoLote,
-                                      p.NomeProduto,
-                                      c.NomeCategoria,
-                                      l.ValidadeLote,
-                                      l.QuantidadeProduto,
+                                      DescricaoLote = l.DescricaoLote,
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      ValidadeLote = l.ValidadeLote,
+                                      QuantidadeProduto = l.QuantidadeProduto,
                                   };
-                return View();
+                return View(resultQuery);
 
             }
         }

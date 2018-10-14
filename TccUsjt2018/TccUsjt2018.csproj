@@ -270,6 +270,7 @@
     <Compile Include="ViewModels\ProdutoCategoria\CategoriaProdutoViewModel.cs" />
     <Compile Include="ViewModels\Login\LoginViewModel.cs" />
     <Compile Include="ViewModels\Produtos\ProdutoViewModel.cs" />
+    <Compile Include="ViewModels\Relatório\RelatorioLoteViewModel.cs" />
     <Compile Include="ViewModels\Relatório\RelatorioProdutoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1639,6 +1640,8 @@
     <Content Include="Views\Produto\Create.cshtml" />
     <Content Include="Views\Lote\Create.cshtml" />
     <Content Include="Views\Categoria\Create.cshtml" />
+    <Content Include="Views\Relatorio\RelatorioLote.cshtml" />
+    <Content Include="Views\Relatorio\IndexRelatorioLote.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

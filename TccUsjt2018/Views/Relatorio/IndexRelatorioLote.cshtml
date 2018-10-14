@@ -1,0 +1,44 @@
+﻿@model TccUsjt2018.ViewModels.Filtros.FiltrosViewModel
+@{
+    ViewBag.Title = "IndexRelatorioLote";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">@ViewBag.Title</strong>
+                    </div>
+                    <div class="card-body">
+                        @using (Html.BeginForm("RelatorioLote", "Relatorio"))
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.SelectItemLoteId)
+                                @Html.DropDownListFor(model => model.SelectItemLoteId, Model.Lotes, new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.SelectItemProdutoId)
+                                @Html.DropDownListFor(model => model.SelectItemProdutoId, Model.Produtos, new { @class = "form-control" })
+                            </div>
+                            <div class="cform-group">
+                                @Html.LabelFor(model => model.SelectItemCategoriaId)
+                                @Html.DropDownListFor(model => model.SelectItemCategoriaId, Model.Categorias, new { @class = "form-control" })
+                            </div>
+                            <div class="cform-group">
+                                @Html.LabelFor(X => X.DataVencimento)
+                                @Html.TextBoxFor(x => x.DataVencimento, new { @class = "form-control" })
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" id="idConsulta" value="">Consultar</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->

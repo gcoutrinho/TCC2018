@@ -30,38 +30,27 @@ namespace TccUsjt2018.Controllers
             return View(model);
         }
 
-        public IEnumerable<SelectListItem> GetProdutos()
+        public IEnumerable<SelectListItem> GetLotes()
         {
-            var dao = new ProdutoDAO();
-            var produtos = dao.GetAll()
+            var dao = new LoteDAO();
+            var lotes = dao.GetAll()
                 .Select(x => new SelectListItem
                 {
-                    Value = x.CodigoProduto.ToString(),
-                    Text = x.NomeProduto,
+                    Value = x.CodigoLote.ToString(),
+                    Text = x.DescricaoLote,
                 });
 
-            return new SelectList(produtos, "Value", "Text");
-        }
-
-        public IEnumerable<SelectListItem> GetEstoque()
-        {
-            var dao = new EstoqueDAO();
-            var produtos = dao.GetAll()
-                .Select(x => new SelectListItem
-                {
-                    Value = x.CodigoEstoque.ToString(),
-                    Text = x.DescricaoEstoque,
-                });
-
-            return new SelectList(produtos, "Value", "Text");
+            return new SelectList(lotes, "Value", "Text");
         }
 
         public ActionResult Create()
         {
+            EstoqueController estoqueController = new EstoqueController();
+            ProdutoController produtoController = new ProdutoController();
             var model = new LoteViewModel()
             {
-                Produtos = GetProdutos(),
-                Estoques = GetEstoque(),
+                Produtos = produtoController.GetProdutos(),
+                Estoques = estoqueController.GetEstoque(),
 
             };
             return View(model);

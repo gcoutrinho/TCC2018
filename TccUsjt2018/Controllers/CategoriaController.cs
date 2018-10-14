@@ -27,6 +27,19 @@ namespace TccUsjt2018.Controllers
             return View(model);
         }
 
+        public IEnumerable<SelectListItem> GetCategoria()
+        {
+            var dao = new CategoriaDAO();
+            var categorias = dao.GetAll()
+                .Select(x => new SelectListItem
+                {
+                    Value = x.CodigoCategoria.ToString(),
+                    Text = x.NomeCategoria,
+                });
+
+            return new SelectList(categorias, "Value", "Text");
+        }
+
         public ActionResult Create()
         {
             return View();

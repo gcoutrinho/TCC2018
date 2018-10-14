@@ -27,6 +27,19 @@ namespace TccUsjt2018.Controllers
 
         }
 
+        public IEnumerable<SelectListItem> GetEstoque()
+        {
+            var dao = new EstoqueDAO();
+            var produtos = dao.GetAll()
+                .Select(x => new SelectListItem
+                {
+                    Value = x.CodigoEstoque.ToString(),
+                    Text = x.DescricaoEstoque,
+                });
+
+            return new SelectList(produtos, "Value", "Text");
+        }
+
         public ActionResult Create()
         {
             return View();
