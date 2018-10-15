@@ -42,7 +42,8 @@ namespace TccUsjt2018.Database.DAO
 
         public void Update(Lote lote)
         {
-            contexto.Lotes.Update(lote);
+            var produto = GetById(lote.CodigoLote);
+            produto.QuantidadeProduto = lote.QuantidadeProduto;
             contexto.SaveChanges();
         }
     }

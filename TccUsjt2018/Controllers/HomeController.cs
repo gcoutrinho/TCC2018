@@ -50,11 +50,11 @@ namespace TccUsjt2018.Controllers
             return View(resultQuery);
         }
 
-        public ActionResult BaixaTresMeses()
-        {
+        //public ActionResult BaixaTresMeses()
+        //{
             
 
-        }
+        //}
 
 
     }
