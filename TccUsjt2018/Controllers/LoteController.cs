@@ -80,6 +80,35 @@ namespace TccUsjt2018.Controllers
             {
                 return View("Create");
             }
+
         }
+
+        public ActionResult BaixaLote(LoteViewModel model)
+        {
+            var loteDAO = new LoteDAO();
+            var loteatual = loteDAO.GetById(model.CodigoLote);
+
+            var lote = new Lote()
+            {
+                CodigoLote = model.CodigoLote,
+                QuantidadeProduto = loteatual.QuantidadeProduto-model.QuantidadeBaixa, //Subtraindo a quantidade atual.
+            };
+
+            loteDAO.Update(lote);
+
+            var baixaDAO = new BaixaDAO();
+            var baixa = new Baixa()
+            {
+                DataBaixa = DateTime.Now,
+                Lote_CodigoLote = model.CodigoLote,
+                Produto_CodigoProduto = model.Produto_CodigoProduto,
+                QuantidadeBaixa = model.QuantidadeBaixa,
+            };
+
+            baixaDAO.Salva(baixa);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

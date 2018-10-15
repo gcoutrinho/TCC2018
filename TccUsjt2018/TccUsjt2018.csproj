@@ -232,6 +232,7 @@
     <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\RelatorioController.cs" />
+    <Compile Include="Database\DAO\BaixaDAO.cs" />
     <Compile Include="Database\EntidadesContext\EntidadesContext.cs" />
     <Compile Include="Database\DAO\CategoriaDAO.cs" />
     <Compile Include="Database\DAO\EstoqueDAO.cs" />
