@@ -16,14 +16,14 @@ namespace TccUsjt2018.Controllers
         public ActionResult Index()
         {
             LoteDAO loteDAO = new LoteDAO();
-            var lotes = loteDAO.GetAll();          
+            var lotes = loteDAO.GetAll();
 
             var model = lotes.Select(x => new LoteViewModel()
             {
                 CodigoLote = x.CodigoLote,
                 DescricaoLote = x.DescricaoLote,
                 Produto = x.Produto,
-                ValidadeLote = x .ValidadeLote,
+                ValidadeLote = x.ValidadeLote,
                 QuantidadeProduto = x.QuantidadeProduto,
             });
 
@@ -69,7 +69,7 @@ namespace TccUsjt2018.Controllers
                     Estoque_CodigoEstoque = (int)model.SelectItemEstoqueId,
                     Produto_CodigoProduto = (int)model.SelectItemProdutoId,
                     QuantidadeProduto = model.QuantidadeProduto,
-                    ValidadeLote = model.ValidadeLote,                    
+                    ValidadeLote = model.ValidadeLote,
                 };
 
                 loteDAO.Salva(lote);
@@ -83,15 +83,30 @@ namespace TccUsjt2018.Controllers
 
         }
 
-        public ActionResult BaixaLote(LoteViewModel model)
+        public ActionResult BaixaLote(int codigoLote)
+        {
+            LoteDAO dao = new LoteDAO();
+            var lote = dao.GetById(codigoLote);
+
+            var model = new LoteViewModel()
+            {
+                CodigoLote = codigoLote,                
+            };
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public ActionResult BaixaLote(LoteViewModel model, int codigoLote)
         {
             var loteDAO = new LoteDAO();
-            var loteatual = loteDAO.GetById(model.CodigoLote);
+            var loteAtual = loteDAO.GetById(codigoLote);
 
             var lote = new Lote()
             {
-                CodigoLote = model.CodigoLote,
-                QuantidadeProduto = loteatual.QuantidadeProduto-model.QuantidadeBaixa, //Subtraindo a quantidade atual.
+                CodigoLote = loteAtual.CodigoLote,
+                QuantidadeProduto = (loteAtual.QuantidadeProduto - model.QuantidadeBaixa), //Subtraindo a quantidade atual.
             };
 
             loteDAO.Update(lote);
@@ -100,8 +115,8 @@ namespace TccUsjt2018.Controllers
             var baixa = new Baixa()
             {
                 DataBaixa = DateTime.Now,
-                Lote_CodigoLote = model.CodigoLote,
-                Produto_CodigoProduto = model.Produto_CodigoProduto,
+                Lote_CodigoLote = loteAtual.CodigoLote,
+                Produto_CodigoProduto = loteAtual.Produto_CodigoProduto,
                 QuantidadeBaixa = model.QuantidadeBaixa,
             };
 

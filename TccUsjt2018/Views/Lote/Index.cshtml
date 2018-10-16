@@ -37,6 +37,9 @@
                                             @Html.ActionLink("Editar", "Edit", new { codigo = lote.CodigoLote }, new { @class = "btn btn-warning" })
                                             <button onclick="remover('@lote');" type="button" class="btn btn-danger">Excluir</button>
                                         </td>
+                                        <td>
+                                            @Html.ActionLink("Baixar", "BaixaLote", new { codigoLote = lote.CodigoLote }, new { @class = "btn btn-dark" })
+                                        </td>
                                     </tr>
                                 }
                             </tbody>

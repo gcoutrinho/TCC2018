@@ -1,0 +1,39 @@
+﻿@model TccUsjt2018.ViewModels.Lote.LoteViewModel
+@{
+    ViewBag.Title = "BaixaLote";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Novo Lote</strong>
+                    </div>
+                    <div class="card-body">
+                        <!-- Credit Card -->
+                        <div id="pay-invoice">
+                            <div class="card-body">
+                                @using (Html.BeginForm("BaixaLote", "Lote", new { codigoLote = Model.CodigoLote}))
+                                {
+                                    <div class="form-group">
+                                        @Html.LabelFor(X => X.QuantidadeBaixa)
+                                        @Html.TextBoxFor(x => x.QuantidadeBaixa, new { @class = "form-control" })
+                                    </div>                                    
+                                    <br />
+                                    <br />
+                                    <div class="form-group" style="display:inline-block">
+                                        <button type="submit" class="btn btn-primary" id="idCadastrar" value="">Confirmar</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- .card -->
+            </div>
+        </div>
+    </div>
+</div>
+
