@@ -8,6 +8,7 @@ namespace TccUsjt2018.ViewModels.Relatório
 {
     public class RelatorioProdutoViewModel
     {
+        public int CodigoProduto { get; set; }
         [Display(Name = "Nome Produto")]
         public virtual string NomeProduto { get; set; }
         [Display(Name = "Nome Categoria")]

@@ -90,7 +90,10 @@ namespace TccUsjt2018.Controllers
 
             var model = new LoteViewModel()
             {
-                CodigoLote = codigoLote,                
+                CodigoLote = codigoLote,
+                DescricaoLote = lote.DescricaoLote,
+                QuantidadeProduto = lote.QuantidadeProduto,
+                ValidadeLote = lote.ValidadeLote,
             };
 
             return View(model);

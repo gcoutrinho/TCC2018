@@ -31,6 +31,7 @@ namespace TccUsjt2018.ViewModels.Lote
         [Display(Name = "Local Estoque")]
         public int? SelectItemEstoqueId { get; set; }
         public IEnumerable<SelectListItem> Estoques { get; set; }
+        [Display(Name = "Quantidade a Baixar")]
         public int QuantidadeBaixa { get; set; }
     }
 }

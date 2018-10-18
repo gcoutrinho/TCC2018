@@ -16,9 +16,11 @@ namespace TccUsjt2018.Controllers
         public ActionResult Index()
         {
             CategoriaController categoriaController = new CategoriaController();
+            ProdutoController produtoController = new ProdutoController();
             var model = new FiltrosViewModel
             {
-                Categorias = categoriaController.GetCategoria()
+                Categorias = categoriaController.GetCategoria(),
+                Produtos = produtoController.GetProdutos(),
             };
 
             return View(model);
@@ -26,10 +28,7 @@ namespace TccUsjt2018.Controllers
 
         public ActionResult RelatorioProduto(FiltrosViewModel filtro)
         {
-            if (filtro.SelectItemCategoriaId == 1)
-            {
-                filtro.SelectItemCategoriaId = null;
-            }           
+            filtro.DataVencimento = null;
 
             // Retorna a lista de categoria de acordo com o filtro
             CategoriaDAO categoriaDAO = new CategoriaDAO();
@@ -49,7 +48,7 @@ namespace TccUsjt2018.Controllers
             var filtroProduto = new List<Produto>();
             foreach (var item in listaProduto)
             {
-                if (item.NomeProduto.Equals(filtro.NomeProduto))
+                if (item.CodigoProduto.Equals(filtro.SelectItemProdutoId))
                 {
                     filtroProduto.Add(item);
                 }
@@ -66,7 +65,7 @@ namespace TccUsjt2018.Controllers
                     filtroLote.Add(item);
                 }
             }
-            if (filtro.SelectItemCategoriaId != null && filtro.DataVencimento != null && filtro.NomeProduto != null)
+            if (filtro.SelectItemCategoriaId != null && filtro.DataVencimento != null && filtro.SelectItemProdutoId != null)
             {
                 var resultQuery = from p in filtroProduto
                                   join l in filtroLote
@@ -144,23 +143,8 @@ namespace TccUsjt2018.Controllers
 
         public ActionResult RelatorioLote(FiltrosViewModel filtro)
         {
-            if (filtro.SelectItemCategoriaId == null)
-            {
-                filtro.SelectItemCategoriaId = null;
-            }
-            if (filtro.SelectItemProdutoId == null)
-            {
-                filtro.SelectItemProdutoId = null;
-            }
-            if (filtro.SelectItemLoteId == null)
-            {
-                filtro.SelectItemLoteId = null;
-            }
-            if (filtro.DataVencimento == null)
-            {
-                filtro.DataVencimento = null;
-            }
-
+            filtro.DataVencimento = null;
+          
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             var listaCategoria = categoriaDAO.GetAll();
             var filtroCategoria = new List<CategoriaProduto>();
@@ -177,7 +161,7 @@ namespace TccUsjt2018.Controllers
             var filtroLote = new List<Lote>();
             foreach (var item in listaLote)
             {
-                if (item.ValidadeLote.Equals(filtro.DataVencimento) && item.CodigoLote.Equals(filtro.SelectItemLoteId))
+                if (item.CodigoLote.Equals(filtro.SelectItemLoteId))
                 {
                     filtroLote.Add(item);
                 }
@@ -186,9 +170,16 @@ namespace TccUsjt2018.Controllers
             ProdutoDAO produtoDAO = new ProdutoDAO();
             var listaProduto = produtoDAO.GetAll();
             var filtroProduto = new List<Produto>();
+            foreach (var item in listaProduto)
+            {
+                if (item.CodigoProduto.Equals(filtro.SelectItemProdutoId))
+                {
+                    filtroProduto.Add(item);
+                }
+            }
 
 
-            if (filtro.SelectItemLoteId != null && filtro.SelectItemCategoriaId != null && filtro.DataVencimento != null)
+            if (filtro.SelectItemLoteId != null && filtro.SelectItemCategoriaId != null && filtro.SelectItemProdutoId != null)
             {
                 var resultQuery = from l in filtroLote
                                   join p in listaProduto

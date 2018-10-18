@@ -17,15 +17,15 @@
                         {
                             <div class="form-group">
                                 @Html.LabelFor(model => model.SelectItemLoteId)
-                                @Html.DropDownListFor(model => model.SelectItemLoteId, Model.Lotes, new { @class = "form-control" })
+                                @Html.DropDownListFor(model => model.SelectItemLoteId, Model.Lotes, "Selecione", new { @class = "form-control" })
                             </div>
                             <div class="form-group">
                                 @Html.LabelFor(model => model.SelectItemProdutoId)
-                                @Html.DropDownListFor(model => model.SelectItemProdutoId, Model.Produtos, new { @class = "form-control" })
+                                @Html.DropDownListFor(model => model.SelectItemProdutoId, Model.Produtos, "Selecione", new { @class = "form-control" })
                             </div>
                             <div class="cform-group">
                                 @Html.LabelFor(model => model.SelectItemCategoriaId)
-                                @Html.DropDownListFor(model => model.SelectItemCategoriaId, Model.Categorias, new { @class = "form-control" })
+                                @Html.DropDownListFor(model => model.SelectItemCategoriaId, Model.Categorias, "Selecione", new { @class = "form-control" })
                             </div>
                             <div class="cform-group">
                                 @Html.LabelFor(X => X.DataVencimento)
