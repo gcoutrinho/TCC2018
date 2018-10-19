@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TccUsjt2018.Controllers;
 using TccUsjt2018.Database.DAO;
 using TccUsjt2018.Database.Entities;
 using TccUsjt2018.ViewModels;
+using TccUsjt2018.ViewModels.Lote;
 using TccUsjt2018.ViewModels.Relatório;
 
 namespace Teste
@@ -127,79 +129,96 @@ namespace Teste
 
             //RELATORIO DE PRODUTO
             // Filtros: CATEGORIA/DATA ou DATA ou TODOS OS PRODUTOS
-            #region RELATORIO DE PRODUTO
-            if (nomeCategoria != null && dataValidade != null)
+            //#region RELATORIO DE PRODUTO
+            //if (nomeCategoria != null && dataValidade != null)
+            //{
+            //    var resultQuery = from p in listaProduto
+            //                      join l in filtroLote
+            //                      on p.CodigoProduto equals l.Produto_CodigoProduto
+            //                      join c in filtroCategoria
+            //                      on p.Categoria_CodigoCategoria equals c.CodigoCategoria
+            //                      select new
+            //                      {
+            //                          p.NomeProduto,
+            //                          c.NomeCategoria,
+            //                          p.MarcaProduto,
+            //                          l.ValidadeLote,
+            //                      };
+
+            //    foreach (var item in resultQuery)
+            //    {
+            //        Console.WriteLine("Produto: " + item.NomeProduto + " Categoria: " + item.NomeCategoria + " Marca: " + item.MarcaProduto + " Validade: " + item.ValidadeLote);
+            //    }
+            //    Console.ReadLine();
+
+            //}
+            //else if (nomeCategoria == null && dataValidade != null)
+            //{
+            //    var resultQuery = from p in listaProduto
+            //                      join l in filtroLote
+            //                      on p.CodigoProduto equals l.Produto_CodigoProduto
+            //                      join c in listaCategoria
+            //                      on p.Categoria_CodigoCategoria equals c.CodigoCategoria
+            //                      select new
+            //                      {
+            //                          p.NomeProduto,
+            //                          c.NomeCategoria,
+            //                          p.MarcaProduto,
+            //                          l.ValidadeLote,
+            //                      };
+
+            //    foreach (var item in resultQuery)
+            //    {
+            //        Console.WriteLine("Produto: " + item.NomeProduto + " Categoria: " + item.NomeCategoria + " Marca: " + item.MarcaProduto + " Validade: " + item.ValidadeLote);
+            //    }
+            //    Console.ReadLine();
+
+            //}
+            //else if (nomeCategoria == null && dataValidade == null)
+            //{
+            //    var todosLote = loteDAO.GetAll();
+            //    var todosProdutos = produtoDAO.GetAll();
+            //    var todasCategorias = categoriaDAO.GetAll();
+
+            //    var resultQuery = from p in todosProdutos
+            //                      join l in todosLote
+            //                      on p.CodigoProduto equals l.Produto_CodigoProduto
+            //                      join c in todasCategorias
+            //                      on p.Categoria_CodigoCategoria equals c.CodigoCategoria
+            //                      select new
+            //                      {
+            //                          p.NomeProduto,
+            //                          c.NomeCategoria,
+            //                          p.MarcaProduto,
+            //                          l.ValidadeLote,
+            //                      };
+
+            //    foreach (var item in resultQuery)
+            //    {
+            //        Console.WriteLine("Produto: " + item.NomeProduto + " Categoria: " + item.NomeCategoria + " Marca: " + item.MarcaProduto + " Validade: " + item.ValidadeLote );
+            //    }
+            //    Console.ReadLine();
+
+            //}
+            //#endregion
+            //LoteController loteController = new LoteController();
+            //var lote = new LoteViewModel()
+            //{
+            //    CodigoLote = 2,
+            //    QuantidadeBaixa = 10,
+            //    Produto_CodigoProduto = 1,
+            //};
+
+            //loteController.BaixaLote(lote);
+          
+            HomeController controller = new HomeController();
+
+            var teste = controller.VerificaSituacaoLote();
+            foreach (var item in teste)
             {
-                var resultQuery = from p in listaProduto
-                                  join l in filtroLote
-                                  on p.CodigoProduto equals l.Produto_CodigoProduto
-                                  join c in filtroCategoria
-                                  on p.Categoria_CodigoCategoria equals c.CodigoCategoria
-                                  select new
-                                  {
-                                      p.NomeProduto,
-                                      c.NomeCategoria,
-                                      p.MarcaProduto,
-                                      l.ValidadeLote,
-                                  };
-
-                foreach (var item in resultQuery)
-                {
-                    Console.WriteLine("Produto: " + item.NomeProduto + " Categoria: " + item.NomeCategoria + " Marca: " + item.MarcaProduto + " Validade: " + item.ValidadeLote);
-                }
-                Console.ReadLine();
-
+                Console.WriteLine(item);
             }
-            else if (nomeCategoria == null && dataValidade != null)
-            {
-                var resultQuery = from p in listaProduto
-                                  join l in filtroLote
-                                  on p.CodigoProduto equals l.Produto_CodigoProduto
-                                  join c in listaCategoria
-                                  on p.Categoria_CodigoCategoria equals c.CodigoCategoria
-                                  select new
-                                  {
-                                      p.NomeProduto,
-                                      c.NomeCategoria,
-                                      p.MarcaProduto,
-                                      l.ValidadeLote,
-                                  };
-
-                foreach (var item in resultQuery)
-                {
-                    Console.WriteLine("Produto: " + item.NomeProduto + " Categoria: " + item.NomeCategoria + " Marca: " + item.MarcaProduto + " Validade: " + item.ValidadeLote);
-                }
-                Console.ReadLine();
-
-            }
-            else if (nomeCategoria == null && dataValidade == null)
-            {
-                var todosLote = loteDAO.GetAll();
-                var todosProdutos = produtoDAO.GetAll();
-                var todasCategorias = categoriaDAO.GetAll();
-
-                var resultQuery = from p in todosProdutos
-                                  join l in todosLote
-                                  on p.CodigoProduto equals l.Produto_CodigoProduto
-                                  join c in todasCategorias
-                                  on p.Categoria_CodigoCategoria equals c.CodigoCategoria
-                                  select new
-                                  {
-                                      p.NomeProduto,
-                                      c.NomeCategoria,
-                                      p.MarcaProduto,
-                                      l.ValidadeLote,
-                                  };
-
-                foreach (var item in resultQuery)
-                {
-                    Console.WriteLine("Produto: " + item.NomeProduto + " Categoria: " + item.NomeCategoria + " Marca: " + item.MarcaProduto + " Validade: " + item.ValidadeLote );
-                }
-                Console.ReadLine();
-
-            }
-            #endregion
-
+            Console.ReadLine();
 
 
         }

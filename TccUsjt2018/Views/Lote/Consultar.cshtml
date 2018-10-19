@@ -1,0 +1,37 @@
+﻿@model TccUsjt2018.ViewModels.Lote.LoteViewModel
+
+@{
+    ViewBag.Title = "Consultar Lote";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">@ViewBag.Title</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-dark" role="alert">
+                            Nome Lote: @Model.CodigoLote 
+                        </div>
+                        <div class="alert alert-dark" role="alert">
+                            Descrição: @Model.DescricaoLote
+                        </div>
+                        <div class="alert alert-dark" role="alert">
+                            Quantidade: @Model.QuantidadeProduto
+                        </div>
+                        <div class="alert alert-dark" role="alert">
+                            Produto: @Model.Produto.NomeProduto
+                        </div>
+                        <div class="alert alert-dark" role="alert">
+                            Local Estoque: @Model.Estoque.DescricaoEstoque
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->

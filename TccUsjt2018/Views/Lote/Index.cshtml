@@ -33,7 +33,8 @@
                                         <td>@Html.DisplayFor(model => lote.Produto.NomeProduto)</td>
                                         <td>@Html.DisplayFor(model => lote.QuantidadeProduto)</td>
                                         <td align="center">
-                                            <button onclick="detalhes('@lote');" type="button" class="btn btn-success">Detalhes</button>
+                                            @*<button onclick="detalhes('@lote.CodigoLote');" type="button" class="btn btn-success">Detalhes</button>*@
+                                            @Html.ActionLink("Consultar", "Consultar", new { codigoLote = lote.CodigoLote }, new { @class = "btn btn-success" })
                                             @Html.ActionLink("Editar", "Edit", new { codigo = lote.CodigoLote }, new { @class = "btn btn-warning" })
                                             <button onclick="remover('@lote');" type="button" class="btn btn-danger">Excluir</button>
                                         </td>

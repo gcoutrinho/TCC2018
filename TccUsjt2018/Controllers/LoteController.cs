@@ -128,5 +128,27 @@ namespace TccUsjt2018.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Consultar(int codigoLote)
+        {
+            var dao = new LoteDAO();
+            var lote = dao.GetById(codigoLote);
+            var daoEstoque = new EstoqueDAO();
+            var estoque = daoEstoque.GetById(lote.Estoque_CodigoEstoque);
+            var produtoDao = new ProdutoDAO();
+            var produto = produtoDao.GetById(lote.Produto_CodigoProduto);
+            var model = new LoteViewModel()
+            {
+                CodigoLote = lote.CodigoLote,
+                DescricaoLote = lote.DescricaoLote,
+                QuantidadeProduto = lote.QuantidadeProduto,
+                Estoque = estoque,
+                Produto = produto,
+                ValidadeLote = lote.ValidadeLote,
+            };
+
+            return View(model);
+        }
+
     }
 }
