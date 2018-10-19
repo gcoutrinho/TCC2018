@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using TccUsjt2018.Database.DAO;
 using TccUsjt2018.Database.Entities;
+using TccUsjt2018.ViewModels.Lote;
 
 namespace TccUsjt2018.Controllers
 {
@@ -11,7 +12,8 @@ namespace TccUsjt2018.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            var dados = VerificaSituacaoLote();
+            return View(dados);
         }
 
         public ActionResult About()
@@ -112,7 +114,7 @@ namespace TccUsjt2018.Controllers
 
         //}
 
-        public HashSet<string> VerificaSituacaoLote()
+        public LoteViewModel VerificaSituacaoLote()
         {
             var loteDAO = new LoteDAO();
             var baixaDAO = new BaixaDAO();
@@ -183,7 +185,11 @@ namespace TccUsjt2018.Controllers
 
 
             }
-            return lista;
+            var model = new LoteViewModel()
+            {
+                ListaAlerta = lista,
+            };
+            return model;
         }
     }
 }

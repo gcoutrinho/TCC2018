@@ -1,53 +1,62 @@
-﻿@{
+﻿@model TccUsjt2018.ViewModels.Lote.LoteViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
 <head>
     <script src="~/Assets/js/echarts.js"></script>
 </head>
-<div class="content mt-3">
-    <div class="animated fadeIn">
 
+@foreach (var alerta in Model.ListaAlerta)
+{
+    if (alerta != "")
+    {
+        <div class="alert alert-danger" role="alert">
+            <strong>Aviso: @alerta</strong>
+        </div>
 
-        <div class="row">
-            <div class="col-lg-10">
-                <div class="card">
-                    <div class="card-body">
-                        <div id="main" style="width: null;height:400px;"></div>
-                        <script type="text/javascript">
-                            // based on prepared DOM, initialize echarts instance
-                            var myChart = echarts.init(document.getElementById('main'));
+    }
+}
 
-                            // specify chart configuration item and data
-                            var option = {
-                                title: {
-                                    text: 'Relatório de Produtos'
-                                },
-                                tooltip: {},
-                                legend: {
-                                    data: ['Produtos']
-                                },
-                                xAxis: {
-                                    data: ["Leite", "Açucar", "Sal", "Óleo", "Farinha", "Café", "Arroz", "Feijão"]
-                                },
-                                yAxis: {},
-                                series: [{
-                                    name: 'Produtos',
-                                    type: 'bar',
-                                    data: [85, 30, 80, 70, 55, 28, 90, 100]
-                                }]
-                            };
+@*<div class="content mt-3">
+    <div class="animated fadeIn">*@
+@*<div class="row">
+                <div class="col-lg-10">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="main" style="width: null;height:400px;"></div>
+                            <script type="text/javascript">
+                                // based on prepared DOM, initialize echarts instance
+                                var myChart = echarts.init(document.getElementById('main'));
 
-                            // use configuration item and data specified to show chart
-                            myChart.setOption(option);
-                        </script>
+                                // specify chart configuration item and data
+                                var option = {
+                                    title: {
+                                        text: 'Relatório de Produtos'
+                                    },
+                                    tooltip: {},
+                                    legend: {
+                                        data: ['Produtos']
+                                    },
+                                    xAxis: {
+                                        data: ["Leite", "Açucar", "Sal", "Óleo", "Farinha", "Café", "Arroz", "Feijão"]
+                                    },
+                                    yAxis: {},
+                                    series: [{
+                                        name: 'Produtos',
+                                        type: 'bar',
+                                        data: [85, 30, 80, 70, 55, 28, 90, 100]
+                                    }]
+                                };
+
+                                // use configuration item and data specified to show chart
+                                myChart.setOption(option);
+                            </script>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div><!-- /# column -->
-    </div><!-- .animated -->
-</div><!-- .content -->
-
-
+            </div><!-- /# column -->
+        </div><!-- .animated -->
+    </div><!-- .content -->*@  
 
 <script src="~/Assets/js/vendor/jquery-2.1.4.min.js"></script>

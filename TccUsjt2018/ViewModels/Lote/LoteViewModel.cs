@@ -33,5 +33,6 @@ namespace TccUsjt2018.ViewModels.Lote
         public IEnumerable<SelectListItem> Estoques { get; set; }
         [Display(Name = "Quantidade a Baixar")]
         public int QuantidadeBaixa { get; set; }
+        public HashSet<string> ListaAlerta { get; set; }
     }
 }

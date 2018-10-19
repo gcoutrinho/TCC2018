@@ -135,7 +135,7 @@ namespace TccUsjt2018.Controllers
             {
                 CodigoProduto = produto.CodigoProduto,
                 MarcaProduto = produto.MarcaProduto,
-                CategoriaProduto = produto.CategoriaProduto,
+                CategoriaProduto = listacategoria,
             };
 
             return View(model);
