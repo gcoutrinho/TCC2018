@@ -1,0 +1,34 @@
+﻿@model TccUsjt2018.ViewModels.ProdutoViewModel
+@{
+    ViewBag.Title = "Consultar Produto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">@ViewBag.Title</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-dark" role="alert">
+                            Nome Produto: @Model.CodigoProduto
+                        </div>
+                        <div class="alert alert-dark" role="alert">
+                            Marca Produto: @Model.MarcaProduto
+                        </div>
+                        <div class="alert alert-dark" role="alert">
+                            Categoria Produto: @Model.CategoriaProduto
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+<h2>Consultar</h2>
+

@@ -1651,6 +1651,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Lote\BaixaLote.cshtml" />
     <Content Include="Views\Lote\Consultar.cshtml" />
+    <Content Include="Views\Produto\Consultar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

@@ -123,5 +123,22 @@ namespace TccUsjt2018.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult Consultar(int codigoProduto)
+        {
+            var produtoDao = new ProdutoDAO();
+            var produto = produtoDao.GetById(codigoProduto);
+            var categoriaDao = new CategoriaDAO();
+            var listacategoria = categoriaDao.GetById(produto.Categoria_CodigoCategoria);
+            var model = new ProdutoViewModel()
+            {
+                CodigoProduto = produto.CodigoProduto,
+                MarcaProduto = produto.MarcaProduto,
+                CategoriaProduto = produto.CategoriaProduto,
+            };
+
+            return View(model);
+        }
     }
 }
