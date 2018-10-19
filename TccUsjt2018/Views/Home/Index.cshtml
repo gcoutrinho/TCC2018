@@ -18,45 +18,61 @@
     }
 }
 
-@*<div class="content mt-3">
-    <div class="animated fadeIn">*@
-@*<div class="row">
+<div class="content mt-3">
+    <div class="animated fadeIn">
+<div class="row">
                 <div class="col-lg-10">
                     <div class="card">
                         <div class="card-body">
                             <div id="main" style="width: null;height:400px;"></div>
-                            <script type="text/javascript">
-                                // based on prepared DOM, initialize echarts instance
-                                var myChart = echarts.init(document.getElementById('main'));
-
-                                // specify chart configuration item and data
-                                var option = {
-                                    title: {
-                                        text: 'Relatório de Produtos'
-                                    },
-                                    tooltip: {},
-                                    legend: {
-                                        data: ['Produtos']
-                                    },
-                                    xAxis: {
-                                        data: ["Leite", "Açucar", "Sal", "Óleo", "Farinha", "Café", "Arroz", "Feijão"]
-                                    },
-                                    yAxis: {},
-                                    series: [{
-                                        name: 'Produtos',
-                                        type: 'bar',
-                                        data: [85, 30, 80, 70, 55, 28, 90, 100]
-                                    }]
-                                };
-
-                                // use configuration item and data specified to show chart
-                                myChart.setOption(option);
-                            </script>
                         </div>
                     </div>
                 </div>
             </div><!-- /# column -->
         </div><!-- .animated -->
-    </div><!-- .content -->*@  
+    </div><!-- .content -->  
 
 <script src="~/Assets/js/vendor/jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript">
+        // based on prepared DOM, initialize echarts instance
+    var myChart = echarts.init(document.getElementById('main'));
+
+    $.ajax({
+        url: '@Url.Action("RetornaRankingProdutos")',
+        method: "GET"
+    }).done(function (response) {
+
+        var label = [];
+        var data = [];
+        for (var product in response) {
+            label.push(product.NomeProduto);
+            data.push(product.QuantidadeProduto);
+        }
+
+        console.log(label);
+        console.log(data);
+
+        var option = {
+            title: {
+                text: 'Relatório de Produtos'
+            },
+            tooltip: {},
+            legend: {
+                data: ['Produtos']
+            },
+            xAxis: {
+                data: ["Leite", "Açucar", "Sal", "Óleo", "Farinha", "Café", "Arroz", "Feijão"]
+            },
+            yAxis: {},
+            series: [{
+                name: 'Produtos',
+                type: 'bar',
+                data: [85, 30, 80, 70, 55, 28, 90, 100]
+            }]
+        };
+
+        // use configuration item and data specified to show chart
+        myChart.setOption(option); 
+    });
+</script>

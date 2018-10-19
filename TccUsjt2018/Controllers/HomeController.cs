@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using TccUsjt2018.Database.DAO;
 using TccUsjt2018.Database.Entities;
+using TccUsjt2018.ViewModels;
 using TccUsjt2018.ViewModels.Lote;
 
 namespace TccUsjt2018.Controllers
@@ -29,9 +31,8 @@ namespace TccUsjt2018.Controllers
 
             return View();
         }
-
-        [HttpPost]
-        public ActionResult RetornaRankingProdutos()
+        [HttpGet]
+        public JsonResult RetornaRankingProdutos()
         {
             //Retorna Grafico de Colunas
             //Esse grafico retorna a quantidade de produtos totais.
@@ -51,7 +52,19 @@ namespace TccUsjt2018.Controllers
                                   NomeProduto = g.Key.NomeProduto,
                                   QuantidadeProduto = g.Sum(x => x.QuantidadeProduto)
                               };
-            return View(resultQuery);
+            
+            var lista = new List<RankingProdutoViewModel>();
+            foreach (var item in resultQuery)
+            {
+                lista.Add(new RankingProdutoViewModel() {
+                    NomeProduto = item.NomeProduto,
+                    QuantidadeProduto = item.QuantidadeProduto
+                });
+            }
+
+            var js = new JavaScriptSerializer();
+            var json = js.Serialize(lista);
+            return Json(json, JsonRequestBehavior.AllowGet);
         }
 
         //public HashSet<string> VerificaSituacaoLote()

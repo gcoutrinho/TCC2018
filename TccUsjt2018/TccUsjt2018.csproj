@@ -276,6 +276,7 @@
     <Compile Include="ViewModels\ProdutoCategoria\CategoriaProdutoViewModel.cs" />
     <Compile Include="ViewModels\Login\LoginViewModel.cs" />
     <Compile Include="ViewModels\Produtos\ProdutoViewModel.cs" />
+    <Compile Include="ViewModels\RankingProdutoViewModel.cs" />
     <Compile Include="ViewModels\Relatório\RelatorioLoteViewModel.cs" />
     <Compile Include="ViewModels\Relatório\RelatorioProdutoViewModel.cs" />
   </ItemGroup>
