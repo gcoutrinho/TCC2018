@@ -30,8 +30,8 @@
                                         <td>@Html.DisplayFor(model => estoque.Descricao)</td>
                                         <td align="center">
                                             <button onclick="detalhes('@estoque');" type="button" class="btn btn-success">Detalhes</button>
-                                            @Html.ActionLink("Editar", "Edit", new { codigo = estoque.CodigoEstoque }, new { @class = "btn btn-warning" })
-                                            <button onclick="remover('@estoque');" type="button" class="btn btn-danger">Excluir</button>
+                                            @Html.ActionLink("Consultar", "Consultar", new { codigoEstoque = estoque.CodigoEstoque }, new { @class = "btn btn-warning" })
+                                            @*<button onclick="remover('@estoque');" type="button" class="btn btn-danger">Excluir</button>*@
                                         </td>
                                     </tr>
                                 }

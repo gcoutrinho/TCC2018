@@ -67,5 +67,21 @@ namespace TccUsjt2018.Controllers
                 return View("Create");
             }
         }
+
+        [HttpGet]
+        public ActionResult Consultar(int codigoCategoria)
+        {
+            var categoriaDao = new CategoriaDAO();
+            var listacategoria = categoriaDao.GetById(codigoCategoria);
+            var model = new CategoriaProdutoViewModel()
+            {
+                CodigoCategoria = listacategoria.CodigoCategoria,
+                DescricaoCategoria = listacategoria.DescricaoCategoria,
+            };
+
+            return View(model);
+        }
+
+
     }
 }
