@@ -66,5 +66,19 @@ namespace TccUsjt2018.Controllers
                 return View("Create");
             }
         }
+
+        [HttpGet]
+        public ActionResult Consultar(int codigoEstoque)
+        {
+            var daoEstoque = new EstoqueDAO();
+            var estoque = daoEstoque.GetById(codigoEstoque);
+            var model = new EstoqueViewModel()
+            {
+                CodigoEstoque = estoque.CodigoEstoque,
+                Descricao = estoque.DescricaoEstoque,
+            };
+
+            return View(model);
+        }
     }
 }

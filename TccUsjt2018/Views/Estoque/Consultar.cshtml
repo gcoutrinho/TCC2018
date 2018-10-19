@@ -1,0 +1,28 @@
+﻿@model TccUsjt2018.ViewModels.Estoques.EstoqueViewModel
+
+@{
+    ViewBag.Title = "Consultar Estoque";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">@ViewBag.Title</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-dark" role="alert">
+                            Nome Estoque: @Model.CodigoEstoque
+                        </div>
+                        <div class="alert alert-dark" role="alert">
+                            Descrição: @Model.Descricao
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
