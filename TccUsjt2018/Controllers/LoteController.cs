@@ -16,7 +16,7 @@ namespace TccUsjt2018.Controllers
         public ActionResult Index()
         {
             LoteDAO loteDAO = new LoteDAO();
-            var lotes = loteDAO.GetAll();
+            var lotes = loteDAO.GetAll().Where(x => x.QuantidadeProduto > 0).OrderBy(x => x.ValidadeLote);
 
             var model = lotes.Select(x => new LoteViewModel()
             {

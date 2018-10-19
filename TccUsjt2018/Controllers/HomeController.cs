@@ -175,7 +175,7 @@ namespace TccUsjt2018.Controllers
                 {
                     var diferençaresultado = lotemesatual - baixaTotal;
                     var resultadoporcentagem = (float)((diferençaresultado * 100) / lotemesatual);
-                    texto = "Ops, você não conseguira vender: " + resultadoporcentagem + "% de" + nomeproduto.NomeProduto + "faça uma promoção!";
+                    texto = "Ops, você não conseguira vender: " + resultadoporcentagem + " % de " + nomeproduto.NomeProduto + " faça uma promoção!";
                     lista.Add(texto);
                 }
                 else

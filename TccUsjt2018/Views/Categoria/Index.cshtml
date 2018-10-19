@@ -19,8 +19,7 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Nome Categoria</th>
-                                    <th>Descricao Categoria</th>
-                                    <th></th>
+                                    <th>Descricao Categoria</th>                             
                                 </tr>
                             </thead>
                             <tbody>
@@ -32,12 +31,9 @@
                                         <td align="center">
                                             @*<button onclick="detalhes('@lote.CodigoLote');" type="button" class="btn btn-success">Detalhes</button>*@
                                             @Html.ActionLink("Consultar", "Consultar", new {  CodigoCategoria = categoria.CodigoCategoria}, new { @class = "btn btn-success" })
-                                            @Html.ActionLink("Editar", "Edit", new { codigoCategoria = categoria.CodigoCategoria }, new { @class = "btn btn-warning" })
+                                            @*@Html.ActionLink("Editar", "Edit", new { codigoCategoria = categoria.CodigoCategoria }, new { @class = "btn btn-warning" })*@
                                             @*<button onclick="remover('@lote');" type="button" class="btn btn-danger">Excluir</button>*@
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Baixar", "BaixaLote", new { categoria = categoria.CodigoCategoria}, new { @class = "btn btn-dark" })
-                                        </td>
+                                        </td>                                        
                                     </tr>
                                 }
                             </tbody>

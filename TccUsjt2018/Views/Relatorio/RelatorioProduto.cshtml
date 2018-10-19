@@ -18,7 +18,6 @@
                                 <tr>
                                     <th>Produto</th>
                                     <th>Categoria</th>
-                                    <th>Validade</th>
                                     <th>Marca</th>
                                 </tr>
                             </thead>
@@ -27,8 +26,7 @@
                                 {
                                 <tr>
                                     <td>@Html.DisplayFor(model => produto.NomeProduto)</td>
-                                    <td>@Html.DisplayFor(model => produto.NomeCategoria)</td>
-                                    <td>@Html.DisplayFor(model => produto.DataVencimento)</td>
+                                    <td>@Html.DisplayFor(model => produto.NomeCategoria)</td>                               >
                                     <td>@Html.DisplayFor(model => produto.Marca)</td>
                                 </tr>
                                 }

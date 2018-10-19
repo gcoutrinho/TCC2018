@@ -1,6 +1,6 @@
 ﻿@model TccUsjt2018.ViewModels.Filtros.FiltrosViewModel
 @{
-    ViewBag.Title = "IndexRelatorioLote";
+    ViewBag.Title = "Relatório Lote";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -27,10 +27,10 @@
                                 @Html.LabelFor(model => model.SelectItemCategoriaId)
                                 @Html.DropDownListFor(model => model.SelectItemCategoriaId, Model.Categorias, "Selecione", new { @class = "form-control" })
                             </div>
-                            <div class="cform-group">
+                            @*<div class="cform-group">
                                 @Html.LabelFor(X => X.DataVencimento)
                                 @Html.TextBoxFor(x => x.DataVencimento, new { @class = "form-control" })
-                            </div>
+                            </div>*@
                             <br />
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary" id="idConsulta" value="">Consultar</button>
