@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<TccUsjt2018.ViewModels.ProdutoCategoria.CategoriaProdutoViewModel>
 @{
-    ViewBag.Title = "Categoria";
+    ViewBag.Title = "Categoria Produtos";
 }
 <div class="content mt-3">
     <div class="animated fadeIn">
@@ -18,8 +18,8 @@
                             <thead>
                                 <tr>
                                     <th>Id</th>
-                                    <th>Nome</th>
-                                    <th>Descrição</th>                              
+                                    <th>Nome Categoria</th>
+                                    <th>Descricao Categoria</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -28,12 +28,15 @@
                                 {
                                     <tr>
                                         <td>@Html.DisplayFor(model => categoria.CodigoCategoria)</td>
-                                        <td>@Html.DisplayFor(model => categoria.NomeCategoria)</td>
-                                        <td>@Html.DisplayFor(model => categoria.DescricaoCategoria)</td>                
+                                        <td>@Html.DisplayFor(model => categoria.DescricaoCategoria)</td>
                                         <td align="center">
-                                            <button onclick="detalhes('@categoria');" type="button" class="btn btn-success">Detalhes</button>
-                                            @Html.ActionLink("Editar", "Edit", new { codigo = categoria.CodigoCategoria }, new { @class = "btn btn-warning" })
-                                            <button onclick="remover('@categoria');" type="button" class="btn btn-danger">Excluir</button>
+                                            @*<button onclick="detalhes('@lote.CodigoLote');" type="button" class="btn btn-success">Detalhes</button>*@
+                                            @Html.ActionLink("Consultar", "Consultar", new {  CodigoCategoria = categoria.CodigoCategoria}, new { @class = "btn btn-success" })
+                                            @Html.ActionLink("Editar", "Edit", new { codigoCategoria = categoria.CodigoCategoria }, new { @class = "btn btn-warning" })
+                                            @*<button onclick="remover('@lote');" type="button" class="btn btn-danger">Excluir</button>*@
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Baixar", "BaixaLote", new { categoria = categoria.CodigoCategoria}, new { @class = "btn btn-dark" })
                                         </td>
                                     </tr>
                                 }
