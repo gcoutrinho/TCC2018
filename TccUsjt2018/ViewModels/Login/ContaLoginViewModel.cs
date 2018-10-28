@@ -6,7 +6,7 @@ using System.Web;
 
 namespace TccUsjt2018.ViewModels.Login
 {
-    public class LoginViewModel
+    public class ContaLoginViewModel
     {
 
         [Required]

@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using TccUsjt2018.Models;
 using System.Data.Entity;
+using TccUsjt2018.ViewModels.Login;
 
 namespace TccUsjt2018
 {
@@ -32,6 +33,23 @@ namespace TccUsjt2018
                 _userManager = value;
             }
         }
+        private SignInManager<UsuarioAplicacao, string> _signInManager;
+        public SignInManager<UsuarioAplicacao, string> SignInManager
+        {
+            get
+            {
+                if (_userManager == null)
+                {
+                    var contextOwin = HttpContext.GetOwinContext();
+                    _signInManager = contextOwin.GetUserManager<SignInManager<UsuarioAplicacao, string>>();
+                }
+                return _signInManager;
+            }
+            set
+            {
+                _signInManager = value;
+            }
+        }
 
         public ActionResult Registrar()
         {
@@ -43,23 +61,26 @@ namespace TccUsjt2018
         {
             if (ModelState.IsValid)
             {
-                var novoUsuario = new UsuarioAplicacao();
+                var novoUsuario = new UsuarioAplicacao
+                {
+                    Email = modelo.Email,
+                    UserName = modelo.UserName,
+                    NomeCompleto = modelo.NomeCompleto
+                };
 
-                novoUsuario.Email = modelo.Email;
-                novoUsuario.UserName = modelo.UserName;
-                novoUsuario.NomeCompleto = modelo.NomeCompleto;
-
-                var usuario = UserManager.FindByEmail(modelo.Email);
+                var usuario = await UserManager.FindByEmailAsync(modelo.Email);
                 var usuarioJaExiste = usuario != null;
 
                 if (usuarioJaExiste)
-                    return RedirectToAction("Index", "Home");
+                    return View("AguardandoConfirmacao");
 
                 var resultado = await UserManager.CreateAsync(novoUsuario, modelo.Senha);
 
                 if (resultado.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    //Enviar email d confirmação
+                    await EnviarEmailDeConfirmacaoAsync(novoUsuario);
+                    return View("AguardandoConfirmacao");
                 }
                 else
                 {
@@ -69,6 +90,44 @@ namespace TccUsjt2018
 
             // Alguma coisa de errado aconteceu!
             return View(modelo);
+        }
+
+        public async Task<ActionResult> ConfirmacaoEmail(string usuarioId, string token)
+        {
+            if (usuarioId == null || token == null)
+            {
+                return View("Error");
+            }
+
+            var resultado = await UserManager.ConfirmEmailAsync(usuarioId, token);
+
+            if (resultado.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View("Error");
+            }
+
+
+
+            throw new NotImplementedException();
+        }
+        private async Task EnviarEmailDeConfirmacaoAsync(UsuarioAplicacao usuario)
+        {
+            var token = await UserManager.GenerateEmailConfirmationTokenAsync(usuario.Id);
+
+            var linkDeCallback =
+                Url.Action(
+                    "ConfirmacaoEmail",
+                    "Conta",
+                    new { usuarioId = usuario.Id, token = token },
+                    Request.Url.Scheme);
+
+            await UserManager.SendEmailAsync(usuario.Id,
+                "Lgg Rastreablidade - Confirmação de Email",
+                $"Bem vindo a LGG Rastreabilidade , clique aqui {linkDeCallback} para confirmar o seu e-mail");
         }
 
         public ActionResult Index()
@@ -94,6 +153,48 @@ namespace TccUsjt2018
         {
             List<UsuarioAplicacao> usuarios = await UserManager.Users.ToListAsync();
             return usuarios;
+        }
+
+        public async Task<ActionResult> Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Login(ContaLoginViewModel modelo)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuario = await UserManager.FindByEmailAsync(modelo.Email);
+
+                if (usuario == null)                
+                    return SenhaDoUsuarioInvalido();
+                
+
+                var signInResultado =
+                    await SignInManager.PasswordSignInAsync(
+                        usuario.UserName,
+                        modelo.Senha,
+                        isPersistent: false,
+                        shouldLockout: false);
+
+                switch (signInResultado)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToAction("Index", "Home");
+                    default:
+                        return SenhaDoUsuarioInvalido();
+
+                }
+            }
+
+            return View(modelo);
+        }
+
+        private ActionResult SenhaDoUsuarioInvalido()
+        {
+            ModelState.AddModelError("", "Credenciais Invalidas!");
+            return View("Login");
         }
     }
 }

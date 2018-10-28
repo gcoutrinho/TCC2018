@@ -239,6 +239,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\Identity\EmailServico.cs" />
     <Compile Include="App_Start\Identity\SenhaValidator.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="banco23092018.Designer.cs">
@@ -258,7 +259,6 @@
     <Compile Include="Controllers\FiltroRelatorioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CadastrosController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\RelatorioController.cs" />
@@ -306,7 +306,7 @@
     <Compile Include="ViewModels\Filtros\FiltrosViewModel.cs" />
     <Compile Include="ViewModels\Lote\LoteViewModel.cs" />
     <Compile Include="ViewModels\ProdutoCategoria\CategoriaProdutoViewModel.cs" />
-    <Compile Include="ViewModels\Login\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Login\ContaLoginViewModel.cs" />
     <Compile Include="ViewModels\Produtos\ProdutoViewModel.cs" />
     <Compile Include="ViewModels\RankingProdutoViewModel.cs" />
     <Compile Include="ViewModels\Relatório\RelatorioLoteViewModel.cs" />
@@ -1681,7 +1681,6 @@
     <Content Include="Views\Relatorio\RelatorioLote.cshtml" />
     <Content Include="Views\Relatorio\IndexRelatorioLote.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Lote\BaixaLote.cshtml" />
     <Content Include="Views\Lote\Consultar.cshtml" />
     <Content Include="Views\Produto\Consultar.cshtml" />
@@ -1689,8 +1688,13 @@
     <Content Include="Views\Estoque\Consultar.cshtml" />
     <Content Include="Views\Conta\Registrar.cshtml" />
     <Content Include="Views\Conta\Index.cshtml" />
+    <Content Include="Views\Conta\AguardandoConfirmacao.cshtml" />
+    <Content Include="Views\Conta\Login.cshtml" />
+    <Content Include="Views\Conta\IndexLogin.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Login\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
@@ -1701,7 +1705,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <PropertyGroup>

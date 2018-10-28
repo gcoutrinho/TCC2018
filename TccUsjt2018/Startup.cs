@@ -35,8 +35,10 @@ namespace TccUsjt2018
                     var userStore = contextoOwin.Get<IUserStore<UsuarioAplicacao>>();
                     var userManager = new UserManager<UsuarioAplicacao>(userStore);
 
-                    var userValidator = new UserValidator<UsuarioAplicacao>(userManager);
-                    userValidator.RequireUniqueEmail = true;
+                    var userValidator = new UserValidator<UsuarioAplicacao>(userManager)
+                    {
+                        RequireUniqueEmail = true
+                    };
 
                     userManager.UserValidator = userValidator;
                     userManager.PasswordValidator = new SenhaValidador()
@@ -48,8 +50,26 @@ namespace TccUsjt2018
                         ObrigatorioUpperCase = true
                     };
 
+                    userManager.EmailService = new EmailServico();
+
+                    var dataProtectionPriveder = opcoes.DataProtectionProvider;
+                    var dataProtectionPrivederCreate = dataProtectionPriveder.Create("TccUsjt2018");
+
+                    userManager.UserTokenProvider = new DataProtectorTokenProvider<UsuarioAplicacao>(dataProtectionPrivederCreate);
+
                     return userManager;
                 });
+
+            builder.CreatePerOwinContext<SignInManager<UsuarioAplicacao, string>>(
+               (opcoes, contextoOwin) =>
+               {
+                   var userManager = contextoOwin.Get<UserManager<UsuarioAplicacao>>();
+                   var signManager =
+                        new SignInManager<UsuarioAplicacao, string>(
+                            userManager,
+                            contextoOwin.Authentication);
+                   return signManager;
+               });
         }
     }
 }
