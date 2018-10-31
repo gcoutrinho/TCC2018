@@ -12,6 +12,7 @@ namespace TccUsjt2018.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             var dados = VerificaSituacaoLote();
@@ -31,6 +32,8 @@ namespace TccUsjt2018.Controllers
 
             return View();
         }
+
+        [Authorize]
         [HttpGet]
         public JsonResult RetornaRankingProdutos()
         {
@@ -126,7 +129,7 @@ namespace TccUsjt2018.Controllers
 
 
         //}
-
+        [Authorize]
         public LoteViewModel VerificaSituacaoLote()
         {
             var loteDAO = new LoteDAO();

@@ -33,12 +33,13 @@ namespace TccUsjt2018
                 _userManager = value;
             }
         }
+
         private SignInManager<UsuarioAplicacao, string> _signInManager;
         public SignInManager<UsuarioAplicacao, string> SignInManager
         {
             get
             {
-                if (_userManager == null)
+                if (_signInManager == null)
                 {
                     var contextOwin = HttpContext.GetOwinContext();
                     _signInManager = contextOwin.GetUserManager<SignInManager<UsuarioAplicacao, string>>();

@@ -13,6 +13,7 @@ namespace TccUsjt2018.Controllers
     public class ProdutoController : Controller
     {
         // GET: Produto
+        [Authorize]
         public ActionResult Index()
         {
             ProdutoDAO dao = new ProdutoDAO();
@@ -43,6 +44,7 @@ namespace TccUsjt2018.Controllers
             return new SelectList(produtos, "Value", "Text");
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             CategoriaController categoriaController = new CategoriaController();
@@ -56,7 +58,9 @@ namespace TccUsjt2018.Controllers
 
             return View(model);
         }
+
         [HttpPost]
+        [Authorize]
         public ActionResult Create(ProdutoViewModel model)
         {
             ProdutoDAO dao = new ProdutoDAO();
@@ -83,6 +87,7 @@ namespace TccUsjt2018.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Edit(int codigo)
         {
             ProdutoDAO dao = new ProdutoDAO();
@@ -100,12 +105,14 @@ namespace TccUsjt2018.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Edit(ProdutoViewModel model)
         {
             return View();
         }        
        
         [HttpPost]
+        [Authorize]
         public ActionResult Excluir(int codigo)
         {
             ProdutoDAO dao = new ProdutoDAO();
@@ -125,6 +132,7 @@ namespace TccUsjt2018.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Consultar(int codigoProduto)
         {
             var produtoDao = new ProdutoDAO();
