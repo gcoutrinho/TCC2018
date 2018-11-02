@@ -1,0 +1,45 @@
+﻿@model TccUsjt2018.ViewModels.Login.ContaConfirmacaoAlteracaoSenhaViewModel
+@{
+    ViewBag.Title = "ConfirmacaoAlteracaoSenha";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+
+<body class="bg-dark">
+
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-logo">
+                    <a href="index.html">
+                        <img class="align-content" src="images/logo.png" alt="">
+                    </a>
+                </div>
+
+                <div class="login-form">
+                    @using (Html.BeginForm("ConfirmacaoAlteracaoSenha", "Conta"))
+                    {
+                        @Html.ValidationSummary(true)
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            @Html.EditorForModel(new { @class= "form-group" })
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Alterar Senha</button>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function () {
+
+        //Escondendo campos quando carregar página
+        $('#UsuarioId, #Token').hide();
+
+    });
+</script>

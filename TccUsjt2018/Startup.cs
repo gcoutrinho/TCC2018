@@ -58,6 +58,12 @@ namespace TccUsjt2018
 
                     userManager.UserTokenProvider = new DataProtectorTokenProvider<UsuarioAplicacao>(dataProtectionPrivederCreate);
 
+                    //Define que o maximo de tentativa de login por usuario é de 3, apos isso, bloqueia por 1 minuto
+                    userManager.MaxFailedAccessAttemptsBeforeLockout = 3;
+                    //Define que o tempo de bloqueio é de 1 minuto
+                    userManager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(1);
+                    //Define que a condição de bloqueio é valida para todas as classes de usuário
+                    userManager.UserLockoutEnabledByDefault = true;
                     return userManager;
                 });
 

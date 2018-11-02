@@ -304,6 +304,8 @@
     </Compile>
     <Compile Include="ViewModels\Estoques\EstoqueViewModel.cs" />
     <Compile Include="ViewModels\Filtros\FiltrosViewModel.cs" />
+    <Compile Include="ViewModels\Login\ContaConfirmacaoAlteracaoSenhaViewModel.cs" />
+    <Compile Include="ViewModels\Login\ContaEsqueciSenhaViewModel.cs" />
     <Compile Include="ViewModels\Lote\LoteViewModel.cs" />
     <Compile Include="ViewModels\ProdutoCategoria\CategoriaProdutoViewModel.cs" />
     <Compile Include="ViewModels\Login\ContaLoginViewModel.cs" />
@@ -1691,6 +1693,9 @@
     <Content Include="Views\Conta\AguardandoConfirmacao.cshtml" />
     <Content Include="Views\Conta\Login.cshtml" />
     <Content Include="Views\Conta\IndexLogin.cshtml" />
+    <Content Include="Views\Conta\EsqueciSenha.cshtml" />
+    <Content Include="Views\Conta\EmailAlteracaoSenhaEnviado.cshtml" />
+    <Content Include="Views\Conta\ConfirmacaoAlteracaoSenha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Login\" />

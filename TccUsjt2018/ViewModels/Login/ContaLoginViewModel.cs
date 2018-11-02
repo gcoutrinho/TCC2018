@@ -18,6 +18,9 @@ namespace TccUsjt2018.ViewModels.Login
         [DataType(DataType.Password)]
         [Display(Name = "Senha")]
         public string Senha { get; set; }
+
+        [Display(Name = "Continuar Logado")]
+        public bool ContinuarLogado { get; set; }
         
 
     }

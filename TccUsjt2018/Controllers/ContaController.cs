@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using TccUsjt2018.Models;
 using System.Data.Entity;
 using TccUsjt2018.ViewModels.Login;
+using Microsoft.Owin.Security;
 
 namespace TccUsjt2018
 {
@@ -52,9 +53,91 @@ namespace TccUsjt2018
             }
         }
 
+        public IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                var contextoOwin = Request.GetOwinContext();
+                return contextoOwin.Authentication;
+            }
+        }
+
         public ActionResult Registrar()
         {
             return View();
+        }
+
+        public ActionResult EsqueciSenha()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EsqueciSenha(ContaEsqueciSenhaViewModel modelo)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuario = await UserManager.FindByEmailAsync(modelo.Email);
+
+                if (usuario != null)
+                {
+                    var token = await UserManager.GeneratePasswordResetTokenAsync(usuario.Id);
+
+                    var linkDeCallback =
+                       Url.Action(
+                           "ConfirmacaoAlteracaoSenha",
+                           "Conta",
+                           new { usuarioId = usuario.Id, token = token },
+                           Request.Url.Scheme);
+
+                    await UserManager.SendEmailAsync(usuario.Id,
+                        "Lgg Rastreablidade - Alteração de Senha",
+                        $"Bem vindo a LGG Rastreabilidade , clique aqui {linkDeCallback} para alterar a sua senha!");
+                }
+
+                return View("EmailAlteracaoSenhaEnviado");
+            }
+
+            return View();
+        }
+
+        public ActionResult ConfirmacaoAlteracaoSenha(string usuarioId, string token)
+        {
+            var modelo = new ContaConfirmacaoAlteracaoSenhaViewModel()
+            {
+                UsuarioId = usuarioId,
+                Token = token
+            };
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ConfirmacaoAlteracaoSenha(ContaConfirmacaoAlteracaoSenhaViewModel modelo)
+        {
+            if (ModelState.IsValid)
+            {
+                var resultadoAlteracao =
+                    await UserManager.ResetPasswordAsync(
+                        modelo.UsuarioId,
+                        modelo.Token,
+                        modelo.NovaSenha);
+
+                if (resultadoAlteracao.Succeeded)
+                {
+                    return RedirectToAction("Login", "Conta");
+                }
+                AdicionaErros(resultadoAlteracao);
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Logoff()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Login", "Conta");
         }
 
         [HttpPost]
@@ -168,21 +251,37 @@ namespace TccUsjt2018
             {
                 var usuario = await UserManager.FindByEmailAsync(modelo.Email);
 
-                if (usuario == null)                
+                if (usuario == null)
                     return SenhaDoUsuarioInvalido();
-                
+
 
                 var signInResultado =
                     await SignInManager.PasswordSignInAsync(
                         usuario.UserName,
                         modelo.Senha,
-                        isPersistent: false,
-                        shouldLockout: false);
+                        isPersistent: modelo.ContinuarLogado,
+                        shouldLockout: true);
 
                 switch (signInResultado)
                 {
                     case SignInStatus.Success:
+                        if (!usuario.EmailConfirmed)
+                        {
+                            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                            return View("AguardandoCOnfirmacao");
+                        }
                         return RedirectToAction("Index", "Home");
+                    case SignInStatus.LockedOut:
+                        var senhaCorreta =
+                            await UserManager.CheckPasswordAsync(
+                                usuario,
+                                modelo.Senha);
+
+                        if (senhaCorreta)
+                            ModelState.AddModelError("", "A conta esta temporariamente bloqueada!");
+                        else
+                            return SenhaDoUsuarioInvalido();
+                        break;
                     default:
                         return SenhaDoUsuarioInvalido();
 
