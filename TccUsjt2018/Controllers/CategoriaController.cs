@@ -12,6 +12,7 @@ namespace TccUsjt2018.Controllers
     public class CategoriaController : Controller
     {
         // GET: Categoria
+        [Authorize]
         public ActionResult Index()
         {            
             CategoriaDAO categoriaDAO = new CategoriaDAO();
@@ -27,6 +28,7 @@ namespace TccUsjt2018.Controllers
             return View(model);
         }
 
+        [Authorize]
         public IEnumerable<SelectListItem> GetCategoria()
         {
             var dao = new CategoriaDAO();
@@ -46,6 +48,7 @@ namespace TccUsjt2018.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(CategoriaProdutoViewModel model)
         {
             CategoriaDAO categoriaDAO = new CategoriaDAO();
@@ -69,6 +72,7 @@ namespace TccUsjt2018.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Consultar(int codigoCategoria)
         {
             var categoriaDao = new CategoriaDAO();

@@ -1,0 +1,56 @@
+﻿@model TccUsjt2018.ContaRegistrarViewModel
+@{
+    ViewBag.Title = "Registrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Cadastro de Usuario</strong>
+                    </div>
+                    <div class="card-body">
+                        <!-- Credit Card -->
+                        <div id="pay-invoice">
+                            <div class="card-body">
+                                @using (Html.BeginForm("Registrar", "Conta"))
+                                {
+                                    <div class="form-group">
+                                        @Html.LabelFor(X => X.UserName)
+                                        @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.UserName)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(X => X.NomeCompleto)
+                                        @Html.TextBoxFor(x => x.NomeCompleto, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.NomeCompleto)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(X => X.Email)
+                                        @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.Email)
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(X => X.Senha)
+                                        @Html.PasswordFor(x => x.Senha, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.Senha)
+                                    </div>
+
+                                    <br />
+                                    <br />
+                                    <div class="form-group" style="display:inline-block">
+                                        <button type="submit" class="btn btn-primary" id="idRegistrar" value="">Registrar</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- .card -->
+            </div>
+        </div>
+    </div>
+</div>
+
+

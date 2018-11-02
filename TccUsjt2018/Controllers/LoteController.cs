@@ -13,6 +13,7 @@ namespace TccUsjt2018.Controllers
     public class LoteController : Controller
     {
         // GET: Lote
+        [Authorize]
         public ActionResult Index()
         {
             LoteDAO loteDAO = new LoteDAO();
@@ -43,6 +44,7 @@ namespace TccUsjt2018.Controllers
             return new SelectList(lotes, "Value", "Text");
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             EstoqueController estoqueController = new EstoqueController();
@@ -57,6 +59,7 @@ namespace TccUsjt2018.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(LoteViewModel model)
         {
             LoteDAO loteDAO = new LoteDAO();
@@ -83,6 +86,7 @@ namespace TccUsjt2018.Controllers
 
         }
 
+        [Authorize]
         public ActionResult BaixaLote(int codigoLote)
         {
             LoteDAO dao = new LoteDAO();
@@ -101,6 +105,7 @@ namespace TccUsjt2018.Controllers
 
 
         [HttpPost]
+        [Authorize]
         public ActionResult BaixaLote(LoteViewModel model, int codigoLote)
         {
             var loteDAO = new LoteDAO();
@@ -129,6 +134,7 @@ namespace TccUsjt2018.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Consultar(int codigoLote)
         {
             var dao = new LoteDAO();

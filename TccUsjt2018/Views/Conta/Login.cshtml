@@ -1,4 +1,4 @@
-﻿@model TccUsjt2018.ViewModels.Login.LoginViewModel
+﻿@model TccUsjt2018.ViewModels.Login.ContaLoginViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
@@ -32,6 +32,9 @@
                             @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
                         </div>
                         <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.ContinuarLogado)
+                            @Html.LabelFor(model => model.ContinuarLogado)
+                            <br />
                             <label>
                                 <input type="checkbox"> Lembrar-me
                             </label>
@@ -41,7 +44,9 @@
 
                         </div>
                         <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
-                        @*<div class="register-link m-t-15 text-center"><p>Don't have account ? <a href="#"> Sign Up Here</a></p></div>*@
+                        <br />
+                        <br />
+                        @Html.ActionLink("Esqueci Minha Senha", "EsqueciSenha", null, new { @class = "btn btn-primary btn-flat m-b-30 m-t-30" })
 
                     }
                 </div>

@@ -6,19 +6,10 @@ using System.Web;
 
 namespace TccUsjt2018.ViewModels.Login
 {
-    public class LoginViewModel
+    public class ContaEsqueciSenhaViewModel
     {
-
-        [Required]
-        [Display(Name = "E-mail")]
+        [Display(Name = "E-Mail")]
         [EmailAddress]
         public string Email { get; set; }
-
-        [Required]
-        [DataType(DataType.Password)]
-        [Display(Name = "Senha")]
-        public string Senha { get; set; }
-        
-
     }
 }

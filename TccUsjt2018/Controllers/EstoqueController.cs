@@ -12,6 +12,7 @@ namespace TccUsjt2018.Controllers
     public class EstoqueController : Controller
     {
         // GET: Estoque
+        [Authorize]
         public ActionResult Index()
         {
             EstoqueDAO dao = new EstoqueDAO();
@@ -26,7 +27,7 @@ namespace TccUsjt2018.Controllers
             return View(model);
 
         }
-
+        
         public IEnumerable<SelectListItem> GetEstoque()
         {
             var dao = new EstoqueDAO();
@@ -40,12 +41,14 @@ namespace TccUsjt2018.Controllers
             return new SelectList(produtos, "Value", "Text");
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(EstoqueViewModel model)
         {
             EstoqueDAO dao = new EstoqueDAO();
@@ -68,6 +71,7 @@ namespace TccUsjt2018.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Consultar(int codigoEstoque)
         {
             var daoEstoque = new EstoqueDAO();

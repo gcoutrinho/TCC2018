@@ -1,0 +1,41 @@
+﻿@model TccUsjt2018.ViewModels.Login.ContaEsqueciSenhaViewModel
+@{
+    ViewBag.Title = "EsqueciSenha";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<body class="bg-dark">
+
+    <div class="sufee-login d-flex align-content-center flex-wrap">
+        <div class="container">
+            <div class="login-content">
+                <div class="login-logo">
+                    <a href="index.html">
+                        <img class="align-content" src="images/logo.png" alt="">
+                    </a>
+                </div>
+
+                <div class="login-form">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary(true)
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email)
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>               
+
+                        <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Enviar E-mail</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+
+
+

@@ -13,6 +13,7 @@ namespace TccUsjt2018.Controllers
 {
     public class RelatorioController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             CategoriaController categoriaController = new CategoriaController();
@@ -24,8 +25,9 @@ namespace TccUsjt2018.Controllers
             };
 
             return View(model);
-        }      
+        }
 
+        [Authorize]
         public ActionResult RelatorioProduto(FiltrosViewModel filtro)
         {            
 
@@ -95,6 +97,7 @@ namespace TccUsjt2018.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult IndexRelatorioLote()
         {
             LoteController loteController = new LoteController();
@@ -112,6 +115,7 @@ namespace TccUsjt2018.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult RelatorioLote(FiltrosViewModel filtro)
         {
             
