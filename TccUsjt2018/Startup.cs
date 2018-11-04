@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Owin;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -81,6 +82,64 @@ namespace TccUsjt2018
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie
             });
+
+            using (var dbContext = new IdentityDbContext<UsuarioAplicacao>("banco23092018"))
+            {
+                CriarRoles(dbContext);
+                CriarAdministrador(dbContext);
+            }
+
         }
+
+        private void CriarRoles(IdentityDbContext<UsuarioAplicacao> dbContext)
+        {
+            using (var roleStore = new RoleStore<IdentityRole>(dbContext))
+            using (var roleManager = new RoleManager<IdentityRole>(roleStore))
+            {
+                if (!roleManager.RoleExists(RolesNomes.GERENTE))                
+                    roleManager.Create(new IdentityRole(RolesNomes.GERENTE));
+
+                if(!roleManager.RoleExists(RolesNomes.ESTOQUISTA))               
+                    roleManager.Create(new IdentityRole(RolesNomes.ESTOQUISTA));
+            }
+        }
+
+        private void CriarAdministrador(IdentityDbContext<UsuarioAplicacao> dbContext)
+        {
+            using (var userStore = new UserStore<UsuarioAplicacao>(dbContext))
+            using (var userManager = new UserManager<UsuarioAplicacao>(userStore))
+            {
+                var administradorEmail = ConfigurationManager.AppSettings["admin:email"];
+                var administrador = userManager.FindByEmail(administradorEmail);
+
+                if (administrador != null)
+                    return;
+
+                administrador = new UsuarioAplicacao
+                {
+                    Email = administradorEmail,
+                    EmailConfirmed = true,
+                    UserName = ConfigurationManager.AppSettings["admin:user_name"]
+                };
+
+                userManager.Create(administrador,
+                    ConfigurationManager.AppSettings["admin:senha"]);
+
+                userManager.AddToRole(administrador.Id, RolesNomes.GERENTE);
+             
+            }
+
+
+
+
+        }
+
     }
+
+
 }
+
+
+
+
+

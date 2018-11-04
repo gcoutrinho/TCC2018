@@ -11,6 +11,7 @@ using TccUsjt2018.Models;
 using System.Data.Entity;
 using TccUsjt2018.ViewModels.Login;
 using Microsoft.Owin.Security;
+using System.Configuration;
 
 namespace TccUsjt2018
 {
@@ -62,6 +63,7 @@ namespace TccUsjt2018
             }
         }
 
+        [Authorize(Roles = RolesNomes.GERENTE)]
         public ActionResult Registrar()
         {
             return View();

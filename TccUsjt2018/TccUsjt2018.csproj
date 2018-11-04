@@ -252,13 +252,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>banco23092018DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AdministracaoController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ContaController.cs" />
+    <Compile Include="RolesNomes.cs" />
     <Compile Include="ViewModels\ContaRegistrarViewModel.cs" />
     <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\FiltroRelatorioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\CadastrosController.cs" />
     <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\RelatorioController.cs" />
@@ -1698,6 +1699,7 @@
     <Content Include="Views\Conta\ConfirmacaoAlteracaoSenha.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Administracao\" />
     <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
