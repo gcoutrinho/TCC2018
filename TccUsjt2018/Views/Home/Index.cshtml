@@ -40,18 +40,18 @@
 
     $.ajax({
         url: '@Url.Action("RetornaRankingProdutos")',
-        method: "GET"
+        method: "GET",
     }).done(function (response) {
 
-        var label = [];
-        var data = [];
-        for (var product in response) {
-            label.push(product.NomeProduto);
-            data.push(product.QuantidadeProduto);
-        }
+        var listaNomeProduto = [];
+        var listaQuantidadeProduto = [];    
 
-        console.log(label);
-        console.log(data);
+        var responseObjeto = JSON.parse(response);    
+
+        for (var product in responseObjeto) {
+            listaNomeProduto.push(responseObjeto[product]["NomeProduto"]);
+            listaQuantidadeProduto.push(responseObjeto[product]["QuantidadeProduto"]);
+        }
 
         var option = {
             title: {
@@ -62,13 +62,15 @@
                 data: ['Produtos']
             },
             xAxis: {
-                data: ["Leite", "Açucar", "Sal", "Óleo", "Farinha", "Café", "Arroz", "Feijão"]
+                data: listaNomeProduto
+                   
             },
             yAxis: {},
             series: [{
                 name: 'Produtos',
                 type: 'bar',
-                data: [85, 30, 80, 70, 55, 28, 90, 100]
+                data: listaQuantidadeProduto
+                       
             }]
         };
 
