@@ -20,17 +20,33 @@
 
 <div class="content mt-3">
     <div class="animated fadeIn">
-<div class="row">
-                <div class="col-lg-10">
-                    <div class="card">
-                        <div class="card-body">
-                            <div id="main" style="width: null;height:400px;"></div>
-                        </div>
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="main" style="width: null;height:400px;"></div>
                     </div>
                 </div>
-            </div><!-- /# column -->
-        </div><!-- .animated -->
-    </div><!-- .content -->  
+            </div>
+        </div><!-- /# column -->
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="main2" style="width: null;height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /# column -->
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+
 
 <script src="~/Assets/js/vendor/jquery-2.1.4.min.js"></script>
 
@@ -44,9 +60,9 @@
     }).done(function (response) {
 
         var listaNomeProduto = [];
-        var listaQuantidadeProduto = [];    
+        var listaQuantidadeProduto = [];
 
-        var responseObjeto = JSON.parse(response);    
+        var responseObjeto = JSON.parse(response);
 
         for (var product in responseObjeto) {
             listaNomeProduto.push(responseObjeto[product]["NomeProduto"]);
@@ -63,18 +79,74 @@
             },
             xAxis: {
                 data: listaNomeProduto
-                   
+
             },
             yAxis: {},
             series: [{
                 name: 'Produtos',
                 type: 'bar',
                 data: listaQuantidadeProduto
-                       
+
             }]
         };
 
         // use configuration item and data specified to show chart
-        myChart.setOption(option); 
+        myChart.setOption(option);
     });
+
+
+     // based on prepared DOM, initialize echarts instance
+    var myChart2 = echarts.init(document.getElementById('main2'));
+
+    $.ajax({
+        url: '@Url.Action("VerificaSituacaoEstoque")',
+        method: "GET",
+    }).done(function (response) {
+
+        var listaNomeProduto = [];
+        var listaQuantidadeProdutoEsteMes = [];
+        var listaQuantidadeProdutoMedia = [];
+
+        var responseObjeto = JSON.parse(response);
+
+        for (var product in responseObjeto) {
+            listaNomeProduto.push(responseObjeto[product]["NomeProduto"]);
+            listaQuantidadeProdutoEsteMes.push(responseObjeto[product]["EstoqueAtual"]);
+            listaQuantidadeProdutoMedia.push(responseObjeto[product]["MediaBaixa"]);
+        }
+        
+        var option = {
+            title: {
+                text: 'Situação Estoque/ Baseado em media de baixas dos meses anteriores'
+            },
+            tooltip: {},
+            legend: {
+                data: ['Produtos']
+            },
+            xAxis: {
+                data: listaNomeProduto
+
+            },
+            yAxis: {
+                
+            },
+            series: [
+                {
+                    name: 'Produtos em Estoque',
+                    type: 'bar',
+                    data: listaQuantidadeProdutoEsteMes
+                },
+                {
+                    name: 'Produtos necessários',
+                    type: 'bar',
+                    //yAxisIndex: 1,
+                    data: listaQuantidadeProdutoMedia
+                }
+            ]
+        };
+
+        // use configuration item and data specified to show chart
+        myChart2.setOption(option);
+    });
+    
 </script>
