@@ -54,16 +54,30 @@ namespace TccUsjt2018.Controllers
                                   };
                 return View(resultQuery.Distinct());
             }
-            else if (filtro.SelectItemCategoriaId != null && filtro.NomeProduto == null)
-            {   
-                var resultQuery = from p in todosProdutos                             
+            else if (filtro.SelectItemCategoriaId == null && filtro.SelectItemProdutoId != null)
+            {
+                var resultQuery = from p in todosProdutos
                                   join c in todasCategorias
                                   on p.Categoria_CodigoCategoria equals c.CodigoCategoria
-                                  where p.Categoria_CodigoCategoria == filtro.SelectItemCategoriaId                 
+                                  where p.CodigoProduto == filtro.SelectItemProdutoId
                                   select new RelatorioProdutoViewModel
                                   {
                                       NomeProduto = p.NomeProduto,
-                                      NomeCategoria = c.NomeCategoria,                                 
+                                      NomeCategoria = c.NomeCategoria,
+                                      Marca = p.MarcaProduto,
+                                  };
+                return View(resultQuery.Distinct());
+            }
+            else if (filtro.SelectItemCategoriaId != null && filtro.NomeProduto == null)
+            {
+                var resultQuery = from p in todosProdutos
+                                  join c in todasCategorias
+                                  on p.Categoria_CodigoCategoria equals c.CodigoCategoria
+                                  where p.Categoria_CodigoCategoria == filtro.SelectItemCategoriaId
+                                  select new RelatorioProdutoViewModel
+                                  {
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
                                       Marca = p.MarcaProduto,
                                   };
                 return View(resultQuery.Distinct());
@@ -86,7 +100,7 @@ namespace TccUsjt2018.Controllers
             {
                 var resultQuery = from p in todosProdutos
                                   join c in todasCategorias
-                                  on p.Categoria_CodigoCategoria equals c.CodigoCategoria                                
+                                  on p.Categoria_CodigoCategoria equals c.CodigoCategoria
                                   select new RelatorioProdutoViewModel
                                   {
                                       NomeProduto = p.NomeProduto,
@@ -116,6 +130,7 @@ namespace TccUsjt2018.Controllers
         }
 
         [Authorize]
+        //[HttpPost]
         public ActionResult RelatorioLote(FiltrosViewModel filtro)
         {
             
@@ -125,50 +140,38 @@ namespace TccUsjt2018.Controllers
             var listaLote = loteDAO.GetAll();
             ProdutoDAO produtoDAO = new ProdutoDAO();
             var listaProduto = produtoDAO.GetAll();
-
-            //if (filtro.SelectItemLoteId != null && filtro.SelectItemCategoriaId != null && filtro.SelectItemProdutoId != null)
-            //{
-            //    var resultQuery = from l in filtroLote
-            //                      join p in listaProduto
-            //                      on l.Produto_CodigoProduto equals p.CodigoProduto
-            //                      join c in filtroCategoria
-            //                      on p.Categoria_CodigoCategoria equals c.CodigoCategoria
-            //                      orderby l.ValidadeLote
-            //                      select new RelatorioLoteViewModel
-            //                      {
-            //                          DescricaoLote = l.DescricaoLote,
-            //                          NomeProduto = p.NomeProduto,
-            //                          NomeCategoria = c.NomeCategoria,
-            //                          ValidadeLote = l.ValidadeLote,
-            //                          QuantidadeProduto = l.QuantidadeProduto,
-            //                      };
-            //    return View(resultQuery);
-
-            //}
-            if (filtro.SelectItemLoteId == null && filtro.SelectItemCategoriaId == null && filtro.SelectItemProdutoId != null)
+            //todos
+            if (filtro.SelectItemLoteId != null && filtro.SelectItemCategoriaId != null && filtro.SelectItemProdutoId != null)
             {
-                //var resultQuery = from l in listaLote
-                //                  join p in listaProduto
-                //                  on l.Produto_CodigoProduto equals p.CodigoProduto
-                //                  join c in listaCategoria
-                //                  on p.Categoria_CodigoCategoria equals c.CodigoCategoria
-                //                  orderby l.ValidadeLote
-                //                  select new RelatorioLoteViewModel
-                //                  {
-                //                      DescricaoLote = l.DescricaoLote,
-                //                      NomeProduto = p.NomeProduto,
-                //                      NomeCategoria = c.NomeCategoria,
-                //                      ValidadeLote = l.ValidadeLote,
-                //                      QuantidadeProduto = l.QuantidadeProduto,
-                //                  };
-                //return View(resultQuery);
-
                 var resultQuery = from l in listaLote
                                   join p in listaProduto
                                   on l.Produto_CodigoProduto equals p.CodigoProduto
                                   join c in listaCategoria on
                                   p.Categoria_CodigoCategoria equals c.CodigoCategoria
                                   where l.Produto_CodigoProduto == filtro.SelectItemProdutoId
+                                  && p.CodigoProduto == filtro.SelectItemProdutoId
+                                  && p.Categoria_CodigoCategoria == filtro.SelectItemCategoriaId
+                                  select new RelatorioLoteViewModel
+                                  {
+                                      DescricaoLote = l.DescricaoLote,
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      ValidadeLote = l.ValidadeLote,
+                                      QuantidadeProduto = l.QuantidadeProduto,
+                                  };
+                return View(resultQuery.Distinct());
+
+            }
+            //seleciona produto e categoria 
+            else if (filtro.SelectItemLoteId == null && filtro.SelectItemCategoriaId != null && filtro.SelectItemProdutoId != null)
+            {
+                var resultQuery = from l in listaLote
+                                  join p in listaProduto
+                                  on l.Produto_CodigoProduto equals p.CodigoProduto
+                                  join c in listaCategoria on
+                                  p.Categoria_CodigoCategoria equals c.CodigoCategoria
+                                  where p.CodigoProduto == filtro.SelectItemProdutoId
+                                  && c.CodigoCategoria == filtro.SelectItemCategoriaId
                                   select new RelatorioLoteViewModel
                                   {
                                       DescricaoLote = l.DescricaoLote,
@@ -179,9 +182,123 @@ namespace TccUsjt2018.Controllers
                                   };
                 return View(resultQuery.Distinct());
             }
+            //seleciona produto e lote
+            else if (filtro.SelectItemLoteId != null && filtro.SelectItemCategoriaId == null && filtro.SelectItemProdutoId != null)
+            {
+                var resultQuery = from l in listaLote
+                                  join p in listaProduto
+                                  on l.Produto_CodigoProduto equals p.CodigoProduto
+                                  join c in listaCategoria on
+                                  p.Categoria_CodigoCategoria equals c.CodigoCategoria
+                                  where p.CodigoProduto == filtro.SelectItemProdutoId
+                                  && l.CodigoLote == filtro.SelectItemLoteId
+                                  select new RelatorioLoteViewModel
+                                  {
+                                      DescricaoLote = l.DescricaoLote,
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      ValidadeLote = l.ValidadeLote,
+                                      QuantidadeProduto = l.QuantidadeProduto,
+                                  };
+                return View(resultQuery.Distinct());
+
+            }
+            //lote e categoria 
+            else if (filtro.SelectItemLoteId != null && filtro.SelectItemCategoriaId != null && filtro.SelectItemProdutoId == null)
+            {
+                var resultQuery = from l in listaLote
+                                  join p in listaProduto
+                                  on l.Produto_CodigoProduto equals p.CodigoProduto
+                                  join c in listaCategoria on
+                                  p.Categoria_CodigoCategoria equals c.CodigoCategoria
+                                  where l.CodigoLote == filtro.SelectItemLoteId
+                                  && c.CodigoCategoria == filtro.SelectItemCategoriaId
+                                  select new RelatorioLoteViewModel
+                                  {
+                                      DescricaoLote = l.DescricaoLote,
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      ValidadeLote = l.ValidadeLote,
+                                      QuantidadeProduto = l.QuantidadeProduto,
+                                  };
+                return View(resultQuery.Distinct());
+            }
+            //produto
+            else if (filtro.SelectItemLoteId == null && filtro.SelectItemCategoriaId == null && filtro.SelectItemProdutoId != null)
+            {
+                var resultQuery = from l in listaLote
+                                  join p in listaProduto
+                                  on l.Produto_CodigoProduto equals p.CodigoProduto
+                                  join c in listaCategoria on
+                                  p.Categoria_CodigoCategoria equals c.CodigoCategoria
+                                  where p.CodigoProduto == filtro.SelectItemProdutoId
+                                  select new RelatorioLoteViewModel
+                                  {
+                                      DescricaoLote = l.DescricaoLote,
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      ValidadeLote = l.ValidadeLote,
+                                      QuantidadeProduto = l.QuantidadeProduto,
+                                  };
+                return View(resultQuery.Distinct());
+            }
+            //lote
+            else if (filtro.SelectItemLoteId != null && filtro.SelectItemCategoriaId == null && filtro.SelectItemProdutoId == null)
+            {
+                var resultQuery = from l in listaLote
+                                  join p in listaProduto
+                                  on l.Produto_CodigoProduto equals p.CodigoProduto
+                                  join c in listaCategoria on
+                                  p.Categoria_CodigoCategoria equals c.CodigoCategoria
+                                  where l.CodigoLote == filtro.SelectItemLoteId
+                                  select new RelatorioLoteViewModel
+                                  {
+                                      DescricaoLote = l.DescricaoLote,
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      ValidadeLote = l.ValidadeLote,
+                                      QuantidadeProduto = l.QuantidadeProduto,
+                                  };
+                return View(resultQuery.Distinct());
+            }
+
+            //categoria
+            else if (filtro.SelectItemLoteId == null && filtro.SelectItemCategoriaId != null && filtro.SelectItemProdutoId == null)
+            {
+                var resultQuery = from l in listaLote
+                                  join p in listaProduto
+                                  on l.Produto_CodigoProduto equals p.CodigoProduto
+                                  join c in listaCategoria on
+                                  p.Categoria_CodigoCategoria equals c.CodigoCategoria
+                                  where c.CodigoCategoria == filtro.SelectItemCategoriaId
+                                  select new RelatorioLoteViewModel
+                                  {
+                                      DescricaoLote = l.DescricaoLote,
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      ValidadeLote = l.ValidadeLote,
+                                      QuantidadeProduto = l.QuantidadeProduto,
+                                  };
+                return View(resultQuery.Distinct());
+            }
+
             else
             {
-                return null;
+                var resultQuery = from l in listaLote
+                                  join p in listaProduto
+                                  on l.Produto_CodigoProduto equals p.CodigoProduto
+                                  join c in listaCategoria on
+                                  p.Categoria_CodigoCategoria equals c.CodigoCategoria
+                                  
+                                  select new RelatorioLoteViewModel
+                                  {
+                                      DescricaoLote = l.DescricaoLote,
+                                      NomeProduto = p.NomeProduto,
+                                      NomeCategoria = c.NomeCategoria,
+                                      ValidadeLote = l.ValidadeLote,
+                                      QuantidadeProduto = l.QuantidadeProduto,
+                                  };
+                return View(resultQuery.Distinct());
             }
         }
     }
