@@ -162,7 +162,7 @@ namespace TccUsjt2018.Controllers
                 return View(resultQuery.Distinct());
 
             }
-            //seleciona produto e categoria 
+            //seleciona produto e categoria aaaaa 
             else if (filtro.SelectItemLoteId == null && filtro.SelectItemCategoriaId != null && filtro.SelectItemProdutoId != null)
             {
                 var resultQuery = from l in listaLote

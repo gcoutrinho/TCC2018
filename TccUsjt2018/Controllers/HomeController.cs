@@ -207,5 +207,57 @@ namespace TccUsjt2018.Controllers
             };
             return model;
         }
+
+
+        [Authorize]
+        public LoteViewModel VerificaSituacaoEstoque()
+        {
+            var loteDAO = new LoteDAO();
+            var baixaDAO = new BaixaDAO();
+            var listabaixa = baixaDAO.GetAll();
+            var loteAtual = loteDAO.GetAll();
+            var produtoDAO = new ProdutoDAO();
+            var listaProduto = produtoDAO.GetAll();
+            
+            HashSet<string> lista = new HashSet<string>();
+            var texto = "";
+
+            foreach (var aux in loteAtual)
+            {
+
+
+                var produtoemestoque = loteDAO.GetAll().Where(x => x.Produto_CodigoProduto == aux.Produto_CodigoProduto).Sum(x => x.QuantidadeProduto);
+                var produtobaixado = baixaDAO.GetAll().Where(x => x.DataBaixa.Month == (DateTime.Now.Month) && x.Produto_CodigoProduto ==aux.Produto_CodigoProduto).Sum(x => x.QuantidadeBaixa);
+                var produtogeral = produtoemestoque + produtobaixado;
+                var baixamenos1 = baixaDAO.GetAll().Where(x => x.DataBaixa.Month == (DateTime.Now.Month - 1) && x.Produto_CodigoProduto == aux.Produto_CodigoProduto).Sum(x => x.QuantidadeBaixa);
+                var baixamenos2 = baixaDAO.GetAll().Where(x => x.DataBaixa.Month == (DateTime.Now.Month - 2) && x.Produto_CodigoProduto == aux.Produto_CodigoProduto).Sum(x => x.QuantidadeBaixa);
+                var baixamenos3 = baixaDAO.GetAll().Where(x => x.DataBaixa.Month == (DateTime.Now.Month - 3) && x.Produto_CodigoProduto == aux.Produto_CodigoProduto).Sum(x => x.QuantidadeBaixa);
+                var nomeproduto = produtoDAO.GetById(aux.Produto_CodigoProduto);
+
+                var mediabaixa = (baixamenos1 + baixamenos2 + baixamenos3) /3 ;
+
+                if (mediabaixa > produtogeral)
+                {
+                    var produtofalta = mediabaixa - produtogeral;
+                    texto = "Seu estoque ficará em falta de: " + produtofalta + " do produto " + nomeproduto.NomeProduto + " ";
+                    lista.Add(texto);
+                }
+                else
+                {
+                    ViewBag.Mensagem = "";
+                }
+                
+            }
+            var model = new LoteViewModel()
+            {
+                ListaAlerta = lista,
+            };
+            return model;
+        }
+
+
     }
+
 }
+
+
