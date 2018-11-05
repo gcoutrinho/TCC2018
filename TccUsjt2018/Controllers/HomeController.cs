@@ -46,17 +46,18 @@ namespace TccUsjt2018.Controllers
             LoteDAO loteDAO = new LoteDAO();
             var listaLote = loteDAO.GetAll();
 
-            var resultQuery = (from l in listaLote
-                               join p in listaProduto
-                               on l.Produto_CodigoProduto equals p.CodigoProduto
-                               group l by new { p.NomeProduto } into g 
-                              
+            var resultQuery = from l in listaLote
+                              join p in listaProduto
+                              on l.Produto_CodigoProduto equals p.CodigoProduto
+                              group l by new { p.NomeProduto } into g
+
                               select new
                               {
                                   NomeProduto = g.Key.NomeProduto,
                                   QuantidadeProduto = g.Sum(x => x.QuantidadeProduto)
-                              }).Take(5);
-            
+                              };
+
+            resultQuery = resultQuery.OrderByDescending(x => x.QuantidadeProduto).Take(5);
 
             var lista = new List<RankingProdutoViewModel>();
             foreach (var item in resultQuery)
@@ -85,18 +86,21 @@ namespace TccUsjt2018.Controllers
             LoteDAO loteDAO = new LoteDAO();
             var listaLote = loteDAO.GetAll();
 
-            var resultQuery = (from l in listaLote
-                               join p in listaProduto
-                               on l.Produto_CodigoProduto equals p.CodigoProduto
-                               where l.ValidadeLote < DateTime.Now.Date
-                               group l by new { p.NomeProduto } into g
+            var resultQuery = from l in listaLote
+                              join p in listaProduto
+                              on l.Produto_CodigoProduto equals p.CodigoProduto
+                              where l.ValidadeLote < DateTime.Now.Date
+                              && l.QuantidadeProduto > 0
+                              orderby l.QuantidadeProduto
+                              group l by new { p.NomeProduto } into g
 
-                               select new
-                               {
-                                   NomeProduto = g.Key.NomeProduto,
-                                   QuantidadeProduto = g.Sum(x => x.QuantidadeProduto)
-                               }).Take(5);
+                              select new
+                              {
+                                  NomeProduto = g.Key.NomeProduto,
+                                  QuantidadeProduto = g.Sum(x => x.QuantidadeProduto)
+                              };
 
+            resultQuery = resultQuery.OrderByDescending(x => x.QuantidadeProduto).Take(5);
 
             var lista = new List<RankingProdutosMortoViewModel>();
             foreach (var item in resultQuery)
