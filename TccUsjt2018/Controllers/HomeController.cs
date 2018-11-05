@@ -71,7 +71,7 @@ namespace TccUsjt2018.Controllers
         }
         
         [Authorize]
-        public JsonResult VerificaSituacaoLote()
+        public LoteViewModel VerificaSituacaoLote()
         {
             var loteDAO = new LoteDAO();
             var baixaDAO = new BaixaDAO();
@@ -81,7 +81,7 @@ namespace TccUsjt2018.Controllers
             var listaProduto = produtoDAO.GetAll();
             var baixaTotal = 0;
 
-            HashSet<VerificaSituacaoLoteViewModel> lista = new HashSet<VerificaSituacaoLoteViewModel>();
+            HashSet<string> lista = new HashSet<string>();
             var texto = "";
             foreach (var aux in loteAtual)
             {
@@ -128,20 +128,12 @@ namespace TccUsjt2018.Controllers
                     baixaTotal = 0;
                 }
                 //Verificação do warning de baixas
-                if (lotemesatual > baixaTotal && baixaTotal > 0 && diasrestantes < 16)
+                if (lotemesatual > baixaTotal && baixaTotal > 0 )//&& diasrestantes < 16)
                 {
                     var diferençaresultado = lotemesatual - baixaTotal;
                     var resultadoporcentagem = (float)((diferençaresultado * 100) / lotemesatual);
                     texto = "Ops, você não conseguira vender: " + resultadoporcentagem + " % do seu estoque de " + nomeproduto.NomeProduto + ", faça uma promoção!";
-                    var quantidadeAtual = lotemesatual;
-                    var quantidadeMedia = baixaTotal;
-                    lista.Add(new VerificaSituacaoLoteViewModel()
-                    {
-                        NomeProduto = nomeproduto.NomeProduto,
-                        QuantidadeAtual = quantidadeAtual,
-                        QuantidadeMedia = baixaTotal
-                    });
-                    
+                    lista.Add(texto);
                 }
                 else
                 {
@@ -150,11 +142,11 @@ namespace TccUsjt2018.Controllers
 
 
             }
-            
-
-            var js = new JavaScriptSerializer();
-            var json = js.Serialize(lista);
-            return Json(json, JsonRequestBehavior.AllowGet);
+            var model = new LoteViewModel()
+            {
+                ListaAlerta = lista,
+            };
+            return model;
         }
 
 

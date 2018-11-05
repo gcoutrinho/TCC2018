@@ -19,24 +19,28 @@
                                 @using (Html.BeginForm("Create", "Lote"))
                                 {
                                     <div class="form-group">
-                                        @Html.LabelFor(X => X.DescricaoLote)
+                                        @Html.LabelFor(X => X.DescricaoLote)                              
                                         @Html.TextBoxFor(x => x.DescricaoLote, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.DescricaoLote)
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(X => X.ValidadeLote)
-                                        @Html.TextBoxFor(x => x.ValidadeLote, new { @class = "form-control" })
+                                        @Html.TextBoxFor(x => x.ValidadeLote, new { @type = "date", @class= "form-control" })                                        
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.SelectItemProdutoId)
                                         @Html.DropDownListFor(model => model.SelectItemProdutoId, Model.Produtos, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.SelectItemProdutoId);
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.SelectItemEstoqueId)
                                         @Html.DropDownListFor(model => model.SelectItemEstoqueId, Model.Estoques, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.SelectItemEstoqueId)
                                     </div>
                                     <div class="form-group">
                                         @Html.LabelFor(X => X.QuantidadeProduto)
                                         @Html.TextBoxFor(x => x.QuantidadeProduto, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.QuantidadeProduto)
                                     </div>
                                     <br />
                                     <br />

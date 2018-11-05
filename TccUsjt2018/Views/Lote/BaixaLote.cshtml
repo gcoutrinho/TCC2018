@@ -30,6 +30,7 @@
                                     <div class="form-group">
                                         @Html.LabelFor(X => X.QuantidadeBaixa)
                                         @Html.TextBoxFor(x => x.QuantidadeBaixa, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.QuantidadeBaixa);
                                     </div>
                                     <br />
                                     <br />

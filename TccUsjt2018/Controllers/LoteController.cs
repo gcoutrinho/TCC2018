@@ -111,26 +111,38 @@ namespace TccUsjt2018.Controllers
             var loteDAO = new LoteDAO();
             var loteAtual = loteDAO.GetById(codigoLote);
 
-            var lote = new Lote()
+            if (model.QuantidadeBaixa > loteAtual.QuantidadeProduto)
             {
-                CodigoLote = loteAtual.CodigoLote,
-                QuantidadeProduto = (loteAtual.QuantidadeProduto - model.QuantidadeBaixa), //Subtraindo a quantidade atual.
-            };
-
-            loteDAO.Update(lote);
-
-            var baixaDAO = new BaixaDAO();
-            var baixa = new Baixa()
+                ModelState.AddModelError("", "Quantidade invalida");
+                return View("ErroQuantidade");
+            }
+            else
             {
-                DataBaixa = DateTime.Now,
-                Lote_CodigoLote = loteAtual.CodigoLote,
-                Produto_CodigoProduto = loteAtual.Produto_CodigoProduto,
-                QuantidadeBaixa = model.QuantidadeBaixa,
-            };
+                var lote = new Lote()
+                {
+                    CodigoLote = loteAtual.CodigoLote,
+                    QuantidadeProduto = (loteAtual.QuantidadeProduto - model.QuantidadeBaixa), //Subtraindo a quantidade atual.
+                };
 
-            baixaDAO.Salva(baixa);
 
-            return RedirectToAction("Index");
+
+                loteDAO.Update(lote);
+
+                var baixaDAO = new BaixaDAO();
+                var baixa = new Baixa()
+                {
+                    DataBaixa = DateTime.Now,
+                    Lote_CodigoLote = loteAtual.CodigoLote,
+                    Produto_CodigoProduto = loteAtual.Produto_CodigoProduto,
+                    QuantidadeBaixa = model.QuantidadeBaixa,
+                };
+
+                baixaDAO.Salva(baixa);
+
+                return RedirectToAction("Index");
+            }
+
+            
         }
 
         [HttpGet]
