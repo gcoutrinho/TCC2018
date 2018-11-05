@@ -46,16 +46,18 @@ namespace TccUsjt2018.Controllers
             LoteDAO loteDAO = new LoteDAO();
             var listaLote = loteDAO.GetAll();
 
-            var resultQuery = from l in listaLote
-                              join p in listaProduto
-                              on l.Produto_CodigoProduto equals p.CodigoProduto
-                              group l by new { p.NomeProduto } into g
+            var resultQuery = (from l in listaLote
+                               join p in listaProduto
+                               on l.Produto_CodigoProduto equals p.CodigoProduto
+                               group l by new { p.NomeProduto } into g 
+                              
                               select new
                               {
                                   NomeProduto = g.Key.NomeProduto,
                                   QuantidadeProduto = g.Sum(x => x.QuantidadeProduto)
-                              };
+                              }).Take(5);
             
+
             var lista = new List<RankingProdutoViewModel>();
             foreach (var item in resultQuery)
             {
@@ -69,7 +71,48 @@ namespace TccUsjt2018.Controllers
             var json = js.Serialize(lista);
             return Json(json, JsonRequestBehavior.AllowGet);
         }
-        
+
+        [Authorize]
+        [HttpGet]
+        public JsonResult RetornaRankingProdutosMorto()
+        {
+            //Retorna Grafico de Colunas
+            //Esse grafico retorna a quantidade de produtos totais.
+
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            var listaProduto = produtoDAO.GetAll();
+
+            LoteDAO loteDAO = new LoteDAO();
+            var listaLote = loteDAO.GetAll();
+
+            var resultQuery = (from l in listaLote
+                               join p in listaProduto
+                               on l.Produto_CodigoProduto equals p.CodigoProduto
+                               where l.ValidadeLote < DateTime.Now.Date
+                               group l by new { p.NomeProduto } into g
+
+                               select new
+                               {
+                                   NomeProduto = g.Key.NomeProduto,
+                                   QuantidadeProduto = g.Sum(x => x.QuantidadeProduto)
+                               }).Take(5);
+
+
+            var lista = new List<RankingProdutosMortoViewModel>();
+            foreach (var item in resultQuery)
+            {
+                lista.Add(new RankingProdutosMortoViewModel()
+                {
+                    NomeProduto = item.NomeProduto,
+                    QuantidadeProduto = item.QuantidadeProduto
+                });
+            }
+
+            var js = new JavaScriptSerializer();
+            var json = js.Serialize(lista);
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
         [Authorize]
         public LoteViewModel VerificaSituacaoLote()
         {
@@ -202,6 +245,8 @@ namespace TccUsjt2018.Controllers
             var json = js.Serialize(lista);
             return Json(json, JsonRequestBehavior.AllowGet);
         }
+
+
 
 
     }

@@ -46,6 +46,19 @@
     </div><!-- .animated -->
 </div><!-- .content -->
 
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="main3" style="width: null;height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /# column -->
+    </div><!-- .animated -->
+</div><!-- .content -->
 
 
 <script src="~/Assets/js/vendor/jquery-2.1.4.min.js"></script>
@@ -114,7 +127,7 @@
             listaQuantidadeProdutoEsteMes.push(responseObjeto[product]["EstoqueAtual"]);
             listaQuantidadeProdutoMedia.push(responseObjeto[product]["MediaBaixa"]);
         }
-        
+
         var option = {
             title: {
                 text: 'Situação Estoque/ Baseado em media de baixas dos meses anteriores'
@@ -128,7 +141,7 @@
 
             },
             yAxis: {
-                
+
             },
             series: [
                 {
@@ -147,6 +160,48 @@
 
         // use configuration item and data specified to show chart
         myChart2.setOption(option);
+        });
+
+    var myChart3 = echarts.init(document.getElementById('main3'));
+
+    $.ajax({
+        url: '@Url.Action("RetornaRankingProdutosMorto")',
+        method: "GET",
+    }).done(function (response) {
+
+        var listaNomeProduto = [];
+        var listaQuantidadeProduto = [];
+
+        var responseObjeto = JSON.parse(response);
+
+        for (var product in responseObjeto) {
+            listaNomeProduto.push(responseObjeto[product]["NomeProduto"]);
+            listaQuantidadeProduto.push(responseObjeto[product]["QuantidadeProduto"]);
+        }
+
+        var option = {
+            title: {
+                text: 'Relatório De Estoque Morto'
+            },
+            tooltip: {},
+            legend: {
+                data: ['Produtos']
+            },
+            xAxis: {
+                data: listaNomeProduto
+
+            },
+            yAxis: {},
+            series: [{
+                name: 'Produtos',
+                type: 'bar',
+                data: listaQuantidadeProduto
+
+            }]
+        };
+
+        // use configuration item and data specified to show chart
+        myChart3.setOption(option);
     });
-    
+
 </script>

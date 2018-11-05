@@ -32,11 +32,8 @@
                                     <td>@Html.DisplayFor(model => produto.NomeProduto)</td>
                                     <td>@Html.DisplayFor(model => produto.CategoriaProduto.NomeCategoria)</td>
                                     <td>@Html.DisplayFor(model => produto.MarcaProduto)</td>
-                                    @*<td align="center"><button onclick="detalhes('@produto');" type="button" class="btn btn-success">Detalhes</button>*@
                                     <td>
                                     @Html.ActionLink("Consultar", "Consultar", new { codigoProduto = produto.CodigoProduto }, new { @class = "btn btn-success" })
-                                    @*@Html.ActionLink("Editar", "Edit", new { codigoProduto = produto.CodigoProduto }, new { @class = "btn btn-warning" })*@
-                                    @*<button onclick="remover('@produto');" type="button" class="btn btn-danger">Excluir</button>*@
                                     </td>
                                 </tr>
                                 }

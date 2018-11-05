@@ -32,15 +32,12 @@
                                         <td>@Html.DisplayFor(model => lote.DescricaoLote)</td>
                                         <td>@Html.DisplayFor(model => lote.Produto.NomeProduto)</td>
                                         <td>@Html.DisplayFor(model => lote.QuantidadeProduto)</td>
-                                        !@{
+                                        @{
                                             var data = lote.ValidadeLote.ToString("dd/MM/yyyy");
                                         }
-                                        <td>@Html.DisplayFor(model => data)</td>
-                                        <td align="center">
-                                            @*<button onclick="detalhes('@lote.CodigoLote');" type="button" class="btn btn-success">Detalhes</button>*@
+                                        @*@<td>@Html.DisplayFor(model => data)</td>*@
+                                        <td>
                                             @Html.ActionLink("Consultar", "Consultar", new { codigoLote = lote.CodigoLote }, new { @class = "btn btn-success" })
-                                            @*@Html.ActionLink("Editar", "Edit", new { codigo = lote.CodigoLote }, new { @class = "btn btn-warning" })*@
-                                            @*<button onclick="remover('@lote');" type="button" class="btn btn-danger">Excluir</button>*@
                                         </td>
                                         <td>
                                             @Html.ActionLink("Baixar", "BaixaLote", new { codigoLote = lote.CodigoLote }, new { @class = "btn btn-dark" })
@@ -59,7 +56,7 @@
 <script>
 
     function detalhes(produto) {
-
+        $()
     }
 
     function remover(produto) {
