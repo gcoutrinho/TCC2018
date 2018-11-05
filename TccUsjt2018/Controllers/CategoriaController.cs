@@ -53,7 +53,7 @@ namespace TccUsjt2018.Controllers
         {
             CategoriaDAO categoriaDAO = new CategoriaDAO();
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model.NomeCategoria != null && model.NomeCategoria != "")
             {
                 CategoriaProduto categoriaProduto = new CategoriaProduto
                 {
@@ -67,7 +67,8 @@ namespace TccUsjt2018.Controllers
             }
             else
             {
-                return View("Create");
+                ModelState.AddModelError("", "Quantidade invalida");
+                return View("ErroQuantidade");
             }
         }
 

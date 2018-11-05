@@ -66,7 +66,7 @@ namespace TccUsjt2018.Controllers
             ProdutoDAO dao = new ProdutoDAO();
             ModelState.Remove("Categorias");
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model.NomeProduto != null && model.NomeProduto != "")
             {
                 Produto produto = new Produto
                 {
@@ -83,7 +83,8 @@ namespace TccUsjt2018.Controllers
             else
             {
                 CategoriaDAO categoriaDao = new CategoriaDAO();
-                return View("FormularioProduto");
+                ModelState.AddModelError("", "Quantidade invalida");
+                return View("ErroQuantidade");
             }
         }
 

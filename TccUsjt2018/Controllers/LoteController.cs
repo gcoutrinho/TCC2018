@@ -64,7 +64,7 @@ namespace TccUsjt2018.Controllers
         {
             LoteDAO loteDAO = new LoteDAO();
 
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model.DescricaoLote != "" && model.DescricaoLote != null && model.QuantidadeProduto > 0 )
             {
                 Lote lote = new Lote
                 {
@@ -81,7 +81,9 @@ namespace TccUsjt2018.Controllers
             }
             else
             {
-                return View("Create");
+                ModelState.AddModelError("", "Quantidade invalida");
+                return View("ErroQuantidade");
+               
             }
 
         }

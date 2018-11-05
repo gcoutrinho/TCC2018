@@ -52,7 +52,7 @@ namespace TccUsjt2018.Controllers
         public ActionResult Create(EstoqueViewModel model)
         {
             EstoqueDAO dao = new EstoqueDAO();
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model.Descricao != null && model.Descricao != "")
             {
                 Estoque estoque = new Estoque()
                 {
@@ -66,7 +66,8 @@ namespace TccUsjt2018.Controllers
             }
             else
             {
-                return View("Create");
+                ModelState.AddModelError("", "Quantidade invalida");
+                return View("ErroQuantidade");
             }
         }
 

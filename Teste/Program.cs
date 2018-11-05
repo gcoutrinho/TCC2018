@@ -213,11 +213,8 @@ namespace Teste
           
             HomeController controller = new HomeController();
 
-            var teste = controller.VerificaSituacaoLote();
-            foreach (var item in teste)
-            {
-                Console.WriteLine(item);
-            }
+            var teste = controller.VerificaSituacaoEstoque();
+            Console.WriteLine(teste);
             Console.ReadLine();
 
 
