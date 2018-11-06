@@ -84,12 +84,12 @@
 
         var option = {
             title: {
-                text: 'Relatório de Produtos'
+                text: 'Ranking de Produtos Top 5'
             },
             tooltip: {},
-            legend: {
+            @*legend: {
                 data: ['Produtos']
-            },
+            },*@
             xAxis: {
                 data: listaNomeProduto
 
@@ -98,6 +98,7 @@
             series: [{
                 name: 'Produtos',
                 type: 'bar',
+                width:'1200px',
                 data: listaQuantidadeProduto
 
             }]
@@ -130,12 +131,12 @@
 
         var option = {
             title: {
-                text: 'Situação Estoque/ Baseado em media de baixas dos meses anteriores'
+                text: 'Produtos a serem reabastecidos de acordo com Media de Baixa ultimos 3 meses'
             },
             tooltip: {},
-            legend: {
+            @*legend: {
                 data: ['Produtos']
-            },
+            },*@
             xAxis: {
                 data: listaNomeProduto
 
@@ -152,7 +153,7 @@
                 {
                     name: 'Produtos necessários',
                     type: 'bar',
-                    //yAxisIndex: 1,
+                    yAxisIndex: 1,
                     data: listaQuantidadeProdutoMedia
                 }
             ]
@@ -181,17 +182,18 @@
 
         var option = {
             title: {
-                text: 'Relatório De Estoque Morto'
+                text: 'Relatório De Produtos Vencidos em Estoque Top 5'
             },
             tooltip: {},
-            legend: {
+            @*legend: {
                 data: ['Produtos']
-            },
+            },*@
             xAxis: {
                 data: listaNomeProduto
-
             },
-            yAxis: {},
+            yAxis: {
+                
+            },
             series: [{
                 name: 'Produtos',
                 type: 'bar',
@@ -202,6 +204,6 @@
 
         // use configuration item and data specified to show chart
         myChart3.setOption(option);
-    });
-
+        });
+    
 </script>
