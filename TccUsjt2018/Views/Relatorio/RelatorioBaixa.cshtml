@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TccUsjt2018.ViewModels.Relatório.RelatorioBaixaViewModel>
+@{
+    ViewBag.Title = "RelatorioBaixa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">Relatório de Baixa</strong>
+                    </div>
+                    <div class="card-body">
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Quantidade</th>
+                                    <th>Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => item.NomeProduto)</td>
+                                        <td>@Html.DisplayFor(model => item.QuantidadeBaixa)</td>
+                                        <td>@Html.DisplayFor(model => item.DataBaixa)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+<script>
+
+</script>

@@ -9,7 +9,10 @@ using TccUsjt2018.Database.Entities;
 namespace TccUsjt2018.ViewModels.Filtros
 {
     public class FiltrosViewModel
-    { 
+    {
+        [Display(Name = "Baixa")]
+        public int? SelectItemBaixaId { get; set; }
+        public IEnumerable<SelectListItem> Baixas { get; set; }
         [Display(Name = "Nome Produto")]
         public string NomeProduto { get; set; }
         [Display(Name = "Data Vencimento")]

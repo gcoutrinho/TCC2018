@@ -117,7 +117,54 @@ namespace TccUsjt2018.Controllers
             return Json(json, JsonRequestBehavior.AllowGet);
         }
 
-        
+
+        [Authorize]
+        [HttpGet]
+        public JsonResult RetornaRankingBaixas()
+        {
+            //Retorna Grafico de Colunas
+            //Esse grafico retorna a quantidade de produtos totais.
+
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            var listaProduto = produtoDAO.GetAll();
+
+            LoteDAO loteDAO = new LoteDAO();
+            var listaLote = loteDAO.GetAll();
+
+            BaixaDAO baixaDAO = new BaixaDAO();
+            var listaBaixa = baixaDAO.GetAll();
+
+            var resultQuery = from b in listaBaixa
+                              join p in listaProduto
+                              on b.Produto_CodigoProduto equals p.CodigoProduto
+                              where b.QuantidadeBaixa > 0
+                              orderby b.QuantidadeBaixa
+                              group b by new { p.NomeProduto } into g
+
+                              select new
+                              {
+                                  NomeProduto = g.Key.NomeProduto,
+                                  QuantidadeBaixa = g.Sum(x => x.QuantidadeBaixa)
+                              };
+
+            resultQuery = resultQuery.OrderByDescending(x => x.QuantidadeBaixa).Take(5);
+
+            var lista = new List<RankingBaixaViewModel>();
+            foreach (var item in resultQuery)
+            {
+                lista.Add(new RankingBaixaViewModel()
+                {
+                    NomeProduto = item.NomeProduto,
+                    QuantidadeBaixa = item.QuantidadeBaixa
+                });
+            }
+
+            var js = new JavaScriptSerializer();
+            var json = js.Serialize(lista);
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
+
         [Authorize]
         public LoteViewModel VerificaSituacaoLote()
         {
@@ -250,8 +297,13 @@ namespace TccUsjt2018.Controllers
             var json = js.Serialize(lista);
             return Json(json, JsonRequestBehavior.AllowGet);
         }
+
+
+
         
     }
+
+
 
 }
 
