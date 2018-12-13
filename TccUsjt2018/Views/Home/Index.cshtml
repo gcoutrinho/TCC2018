@@ -87,9 +87,15 @@
     }).done(function (response) {
 
         var listaNomeProduto = [];
+ Guovanni
         var listaQuantidadeProduto = [];
 
         var responseObjeto = JSON.parse(response);
+
+        var listaQuantidadeProduto = [];    
+
+        var responseObjeto = JSON.parse(response);    
+ master
 
         for (var product in responseObjeto) {
             listaNomeProduto.push(responseObjeto[product]["NomeProduto"]);
@@ -106,7 +112,11 @@
             },*@
             xAxis: {
                 data: listaNomeProduto
+ Guovanni
 
+
+                   
+master
             },
             yAxis: {},
             series: [{
@@ -114,7 +124,11 @@
                 type: 'bar',
                 width:'1200px',
                 data: listaQuantidadeProduto
+ Guovanni
 
+
+                       
+ master
             }]
         };
 
