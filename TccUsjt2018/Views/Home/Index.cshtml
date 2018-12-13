@@ -87,15 +87,15 @@
     }).done(function (response) {
 
         var listaNomeProduto = [];
- Guovanni
+
         var listaQuantidadeProduto = [];
 
         var responseObjeto = JSON.parse(response);
 
         var listaQuantidadeProduto = [];    
 
-        var responseObjeto = JSON.parse(response);    
- master
+        var responseObjeto = JSON.parse(response);   
+
 
         for (var product in responseObjeto) {
             listaNomeProduto.push(responseObjeto[product]["NomeProduto"]);
@@ -112,11 +112,7 @@
             },*@
             xAxis: {
                 data: listaNomeProduto
- Guovanni
-
-
-                   
-master
+                data: listaNomeProduto 
             },
             yAxis: {},
             series: [{
@@ -124,11 +120,6 @@ master
                 type: 'bar',
                 width:'1200px',
                 data: listaQuantidadeProduto
- Guovanni
-
-
-                       
- master
             }]
         };
 
@@ -167,7 +158,6 @@ master
             },*@
             xAxis: {
                 data: listaNomeProduto
-
             },
             yAxis: {
 
@@ -181,6 +171,7 @@ master
                 {
                     name: 'Produtos necessários',
                     type: 'bar',
+                    @*yAxisIndex: 1,*@
                     data: listaQuantidadeProdutoMedia
                 }
             ]
