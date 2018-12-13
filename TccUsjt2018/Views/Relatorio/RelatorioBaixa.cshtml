@@ -1,6 +1,6 @@
-﻿@model IEnumerable<TccUsjt2018.ViewModels.Relatório.RelatorioLoteViewModel>
+﻿@model IEnumerable<TccUsjt2018.ViewModels.Relatório.RelatorioBaixaViewModel>
 @{
-    ViewBag.Title = "RelatorioLote";
+    ViewBag.Title = "RelatorioBaixa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,28 +10,24 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title">Consulta de Lote</strong>
+                        <strong class="card-title">Consulta de Baixa</strong>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Lote</th>
                                     <th>Produto</th>
-                                    <th>Categoria</th>
                                     <th>Quantidade</th>
-                                    <th>Validade</th>
+                                    <th>Data</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-                                        <td>@Html.DisplayFor(model => item.DescricaoLote)</td>
                                         <td>@Html.DisplayFor(model => item.NomeProduto)</td>
-                                        <td>@Html.DisplayFor(model => item.NomeCategoria)</td>
-                                        <td>@Html.DisplayFor(model => item.QuantidadeProduto)</td>
-                                        <td>@Html.DisplayFor(model => item.ValidadeLote)</td>
+                                        <td>@Html.DisplayFor(model => item.QuantidadeBaixa)</td>
+                                        <td>@Html.DisplayFor(model => item.DataBaixa)</td>
                                     </tr>
                                 }
                             </tbody>

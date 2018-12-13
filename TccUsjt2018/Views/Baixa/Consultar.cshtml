@@ -1,0 +1,34 @@
+﻿@model TccUsjt2018.ViewModels.Baixa.BaixaViewModel
+
+@{
+    ViewBag.Title = "Consultar Baixa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">@ViewBag.Title</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-dark" role="alert">
+                            Codigo Baixa: @Model.CodigoBaixa
+                        </div>
+                        <div class="alert alert-dark" role="alert">
+                            Data Baixa: @Model.DataBaixa
+                        </div>
+                        <div class="alert alert-dark" role="alert">
+                            Quantidade: @Model.QuantidadeBaixa  
+                        </div>
+                        @*<div class="alert alert-dark" role="alert">
+                            Produto: @Model.Produto.NomeProduto
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->

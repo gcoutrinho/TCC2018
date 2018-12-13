@@ -256,9 +256,11 @@
       <DependentUpon>banco23092018DataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AdministracaoController.cs" />
+    <Compile Include="Controllers\BaixaController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ContaController.cs" />
     <Compile Include="RolesNomes.cs" />
+    <Compile Include="ViewModels\Baixa\BaixaViewModel.cs" />
     <Compile Include="ViewModels\ContaRegistrarViewModel.cs" />
     <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\FiltroRelatorioController.cs" />
@@ -314,8 +316,10 @@
     <Compile Include="ViewModels\ProdutoCategoria\CategoriaProdutoViewModel.cs" />
     <Compile Include="ViewModels\Login\ContaLoginViewModel.cs" />
     <Compile Include="ViewModels\Produtos\ProdutoViewModel.cs" />
+    <Compile Include="ViewModels\RankingBaixaViewModel.cs" />
     <Compile Include="ViewModels\RankingProdutosMortoViewModel.cs" />
     <Compile Include="ViewModels\RankingProdutoViewModel.cs" />
+    <Compile Include="ViewModels\Relatório\RelatorioBaixaViewModel.cs" />
     <Compile Include="ViewModels\Relatório\RelatorioLoteViewModel.cs" />
     <Compile Include="ViewModels\Relatório\RelatorioProdutoViewModel.cs" />
     <Compile Include="ViewModels\VerificaSituacaoEstoqueViewModel.cs" />
@@ -1707,6 +1711,10 @@
     <Content Include="Views\Produto\ErroQuantidade.cshtml" />
     <Content Include="Views\Categoria\ErroQuantidade.cshtml" />
     <Content Include="Views\Estoque\ErroQuantidade.cshtml" />
+    <Content Include="Views\Relatorio\IndexRelatorioBaixa.cshtml" />
+    <Content Include="Views\Relatorio\RelatorioBaixa.cshtml" />
+    <Content Include="Views\Baixa\Index.cshtml" />
+    <Content Include="Views\Baixa\Consultar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Administracao\" />

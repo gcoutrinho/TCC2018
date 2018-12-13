@@ -1,0 +1,59 @@
+﻿@model IEnumerable<TccUsjt2018.ViewModels.Baixa.BaixaViewModel>
+@{
+    ViewBag.Title = "Baixas";
+}
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong class="card-title">@ViewBag.Title</strong>
+                    </div>
+                    <div class="card-body">
+                        @Html.ActionLink("Cadastrar", "Create", null, new { @class = "btn btn-primary" })
+                        <br />
+                        <br />
+                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>CodigoBaixa</th>
+                                    <th>DataBaixa</th>
+                                    <th>Quantidade Baixa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var baixa in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => baixa.CodigoBaixa)</td>
+                                        <td>@Html.DisplayFor(model => baixa.DataBaixa)</td>
+                                        <td>@Html.DisplayFor(model => baixa.QuantidadeBaixa)</td>
+                                        @{
+                                            var data = baixa.DataBaixa.ToString("dd/MM/yyyy");
+                                        }
+                                        @*@<td>@Html.DisplayFor(model => data)</td>*@
+                                        <td>
+                                            @Html.ActionLink("Consultar", "Consultar", new { codigoBaixa = baixa.CodigoBaixa }, new { @class = "btn btn-success" })
+                                        </td>
+                                        </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .animated -->
+</div><!-- .content -->
+
+<script>
+
+    function detalhes(produto) {
+        $()
+    }
+
+    function remover(produto) {
+
+    }
+</script>

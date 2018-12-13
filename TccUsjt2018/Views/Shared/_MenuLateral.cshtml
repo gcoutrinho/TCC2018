@@ -19,11 +19,11 @@
                 </li>
                 <!--<h3 class="menu-title">UI elements</h3><!-- /.menu-title -->
                 <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Relatório</a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Consultas</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa fa-puzzle-piece"></i>@Html.ActionLink("Produto", "Index", "Relatorio")</li>
-                        @*<li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Estoque</a></li>
-                        <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Categoria</a></li>*@
+                        @*<li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Estoque</a></li>*@
+                        <li><i class="fa fa-share-square-o"></i>@Html.ActionLink("Baixa", "IndexRelatorioBaixa", "Relatorio")</li>
                         <li><i class="fa fa-share-square-o"></i>@Html.ActionLink("Lote", "IndexRelatorioLote", "Relatorio")</li>
                     </ul>
                 </li>

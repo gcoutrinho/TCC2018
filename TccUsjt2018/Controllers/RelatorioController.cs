@@ -29,7 +29,7 @@ namespace TccUsjt2018.Controllers
 
         [Authorize]
         public ActionResult RelatorioProduto(FiltrosViewModel filtro)
-        {            
+        {
 
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             ProdutoDAO produtoDAO = new ProdutoDAO();
@@ -125,15 +125,33 @@ namespace TccUsjt2018.Controllers
                 Produtos = produtoController.GetProdutos(),
 
             };
-  
+
             return View(model);
         }
 
         [Authorize]
-        //[HttpPost]
+        public ActionResult IndexRelatorioBaixa()
+        {
+            BaixaController baixaController = new BaixaController();
+            ProdutoController produtoController = new ProdutoController();
+            CategoriaController categoriaController = new CategoriaController();
+
+            var model = new FiltrosViewModel()
+            {
+                Baixas = baixaController.GetBaixas(),
+                Categorias = categoriaController.GetCategoria(),
+                Produtos = produtoController.GetProdutos(),
+
+            };
+
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
         public ActionResult RelatorioLote(FiltrosViewModel filtro)
         {
-            
+
             CategoriaDAO categoriaDAO = new CategoriaDAO();
             var listaCategoria = categoriaDAO.GetAll();
             LoteDAO loteDAO = new LoteDAO();
@@ -289,7 +307,7 @@ namespace TccUsjt2018.Controllers
                                   on l.Produto_CodigoProduto equals p.CodigoProduto
                                   join c in listaCategoria on
                                   p.Categoria_CodigoCategoria equals c.CodigoCategoria
-                                  
+
                                   select new RelatorioLoteViewModel
                                   {
                                       DescricaoLote = l.DescricaoLote,
@@ -301,5 +319,50 @@ namespace TccUsjt2018.Controllers
                 return View(resultQuery.Distinct());
             }
         }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult RelatorioBaixa(FiltrosViewModel filtro)
+        {
+
+            BaixaDAO baixaDAO = new BaixaDAO();
+            var listaBaixa = baixaDAO.GetAll();
+            ProdutoDAO produtoDAO = new ProdutoDAO();
+            var listaProduto = produtoDAO.GetAll();
+            //todos
+            if (filtro.SelectItemProdutoId != null)
+            {
+                var resultQuery = from b in listaBaixa
+                                  join p in listaProduto
+                                  on b.Produto_CodigoProduto equals p.CodigoProduto
+                                  where b.Produto_CodigoProduto == filtro.SelectItemProdutoId
+                                  select new RelatorioBaixaViewModel
+                                  {
+                                      NomeProduto = p.NomeProduto,
+                                      QuantidadeBaixa = b.QuantidadeBaixa,
+                                      DataBaixa = b.DataBaixa,
+                                  };
+
+                return View(resultQuery.Distinct());
+
+            }
+            else
+            {
+                var resultQuery = from b in listaBaixa
+                                  join p in listaProduto
+                                  on b.Produto_CodigoProduto equals p.CodigoProduto
+                                  select new RelatorioBaixaViewModel
+                                  {
+                                      NomeProduto = p.NomeProduto,
+                                      QuantidadeBaixa = b.QuantidadeBaixa,
+                                      DataBaixa = b.DataBaixa,
+                                  };
+
+                return View(resultQuery.Distinct());
+
+            }
+        }
+
     }
+
 }
