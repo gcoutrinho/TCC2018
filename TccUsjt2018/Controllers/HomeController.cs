@@ -117,6 +117,9 @@ namespace TccUsjt2018.Controllers
             return Json(json, JsonRequestBehavior.AllowGet);
         }
 
+
+        [Authorize]
+        [HttpGet]
         public JsonResult RetornaRankingBaixas()
         {
             //Retorna Grafico de Colunas
@@ -160,6 +163,7 @@ namespace TccUsjt2018.Controllers
             var json = js.Serialize(lista);
             return Json(json, JsonRequestBehavior.AllowGet);
         }
+
 
         [Authorize]
         public LoteViewModel VerificaSituacaoLote()
@@ -293,8 +297,13 @@ namespace TccUsjt2018.Controllers
             var json = js.Serialize(lista);
             return Json(json, JsonRequestBehavior.AllowGet);
         }
+
+
+
         
     }
+
+
 
 }
 
