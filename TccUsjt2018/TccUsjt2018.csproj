@@ -314,6 +314,7 @@
     <Compile Include="ViewModels\ProdutoCategoria\CategoriaProdutoViewModel.cs" />
     <Compile Include="ViewModels\Login\ContaLoginViewModel.cs" />
     <Compile Include="ViewModels\Produtos\ProdutoViewModel.cs" />
+    <Compile Include="ViewModels\RankingBaixaViewModel.cs" />
     <Compile Include="ViewModels\RankingProdutosMortoViewModel.cs" />
     <Compile Include="ViewModels\RankingProdutoViewModel.cs" />
     <Compile Include="ViewModels\Relatório\RelatorioLoteViewModel.cs" />
