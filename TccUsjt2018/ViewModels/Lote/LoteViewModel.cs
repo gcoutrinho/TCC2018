@@ -14,6 +14,8 @@ namespace TccUsjt2018.ViewModels.Lote
         [Required]
         [Display(Name = "Nome")]
         public string DescricaoLote { get; set; }
+        [Display(Name = "Local Estoque")]
+        public string LocalEstoque { get; set; }
         [Display(Name = "Data Validade")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

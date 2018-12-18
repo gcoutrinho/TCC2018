@@ -60,6 +60,19 @@
     </div><!-- .animated -->
 </div><!-- .content -->
 
+<div class="content mt-3">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="main4" style="width: null;height:400px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /# column -->
+    </div><!-- .animated -->
+</div><!-- .content -->
 
 
 <script src="~/Assets/js/vendor/jquery-2.1.4.min.js"></script>
@@ -74,13 +87,15 @@
     }).done(function (response) {
 
         var listaNomeProduto = [];
+
         var listaQuantidadeProduto = [];
 
         var responseObjeto = JSON.parse(response);
 
-        var listaQuantidadeProduto = [];    
+        var listaQuantidadeProduto = [];
 
-        var responseObjeto = JSON.parse(response);   
+        var responseObjeto = JSON.parse(response);
+
 
         for (var product in responseObjeto) {
             listaNomeProduto.push(responseObjeto[product]["NomeProduto"]);
@@ -97,7 +112,7 @@
             },*@
             xAxis: {
                 data: listaNomeProduto
-                data: listaNomeProduto 
+                data: listaNomeProduto
             },
             yAxis: {},
             series: [{
@@ -209,7 +224,7 @@
         myChart3.setOption(option);
         });
 
-    
+
     var myChart4 = echarts.init(document.getElementById('main4'));
 
     $.ajax({

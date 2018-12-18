@@ -22,27 +22,26 @@
                                     <th>Produto</th>
                                     <th>Quantidade</th>
                                     <th>Validade</th>
+                                    <th>Local Estoque</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var lote in Model)
                                 {
-                                    <tr>
-                                        <td>@Html.DisplayFor(model => lote.CodigoLote)</td>
-                                        <td>@Html.DisplayFor(model => lote.DescricaoLote)</td>
-                                        <td>@Html.DisplayFor(model => lote.Produto.NomeProduto)</td>
-                                        <td>@Html.DisplayFor(model => lote.QuantidadeProduto)</td>
-                                        @{
-                                            var data = lote.ValidadeLote.ToString("dd/MM/yyyy");
-                                        }
-                                        @*@<td>@Html.DisplayFor(model => data)</td>*@
-                                        <td>
-                                            @Html.ActionLink("Consultar", "Consultar", new { codigoLote = lote.CodigoLote }, new { @class = "btn btn-success" })
-                                        </td>
-                                        <td>
-                                            @Html.ActionLink("Baixar", "BaixaLote", new { codigoLote = lote.CodigoLote }, new { @class = "btn btn-dark" })
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>@Html.DisplayFor(model => lote.CodigoLote)</td>
+                                    <td>@Html.DisplayFor(model => lote.DescricaoLote)</td>
+                                    <td>@Html.DisplayFor(model => lote.Produto.NomeProduto)</td>
+                                    <td>@Html.DisplayFor(model => lote.QuantidadeProduto)</td>
+                                    <td>@Html.DisplayFor(model => lote.ValidadeLote)</td>
+                                    <td>@Html.DisplayFor(model => lote.LocalEstoque)</td>
+                                    <td>
+                                        @Html.ActionLink("Consultar", "Consultar", new { codigoLote = lote.CodigoLote }, new { @class = "btn btn-success" })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Baixar", "BaixaLote", new { codigoLote = lote.CodigoLote }, new { @class = "btn btn-dark" })
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

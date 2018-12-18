@@ -19,6 +19,9 @@ namespace TccUsjt2018.Controllers
             LoteDAO loteDAO = new LoteDAO();
             var lotes = loteDAO.GetAll().Where(x => x.QuantidadeProduto > 0).OrderBy(x => x.ValidadeLote);
 
+            EstoqueDAO estoqueDao = new EstoqueDAO();
+            var estoque = estoqueDao.GetAll();
+
             var model = lotes.Select(x => new LoteViewModel()
             {
                 CodigoLote = x.CodigoLote,
@@ -26,6 +29,7 @@ namespace TccUsjt2018.Controllers
                 Produto = x.Produto,
                 ValidadeLote = x.ValidadeLote,
                 QuantidadeProduto = x.QuantidadeProduto,
+                LocalEstoque = estoqueDao.GetById(x.Estoque_CodigoEstoque).DescricaoEstoque,        
             });
 
             return View(model);
