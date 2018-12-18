@@ -19,8 +19,7 @@ namespace TccUsjt2018.Controllers
             LoteDAO loteDAO = new LoteDAO();
             var lotes = loteDAO.GetAll().Where(x => x.QuantidadeProduto > 0).OrderBy(x => x.ValidadeLote);
 
-            EstoqueDAO estoqueDao = new EstoqueDAO();
-            var estoque = estoqueDao.GetAll();
+            EstoqueDAO estoqueDao = new EstoqueDAO();        
 
             var model = lotes.Select(x => new LoteViewModel()
             {

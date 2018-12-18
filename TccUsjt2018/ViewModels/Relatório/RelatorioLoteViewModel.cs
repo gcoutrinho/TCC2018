@@ -18,7 +18,10 @@ namespace TccUsjt2018.ViewModels.Relatório
         [Display(Name = "Categoria")]
         public string NomeCategoria { get; set; }
         [Display(Name = "Quantidade")]
-        public virtual int QuantidadeProduto { get; set; }   
+        public virtual int QuantidadeProduto { get; set; }
+        [Display(Name = "Local Estoque")]
+        public string LocalEstoque { get; set; }
+
 
     }
 }

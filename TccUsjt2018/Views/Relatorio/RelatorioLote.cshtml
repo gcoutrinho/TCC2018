@@ -21,18 +21,20 @@
                                     <th>Categoria</th>
                                     <th>Quantidade</th>
                                     <th>Validade</th>
+                                    <th>Local Estoque</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
-                                        <td>@Html.DisplayFor(model => item.DescricaoLote)</td>
-                                        <td>@Html.DisplayFor(model => item.NomeProduto)</td>
-                                        <td>@Html.DisplayFor(model => item.NomeCategoria)</td>
-                                        <td>@Html.DisplayFor(model => item.QuantidadeProduto)</td>
-                                        <td>@Html.DisplayFor(model => item.ValidadeLote)</td>
-                                    </tr>
+                                <tr>
+                                    <td>@Html.DisplayFor(model => item.DescricaoLote)</td>
+                                    <td>@Html.DisplayFor(model => item.NomeProduto)</td>
+                                    <td>@Html.DisplayFor(model => item.NomeCategoria)</td>
+                                    <td>@Html.DisplayFor(model => item.QuantidadeProduto)</td>
+                                    <td>@Html.DisplayFor(model => item.ValidadeLote)</td>
+                                    <td>@Html.DisplayFor(model => item.LocalEstoque)</td>
+                                </tr>
                                 }
                             </tbody>
                         </table>

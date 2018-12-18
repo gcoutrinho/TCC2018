@@ -158,6 +158,7 @@ namespace TccUsjt2018.Controllers
             var listaLote = loteDAO.GetAll();
             ProdutoDAO produtoDAO = new ProdutoDAO();
             var listaProduto = produtoDAO.GetAll();
+            EstoqueDAO estoqueDao = new EstoqueDAO();
             //todos
             if (filtro.SelectItemLoteId != null && filtro.SelectItemCategoriaId != null && filtro.SelectItemProdutoId != null)
             {
@@ -176,6 +177,7 @@ namespace TccUsjt2018.Controllers
                                       NomeCategoria = c.NomeCategoria,
                                       ValidadeLote = l.ValidadeLote,
                                       QuantidadeProduto = l.QuantidadeProduto,
+                                      LocalEstoque = estoqueDao.GetById(l.Estoque_CodigoEstoque).DescricaoEstoque,
                                   };
                 return View(resultQuery.Distinct());
 
@@ -197,6 +199,7 @@ namespace TccUsjt2018.Controllers
                                       NomeCategoria = c.NomeCategoria,
                                       ValidadeLote = l.ValidadeLote,
                                       QuantidadeProduto = l.QuantidadeProduto,
+                                      LocalEstoque = estoqueDao.GetById(l.Estoque_CodigoEstoque).DescricaoEstoque,
                                   };
                 return View(resultQuery.Distinct());
             }
@@ -217,6 +220,7 @@ namespace TccUsjt2018.Controllers
                                       NomeCategoria = c.NomeCategoria,
                                       ValidadeLote = l.ValidadeLote,
                                       QuantidadeProduto = l.QuantidadeProduto,
+                                      LocalEstoque = estoqueDao.GetById(l.Estoque_CodigoEstoque).DescricaoEstoque,
                                   };
                 return View(resultQuery.Distinct());
 
@@ -238,6 +242,7 @@ namespace TccUsjt2018.Controllers
                                       NomeCategoria = c.NomeCategoria,
                                       ValidadeLote = l.ValidadeLote,
                                       QuantidadeProduto = l.QuantidadeProduto,
+                                      LocalEstoque = estoqueDao.GetById(l.Estoque_CodigoEstoque).DescricaoEstoque,
                                   };
                 return View(resultQuery.Distinct());
             }
@@ -257,6 +262,7 @@ namespace TccUsjt2018.Controllers
                                       NomeCategoria = c.NomeCategoria,
                                       ValidadeLote = l.ValidadeLote,
                                       QuantidadeProduto = l.QuantidadeProduto,
+                                      LocalEstoque = estoqueDao.GetById(l.Estoque_CodigoEstoque).DescricaoEstoque,
                                   };
                 return View(resultQuery.Distinct());
             }
@@ -276,6 +282,7 @@ namespace TccUsjt2018.Controllers
                                       NomeCategoria = c.NomeCategoria,
                                       ValidadeLote = l.ValidadeLote,
                                       QuantidadeProduto = l.QuantidadeProduto,
+                                      LocalEstoque = estoqueDao.GetById(l.Estoque_CodigoEstoque).DescricaoEstoque,
                                   };
                 return View(resultQuery.Distinct());
             }
@@ -296,6 +303,7 @@ namespace TccUsjt2018.Controllers
                                       NomeCategoria = c.NomeCategoria,
                                       ValidadeLote = l.ValidadeLote,
                                       QuantidadeProduto = l.QuantidadeProduto,
+                                      LocalEstoque = estoqueDao.GetById(l.Estoque_CodigoEstoque).DescricaoEstoque,
                                   };
                 return View(resultQuery.Distinct());
             }
@@ -315,6 +323,7 @@ namespace TccUsjt2018.Controllers
                                       NomeCategoria = c.NomeCategoria,
                                       ValidadeLote = l.ValidadeLote,
                                       QuantidadeProduto = l.QuantidadeProduto,
+                                      LocalEstoque = estoqueDao.GetById(l.Estoque_CodigoEstoque).DescricaoEstoque,
                                   };
                 return View(resultQuery.Distinct());
             }
